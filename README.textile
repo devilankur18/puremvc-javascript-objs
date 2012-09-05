@@ -43,7 +43,7 @@ port.
 Example:
 
 <script type="text/javascript">HidePureMVC=true</script>
-<script type="text/javascript" src="lib/objs-2.0.js"></script>
+<script type="text/javascript" src="lib/puremvc-javascript-objs-2.0.js"></script>
 
 This made classes from the PureMVC framework will not pollute the global
 context and can only be accessed through their namespace.
