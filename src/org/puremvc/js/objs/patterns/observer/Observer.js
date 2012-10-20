@@ -110,8 +110,8 @@ new function()
 			 * Notify the interested object.
 			 *
 			 * @param {Notification} note
-			 * 		The <code>Notification</code> to pass to the interested object's
-			 * 		notification method.
+			 * 		The <code>Notification</code> to pass to the interested object's notification
+			 *		method.
 			 */
 			notifyObserver: function( note )
 			{

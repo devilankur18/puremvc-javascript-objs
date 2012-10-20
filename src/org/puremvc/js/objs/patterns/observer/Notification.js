@@ -17,18 +17,18 @@ new function()
 	 * Controller).
 	 *
 	 * Notifications are not meant to be a replacement for Events in Flex/Flash/Air/Javascript.
-	 * Generally, <code>Mediator</code> implementors place event listeners on their view components,
+	 * Generally, <code>Mediator</code> subclasses place event listeners on their view components,
 	 * which they then handle in the usual way. This may lead to the broadcast of
 	 * <code>Notification</code>s to trigger <code>Command</code>s or to communicate with other
 	 * <code>Mediators</code>. <code>Proxy</code> and <code>Command</code> instances communicate
 	 * with each other and <code>Mediator</code>s by broadcasting <code>Notification</code>s.
 	 *
-	 * A key difference between Flash <code>Event</code>s and PureMVC <code>Notification</code>s is
-	 * that <code>Event</code>s follow the 'Chain of Responsibility' pattern, 'bubbling' up the
-	 * display hierarchy until some parent component handles the <code>Event</code>, while PureMVC
-	 * <code>Notification</code>s follow a 'Publish/Subscribe' pattern. PureMVC classes need not be
-	 * related to each other in a parent/child relationship in order to communicate with one another
-	 * using <code>Notification</code>s.
+	 * A key difference between JavaScript <code>Event</code>s and PureMVC
+	 * <code>Notification</code>s is that <code>Event</code>s follow the 'Chain of Responsibility'
+	 * pattern, 'bubbling' up the display hierarchy until some parent component handles the
+	 * <code>Event</code>, while PureMVC <code>Notification</code>s follow a 'Publish/Subscribe'
+	 * pattern. PureMVC classes need not be related to each other in a parent/child relationship in
+	 * order to communicate with one another using <code>Notification</code>s.
 	 *
 	 * @see puremvc.Observer Observer
 	 * 

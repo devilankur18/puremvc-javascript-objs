@@ -19,10 +19,8 @@ new function()
 	 * <UL>
 	 * <LI>Initializing the <code>Model</code>, <code>View</code> and <code>Controller</code>
 	 * singletons.
-	 *
 	 * <LI>Providing all the applicable methods of the <code>Model</code>, <code>View</code>, &
 	 * <code>Controller</code> singletons.
-	 *
 	 * <LI>Providing a single point of contact to the application for registering
 	 * <code>Command</code>s and notifying <code>Observer</code>s.
 	 * 
@@ -104,10 +102,12 @@ new function()
 			 *
 			 * <UL>
 			 * <LI>You wish to initialize a different <code>Model</code>.
-			 *
 			 * <LI>You have <code>Proxy</code>s to register with the <code>Model</code> that do not
 			 * retrieve a reference to the <code>Facade</code> at construction time.
 			 *
+			 * If you don't want to initialize a different <code>IModel</code>, call
+			 * <code>Facade.initializeModel.call()</code> at the beginning of your method, then register
+			 * <code>Proxy</code>s.
 			 * Note: This method is <i>rarely</i> overridden; in practice you are more likely to use
 			 * a <code>Command</code> to create and register <code>Proxy</code>s with the
 			 * <code>Model</code>, since <code>Proxy</code>s with mutable data will likely need to
@@ -124,14 +124,17 @@ new function()
 			 * @private
 			 * Initialize the <code>Controller</code>.
 			 *
-			 * Called by the <code>initializeFacade</code> method. Override this method in JSON
-			 * Object <code>Facade</code> definition if one or both of the following are true:
+			 * Called by the <code>initializeFacade</code> method. Override this method in your
+			 * subclass of <code>Facade</code> if one or both of the following are true:
 			 * 
 			 * <UL>
 			 * <LI>You wish to initialize a different <code>Controller</code>.
-
 			 * <LI>You have <code>Command</code>s to register with the <code>Controller</code> at
 			 * startup.
+			 *
+			 * If you don't want to initialize a different <code>IController</code>, call
+			 * <code>super.initializeController()</code> at the beginning of your method, then register
+			 * <code>Command</code>s.
 			 */
 			initializeController: function()
 			{
@@ -166,7 +169,7 @@ new function()
 			},
 			
 			/**
-			 * Register a <code>Command</code> with the <code>Controller</code> by
+			 * Register a <code>Command</code> with the <code>IController</code> associating it to a
 			 * <code>Notification</code> name.
 			 *
 			 * @param {String} name
@@ -174,7 +177,7 @@ new function()
 			 * 		with.
 			 *
 			 * @param {Function} commandClassRef
-			 * 		A reference to the Class of the <code>Command</code>.
+			 * 		A reference to the constructor of the <code>Command</code>.
 			 */
 			registerCommand: function( name, commandClassRef )
 			{
@@ -182,16 +185,16 @@ new function()
 			},
 			
 			/**
-			 * Remove a previously registered <code>Command</code> to
-			 * <code>Notification</code> mapping from the <code>Controller</code>.
+			 * Remove a previously registered <code>Command</code> to <code>Notification</code>
+			 * mapping from the <code>Controller</code>.
 			 *
-			 * @param {String} name
+			 * @param {String} notificationName
 			 * 		The name of the <code>Notification</code> to remove the <code>Command</code>
 			 * 		mapping for.
 			 */
-			removeCommand: function( name )
+			removeCommand: function( notificationName )
 			{
-				this.controller.removeCommand(name);
+				this.controller.removeCommand( notificationName );
 			},
 			
 			/**
@@ -203,19 +206,18 @@ new function()
 			 * 		<code>Command</code> mapping for.
 			 *
 			 * @return {Boolean}
-			 * 		A <code>Command</code> is currently registered for the given
-			 * 		<code>name</code>.
+			 * 		A <code>Command</code> is currently registered for the given <code>name</code>.
 			 */
-			hasCommand: function( name )
+			hasCommand: function( notificationName )
 			{
-				return this.controller.hasCommand(name);
+				return this.controller.hasCommand( notificationName );
 			},
 			
 			/**
 			 * Register a <code>Proxy</code> with the <code>Model</code> by name.
 			 *
 			 * @param proxy {Proxy}
-			 * 		The <code>Proxy</code> instance to be registered with the <code>Model</code>.
+			 * 		The <code>Proxy</code> to be registered with the <code>Model</code>.
 			 */
 			registerProxy: function( proxy )
 			{
@@ -229,8 +231,7 @@ new function()
 			 * 		The name of the <code>Proxy</code> to be retrieved.
 			 *
 			 * @return {Proxy}
-			 * 		The <code>Proxy</code> instance previously registered with the given
-			 * 		<code>proxyName</code>.
+			 * 		The <code>Proxy</code> previously registered with the given	<code>proxyName</code>.
 			 */
 			retrieveProxy: function( proxyName )
 			{
@@ -248,7 +249,11 @@ new function()
 			 */
 			removeProxy: function( proxyName )
 			{
-				return this.model.removeProxy(proxyName);
+				var proxy/*Proxy*/;
+				if( this.model != null )
+					proxy = this.model.removeProxy( proxyName );
+
+				return proxy
 			},
 			
 			/**
@@ -275,7 +280,8 @@ new function()
 			 */
 			registerMediator: function( mediator )
 			{
-				this.view.registerMediator(mediator);
+				if( this.view )
+					this.view.registerMediator(mediator);
 			},
 			
 			/**
@@ -304,7 +310,11 @@ new function()
 			 */
 			removeMediator: function( mediatorName )
 			{
-				return this.view.removeMediator(mediatorName);
+				var mediator/*IMediator*/;
+				if( this.view != null )
+					mediator = this.view.removeMediator( mediatorName );
+
+				return mediator;
 			},
 			
 			/**
@@ -322,25 +332,6 @@ new function()
 				return this.view.hasMediator(mediatorName);
 			},
 			
-			/**
-			 * Create and send a <code>Notification</code>.
-			 *
-			 * Keeps us from having to construct new notification instances in our implementation
-			 * code.
-			 *
-			 * @param {String} name
-			 * 		The name of the notification to send.
-			 *
-			 * @param {Object} body
-			 * 		The body of the notification to send.
-			 *
-			 * @param {String} type
-			 * 		The type of the notification to send.
-			 */
-			sendNotification: function( name, body, type )
-			{
-				this.notifyObservers( new Notification( name, body, type ) );
-			},
 			
 			/**
 			 * Notify <code>Observer</code>s.
@@ -352,13 +343,34 @@ new function()
 			 * Usually you should just call <code>sendNotification</code> and pass the parameters,
 			 * never having to construct the <code>Notification</code> yourself.
 			 *
-			 * @param {Notification} note
+			 * @param {Notification} notification
 			 * 		The <code>Notification</code> to have the <code>View</code> notify
 			 * 		<code>Observers</code> of.
 			 */
-			notifyObservers: function( note )
+			notifyObservers: function( notification )
 			{
-				this.view.notifyObservers(note);
+				if( this.view != null )
+					this.view.notifyObservers( notification );
+			},
+			
+			/**
+			 * Create and send a <code>Notification</code>.
+			 *
+			 * Keeps us from having to construct new notification instances in our implementation
+			 * code.
+			 *
+			 * @param {String} name
+			 * 		The name of the notification to send.
+			 *
+			 * @param {Object} body
+			 * 		The body of the notification to send (optional).
+			 *
+			 * @param {String} type
+			 * 		The type of the notification to send (optional).
+			 */
+			sendNotification: function( name, body, type )
+			{
+				this.notifyObservers( new Notification( name, body, type ) );
 			}
 		}
 	);

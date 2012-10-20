@@ -47,7 +47,7 @@ new function()
 			 * 		The name of the <code>Mediator</code>.
 			 *
 			 * @param {Object} viewComponent
-			 * 		The <code>Mediator</code>'s view component.
+			 * 		The view component handled by this <code>Mediator</code>.
 			 *
 			 */
 			initialize: function( mediatorName, viewComponent )
@@ -58,18 +58,7 @@ new function()
 				this.viewComponent = viewComponent;
 			},
 			
-			/**
-			 * List the <code>Notification</code> names this <code>Mediator</code> is interested in
-			 * being notified of.
-			 *
-			 * @return {Array}
-			 * 		The list of notifications names in which is interested the
-			 * 		<code>Mediator</code>.
-			 */
-			listNotificationInterests: function()
-			{
-				return [];
-			},
+
 			
 			/**
 			 * Get the name of the <code>Mediator</code>.
@@ -85,6 +74,17 @@ new function()
 			/**
 			 * Get the <code>Mediator</code>'s view component.
 			 *
+			 * Additionally, an implicit getter will usually
+			 * be defined in the subclass that casts the view 
+			 * object to a type, like this:
+			 * 
+			 * <code>
+			 *		getMenu: function
+			 *		{
+			 *			return this.viewComponent;
+			 *		}
+			 * </code>
+			 * 
 			 * @return {Object}
 			 * 		The view component.
 			 */
@@ -105,6 +105,19 @@ new function()
 			},
 			
 			/**
+			 * List the <code>Notification</code> names this <code>Mediator</code> is interested in
+			 * being notified of.
+			 *
+			 * @return {Array}
+			 * 		The list of notifications names in which is interested the
+			 *		<code>Mediator</code>.
+			 */
+			listNotificationInterests: function()
+			{
+				return [];
+			},
+			
+			/**
 			 * Handle <code>Notification</code>s.
 			 *
 			 * Typically this will be handled in a switch statement, with one 'case' entry per
@@ -116,14 +129,14 @@ new function()
 			handleNotification: function( note ){},
 			
 			/**
-			 * Called by the View when the Mediator is registered. This method is usually overridden
-			 * as needed by the subclass.
+			 * Called by the View when the Mediator is registered. This method has to be overridden
+			 * by the subclass to know when the instance is registered.
 			 */
 			onRegister: function(){},
 			
 			/**
-			 * Called by the View when the Mediator is removed. This method is usually overridden as
-			 * needed by the subclass.
+			 * Called by the View when the Mediator is removed. This method has to be overridden
+			 * by the subclass to know when the instance is removed.
 			 */
 			onRemove: function(){}
 		}

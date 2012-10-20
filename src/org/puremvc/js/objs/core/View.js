@@ -9,18 +9,16 @@ new function()
 
 	/**
 	 * @classDescription
-	 * The <code>View</code> class in PureMVC.
 	 * 
-	 * A singleton <code>View</code> implementation. In PureMVC, the <code>View</code> class assumes
-	 * these responsibilities:
+	 * In PureMVC, the <code>View</code> class assumes these responsibilities:
 	 * <UL>
 	 * <LI>Maintain a cache of <code>Mediator</code> instances.
-	 * <LI>Provide methods for registering, retrieving, and removing <code>IMediator</code>s.
+	 * <LI>Provide methods for registering, retrieving, and removing <code>Mediator</code>s.
 	 * <LI>Notifiying <code>Mediator</code>s when they are registered or removed.
 	 * <LI>Managing the <code>Observer</code> lists for each <code>Notification</code> in the
 	 * application.
 	 * <LI>Providing a method for attaching <code>Observer</code>s to an
-	 * <code>INotification</code>'s <code>Observer</code> list.
+	 * <code>Notification</code>'s <code>Observer</code> list.
 	 * <LI>Providing a method for broadcasting a <code>Notification</code>.
 	 * <LI>Notifying the <code>Observer</code>s of a given <code>Notification</code> when it
 	 * broadcasts.
@@ -82,19 +80,19 @@ new function()
 			 * Register an <code>Observer</code> to be notified of <code>Notifications</code> with a
 			 * given name.
 			 *
-			 * @param {String} name
+			 * @param {String} notificationName
 			 * The name of the <code>Notification</code>s to notify this <code>Observer</code> of.
 			 * 
 			 * @param {Observer} observer
 			 * 		The <code>Observer</code> to register.
 			 */
-			registerObserver: function( name, observer )
+			registerObserver: function( notificationName, observer )
 			{
-				var observers/*Array*/ = this.observerMap[name];
+				var observers/*Array*/ = this.observerMap[notificationName];
 				if( observers )
 					observers.push(observer);
 				else
-					this.observerMap[name] = [observer];
+					this.observerMap[notificationName] = [observer];
 			},
 			
 			/**
@@ -109,9 +107,9 @@ new function()
 			 */
 			notifyObservers: function( note )
 			{
-				var name/*String*/ = note.getName();
+				var notificationName/*String*/ = note.getName();
 			
-				var observersRef/*Array*/ = this.observerMap[name];
+				var observersRef/*Array*/ = this.observerMap[notificationName];
 				if( observersRef )
 				{
 					// Copy the array.
@@ -129,18 +127,19 @@ new function()
 			 * Remove the <code>Observer</code> for a given <code>notifyContext</code> from an
 			 * <code>Observer</code> list for a given <code>Notification</code> name.
 			 *
-			 * @param {String} name
+			 * @param {String} notificationName
 			 * 		Which <code>Observer</code> list to remove from.
 			 *
 			 * @param {Object} notifyContext
 			 * 		Remove the <code>Observer</code> with this object as its
-			 * 		<code>notifyContext</code>.
+			 *		<code>notifyContext</code>.
 			 */
-			removeObserver: function( name, notifyContext )
+			removeObserver: function( notificationName, notifyContext )
 			{
-				var observers/*Array*/ = this.observerMap[name];
+				var observers/*Array*/ = this.observerMap[notificationName];
+
+				//Find the observer for the notifyContext.
 				var i/*Number*/ = observers.length;
-			
 				while( i-- )
 				{
 					var observer/*Observer*/ = observers[i];
@@ -151,22 +150,25 @@ new function()
 					}
 				}
 			
-				// Remove empty observer lists.
+				/*
+				 * Also, when a Notification's Observer list length falls to zero, delete the
+				 * notification key from the observer map.
+				 */
 				if( observers.length == 0 )
-					delete this.observerMap[name];
+					delete this.observerMap[notificationName];
 			},
 			
 			/**
-			 * Register an <code>IMediator</code> instance with the <code>View</code>.
+			 * Register an <code>Mediator</code> instance with the <code>View</code>.
 			 *
-			 * Registers the <code>IMediator</code> so that it can be retrieved by name, and further
-			 * interrogates the <code>IMediator</code> for its <code>INotification</code> interests.
+			 * Registers the <code>Mediator</code> so that it can be retrieved by name, and further
+			 * interrogates the <code>Mediator</code> for its <code>Notification</code> interests.
 			 *
-			 * If the <code>IMediator</code> returns any <code>INotification</code> names to be
+			 * If the <code>Mediator</code> returns any <code>Notification</code> names to be
 			 * notified about, an <code>Observer</code> is created to encapsulate the
-			 * <code>IMediator</code> instance's <code>handleNotification</code> method and register
-			 * it as an <code>Observer</code> for all <code>INotification</code>s the
-			 * <code>IMediator</code> is interested in.
+			 * <code>Mediator</code> instance's <code>handleNotification</code> method and register
+			 * it as an <code>Observer</code> for all <code>Notification</code>s the
+			 * <code>Mediator</code> is interested in.
 			 *
 			 * @param {Mediator} mediator
 			 * 		A reference to the <code>Mediator</code> instance.
@@ -182,17 +184,20 @@ new function()
 				//Register the Mediator for retrieval by name.
 				this.mediatorMap[name] = mediator;
 				
-				//Register Mediator as an observer for each of its notification interests.
+				//Get Notification interests, if any.
 				var interests/*Array*/ = mediator.listNotificationInterests();
 				var len/*Number*/ = interests.length;
 				if( len )
 				{
-			    	// Register Mediator as Observer for its list of Notification interests.
+			    	//Create Observer referencing this mediator's handlNotification method.
 					var observer/*Observer*/ = new Observer( mediator.handleNotification, mediator );
+					
+					//Register Mediator as Observer for its list of Notification interests.
 					for( var i/*Number*/=0; i<len; i++ )
 						this.registerObserver( interests[i], observer );
 				}
 			
+				//Alert the mediator that it has been registered.
 				mediator.onRegister();
 			},
 			
@@ -213,21 +218,6 @@ new function()
 			},
 			
 			/**
-			 * Check if a <code>Mediator</code> is registered or not.
-			 *
-			 * @param {String} mediatorName
-			 *		Name of the <code>Mediator</code> instance to verify the existence of its
-			 *		registration.
-			 *
-			 * @return {Boolean}
-			 *		A <code>Mediator</code> is registered with the given <code>mediatorName</code>.
-			 */
-			hasMediator: function( mediatorName )
-			{
-				return this.mediatorMap[mediatorName] ? true : false;
-			},
-			
-			/**
 			 * Remove a <code>Mediator</code> from the <code>View</code>.
 			 *
 			 * @param {String} mediatorName
@@ -243,14 +233,33 @@ new function()
 				if( !mediator )
 					return null;
 			
+				//Get Notification interests, if any.
 				var interests/*Array*/ = mediator.listNotificationInterests();
+				
+				//For every notification this mediator is interested in...
 				var i/*Number*/ = interests.length;
-				while (i--) 
+				while( i-- ) 
 					this.removeObserver( interests[i], mediator );
 				
+				// remove the mediator from the map		
 				delete this.mediatorMap[mediatorName];
+				//Alert the mediator that it has been removed
 				mediator.onRemove();
 				return mediator;	
+			},
+					
+			/**
+			 * Check if a <code>Mediator</code> is registered or not.
+			 *
+			 * @param {String} mediatorName
+		 	 * 		The <code>Mediator</code> name to check whether it is registered.
+			 *
+			 * @return {Boolean}
+			 *		A <code>Mediator</code> is registered with the given <code>mediatorName</code>.
+			 */
+			hasMediator: function( mediatorName )
+			{
+				return this.mediatorMap[mediatorName] != null;
 			}
 		}
 	);

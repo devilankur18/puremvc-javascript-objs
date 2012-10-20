@@ -134,7 +134,7 @@ new function()
 			 * 		The name of the <code>Notification</code>.
 			 *
 			 * @param {Function} commandClassRef
-			 * 		The <code>Class</code> of the <code>Command</code>.
+			 * 		The constructor of the <code>ICommand</code>.
 			 */
 			registerCommand: function( notificationName, commandClassRef )
 			{
@@ -148,8 +148,8 @@ new function()
 			 * Check if a <code>Command</code> is registered for a given <code>Notification</code>.
 			 *
 			 * @param {String} notificationName
-			 * 		The name of the <code>Notification</code> to verify the	existence of its
-			 * 		registration.
+			 * 		Name of the <code>Notification</code> to check wheter an <code>ICommand</code> is
+			 * 		registered for.
 			 * 
 			 * @return {Boolean}
 			 * 		A <code>Command</code> is currently registered for the given

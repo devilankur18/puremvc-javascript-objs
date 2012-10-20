@@ -33,7 +33,7 @@ new function()
 		"puremvc.Notifier",
 		{
 			/**
-			 * Facade of the <code>Notifier</code> object.
+			 * Local reference to the <code>Facade</code> of this core.
 			 * 
 			 * @type {Facade}
 			 * @private
@@ -58,10 +58,10 @@ new function()
 			 * 		The name of the notification to send.
 			 * 
 			 * @param {Object} body
-			 * 		The (optional) body of the notification.
+			 * 		The body of the notification (optional).
 			 *
 			 * @param {String} type
-			 * 		The (optional) type of the notification.
+			 * 		The type of the notification (optional).
 			 */
 			sendNotification: function( name, body, type )
 			{

@@ -12,14 +12,11 @@ new function()
 	 * In PureMVC, the <code>Model</code> class provides access to model objects (Proxies) by named
 	 * lookup.
 	 *
-	 * A singleton <code>Model</code> implementation.
-	 *
 	 * The <code>Model</code> assumes these responsibilities:
-	 *
 	 * <UL>
 	 * <LI>Maintain a cache of <code>Proxy</code> instances.
 	 * <LI>Provide methods for registering, retrieving, and removing <code>Proxy</code> instances.
-
+	 *
 	 * Your application must register <code>Proxy</code> instances with the <code>Model</code>.
 	 * Typically, you use a <code>Command</code> to create and register <code>Proxy</code> instances
 	 * once the <code>Facade</code> has initialized the core actors.
@@ -52,6 +49,7 @@ new function()
 				if( Model.instance )
 					throw Error( Model.SINGLETON_MSG );
 					
+				Model.instance = this;
 				this.proxyMap = {};
 				this.initializeModel();
 			},
@@ -121,12 +119,13 @@ new function()
 			 */
 			removeProxy: function( proxyName )
 			{
-				var proxy/*Proxy*/ = this.proxyMap[proxyName];
-				if( !proxy )
-					return null;
-					
-				delete this.proxyMap[proxyName];
-				proxy.onRemove();
+				var proxy/*Proxy*/ = this.proxyMap[ proxyName ];
+				if( proxy )
+				{
+					delete this.proxyMap[ proxyName ];
+					proxy.onRemove();
+				}
+			
 				return proxy;
 			}
 		}

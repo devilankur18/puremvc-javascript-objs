@@ -32,14 +32,14 @@ new function()
 			 * Fulfill the use-case initiated by the given <code>Notification</code>.
 			 *
 			 * In the Command Pattern, an application use-case typically begins with some user
-			 * action, which results in a <code>Notification</code> being broadcast, which is
+			 * action,which results in a <code>Notification</code> being broadcast, which is
 			 * handled by business logic in the <code>execute</code> method of an
 			 * <code>Command</code>.
 			 *
-			 * @param {Notification} note 
+			 * @param {Notification} notification 
 			 * 		The <code>Notification</code> to handle.
 			 */
-			execute: function( note ){}
+			execute: function( notification ){}
 		}
 	);
 }

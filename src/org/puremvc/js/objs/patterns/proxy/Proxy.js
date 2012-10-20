@@ -8,7 +8,7 @@ new function()
 	/**
 	 * @classDescription
 	 * The base <code>Proxy</code> class.
-	 * 
+	 *
 	 * In PureMVC, <code>Proxy</code> classes are used to manage parts of the application's data
 	 * model.
 	 *
@@ -64,7 +64,8 @@ new function()
 				Proxy.$super.initialize.call(this);
 			
 				this.proxyName = (proxyName != null) ? proxyName : Proxy.NAME;
-				this.data = data;
+				if( data != null )
+					this.setData(data);
 			},
 			
 			/**
@@ -90,10 +91,10 @@ new function()
 			},
 			
 			/**
-			 * Gets the data.
+			 * Get the data object
 			 *
 			 * @return {Object}
-			 * 		The data held in the <code>Proxy.
+			 * 		The data held in the <code>Proxy</code>.
 			 */
 			getData: function()
 			{
@@ -101,14 +102,14 @@ new function()
 			},
 			
 			/**
-			 * Called by the Model when the <code>Proxy</code> is registered. This method is usually
-			 * overridden as needed by the subclass.
+			 * Called by the Model when the <code>Proxy</code> is registered. This method has to be
+			 * overridden by the subclass to know when the instance is registered.
 			 */
 			onRegister: function(){},
 			
 			/**
-			 * Called by the Model when the <code>Proxy</code> is removed. This method is usually
-			 * overridden as needed by the subclass.
+			 * Called by the Model when the <code>Proxy</code> is removed. This method has to be
+			 * overridden by the subclass to know when the instance is removed.
 			 */
 			onRemove: function(){}
 		}

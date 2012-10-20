@@ -9,8 +9,8 @@ new function()
 	 * @classDescription 
 	 * A base <code>Command</code> implementation that executes other <code>Command</code>s.
 	 *
-	 * A <code>MacroCommand</code> maintains an list of <code>Command</code> class references called
-	 * <i>SubCommands</i>.
+	 * A <code>MacroCommand</code> maintains an list of <code>Command</code> constructor references
+	 * called <i>SubCommand</i>s.
 	 *
 	 * When <code>execute</code> is called, the <code>MacroCommand</code> instantiates and calls
 	 * <code>execute</code> on each of its <i>SubCommands</i> turn. Each <i>SubCommand</i> will be
@@ -69,23 +69,23 @@ new function()
 			 *    // Initialize MyMacroCommand
 			 *    initializeMacroCommand: function()
 			 *    {
-			 *    	this.addSubCommand(FirstCommand);
-			 *      this.addSubCommand(SecondCommand);
-			 *      this.addSubCommand(ThirdCommand);
+			 *    	this.addSubCommand( FirstCommand );
+			 *      this.addSubCommand( SecondCommand );
+			 *      this.addSubCommand( ThirdCommand );
 			 *    }
 			 * </pre>
 			 *
 			 * Note that <i>subCommands</i> may be any <code>Command</code> implementor.
 			 *
 			 * In the JavaScript version it means that it only needs to implement an execute method
-			 * and inherits from Notifier.
+			 * and inherits from <code>Notifier</code>.
 			 */
 			initializeMacroCommand: function()
 			{
 			},
 			
 			/**
-			 * Add an entry to <i>subCommands</i> list.
+			 * Add an entry to the <i>subCommands</i> list.
 			 *
 			 * The <i>subCommands</i> will be called in First In/First Out (FIFO) order.
 			 *
@@ -103,19 +103,22 @@ new function()
 			 * The <i>subCommands</i> will be called in First In/First Out (FIFO)
 			 * order.
 			 *
-			 * @param {Notification} note
-			 * 		The <code>Notification</code> object to be passed to each entry	of
-			 * 		<i>subCommands</i> list.
+			 * @param {Notification} notification
+			 *		The <code>Notification</code> object to be passed to each <i>SubCommand</i> of
+			 *		the list.
 			 */
-			execute: function( note )
+			execute: function( notification )
 			{
-				var len/*Number*/ = this.subCommands.length;
+				var	subCommands/*Array*/ = this.subCommands.slice(0);
+				var	len/*Number*/ = this.subCommands.length;
 				for( var i/*Number*/=0; i<len; i++ )
 				{
-					var commandClassRef/*Function*/ = this.subCommands[i];
+					var commandClassRef/*Function*/ = subCommands[i];
 					var commandInstance/*Command*/ = new commandClassRef();
-					commandInstance.execute( note );
+					commandInstance.execute( notification );
 				}
+			
+				this.subCommands.splice(0);
 			}
 		}
 	);
