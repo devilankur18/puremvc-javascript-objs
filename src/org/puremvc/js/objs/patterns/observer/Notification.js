@@ -45,7 +45,7 @@ new function()
 			 * @private 
 			 */
 			name: null,
-			
+
 			/**
 			 * The body data to send with the notification.
 			 * 
@@ -53,7 +53,7 @@ new function()
 			 * @private
 			 */
 			body: null,
-			
+
 			/**
 			 * The type identifier of the notification.
 			 * 
@@ -61,7 +61,7 @@ new function()
 			 * @private
 			 */
 			type: null,
-			
+
 			/**
 			 * Initialize a <code>Notification</code> instance.
 			 *
@@ -80,7 +80,7 @@ new function()
 				this.body = body;
 				this.type = type;
 			},
-			
+
 			/**
 			 * Get the name of the <code>Notification</code> instance.
 			 *
@@ -91,7 +91,7 @@ new function()
 			{
 				return this.name;
 			},
-			
+
 			/**
 			 * Set the body of the <code>Notification</code> instance.
 			 *
@@ -102,7 +102,7 @@ new function()
 			{
 				this.body = body;
 			},
-			
+
 			/**
 			 * Get the body of the <code>Notification</code> instance.
 			 *
@@ -113,7 +113,7 @@ new function()
 			{
 				return this.body;
 			},
-			
+
 			/**
 			 * Set the type of the <code>Notification</code> instance.
 			 *
@@ -124,7 +124,7 @@ new function()
 			{
 				this.type = type;
 			},
-			
+
 			/**
 			 * Get the type of the <code>Notification</code> instance.
 			 *
@@ -135,7 +135,7 @@ new function()
 			{
 				return this.type;
 			},
-			
+
 			/**
 			 * Get a textual representation of the <code>Notification</code>
 			 * instance.
@@ -149,7 +149,7 @@ new function()
 				var msg/*String*/ = "Notification Name: " + this.getName();
 				msg += "\nBody:" + (( this.getBody() == null ) ? "null" : this.getBody().toString());
 				msg += "\nType:" + (( this.getType() == null ) ? "null" : this.getType());
-			
+
 				return msg;
 			}
 		}

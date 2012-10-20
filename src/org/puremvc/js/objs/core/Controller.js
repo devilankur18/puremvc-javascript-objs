@@ -7,7 +7,7 @@ new function()
 {
 	var Observer = Objs("puremvc.Observer");
 	var View = Objs("puremvc.View");
-	
+
 	/**
 	 * @classDescription
 	 * The <code>Controller</code> class for PureMVC.
@@ -34,7 +34,7 @@ new function()
 	 * The simplest way is to subclass </code>Facade</code>, and use its
 	 * <code>initializeController</code> method to add your registrations.
 	 * 
-	 * @see puremvc.patterns.View View
+	 * @see puremvc.View View
 	 * @see puremvc.Observer Observer
 	 * @see puremvc.Notification Notification
 	 * @see puremvc.SimpleCommand SimpleCommand
@@ -53,7 +53,7 @@ new function()
 			 * @private
 			 */
 			view: null,
-			
+
 			/**
 			 * Mapping of <code>Notification<code> names to <code>Command</code> class references.
 			 *
@@ -61,10 +61,10 @@ new function()
 			 * @private
 			 */
 			commandMap: null,
-			
+
 			/**
 			 * Initialize a <code>Controller</code> instance.
-			 * 
+			 *
 			 * @throws {Error}
 			 * 		Throws an error if an instance for this singleton has already been constructed.
 			 */
@@ -72,14 +72,15 @@ new function()
 			{
 				if( Controller.instance )
 					throw Error( Controller.SINGLETON_MSG );
-			
+
+				Controller.instance = this;
 				this.commandMap = {};
 				this.initializeController();
 			},
-			
+
 			/**
 			 * Retains a reference to the <code>View</code> singleton.
-		 	 * 
+		 	 *
 			 * Called automatically by the constructor.
 			 *
 			 * Note that if you are using a subclass of <code>View</code> in your application, you
@@ -100,7 +101,7 @@ new function()
 			{
 				this.view = View.getInstance();
 			},
-			
+
 			/**
 			 * If a <code>Command</code> has previously been registered to handle the given
 			 * <code>Notification</code>, then it is executed.
@@ -110,14 +111,14 @@ new function()
 			 */
 			executeCommand: function( note )
 			{
-				var commandClassRef/*Function*/ = this.commandMap[note.getName()];
+				var commandClassRef/*Function*/ = this.commandMap[ note.getName() ];
 				if( commandClassRef )
 				{
 					var command/*Command*/ = new commandClassRef();
 					command.execute(note);
 				}
 			},
-			
+
 			/**
 			 * Register a particular <code>Command</code> class as the handler for a particular
 			 * <code>Notification</code>.
@@ -134,16 +135,16 @@ new function()
 			 * 		The name of the <code>Notification</code>.
 			 *
 			 * @param {Function} commandClassRef
-			 * 		The constructor of the <code>ICommand</code>.
+			 * 		The constructor of the <code>Command</code>.
 			 */
 			registerCommand: function( notificationName, commandClassRef )
 			{
 				if( !this.commandMap[notificationName] )
 					this.view.registerObserver( notificationName, new Observer( this.executeCommand, this ) );
-			
+
 				this.commandMap[notificationName] = commandClassRef;
 			},
-			
+
 			/**
 			 * Check if a <code>Command</code> is registered for a given <code>Notification</code>.
 			 *
@@ -157,9 +158,9 @@ new function()
 			 */
 			hasCommand: function( notificationName )
 			{
-				return this.commandMap[notificationName] ? true : false;
+				return this.commandMap[notificationName] != null;
 			},
-			
+
 			/**
 			 * Remove a previously registered <code>SimpleCommand</code> or
 			 * <code>MacroCommand</code> to <code>Notification</code> mapping.
@@ -172,26 +173,26 @@ new function()
 			{
 				if( this.hasCommand(notificationName) )
 				{
-					this.view.removeObserver(notificationName, this);
+					this.view.removeObserver( notificationName, this );
 					delete this.commandMap[notificationName];
 				}
 			}
 		}
 	);
-	
+
 	/**
 	 * @constant
 	 * @type {String}
 	 * @private
 	 */
 	Controller.SINGLETON_MSG = "Controller Singleton already constructed!";
-	
+
 	/**
 	 * @type {Controller}
 	 * @private
 	 */
 	Controller.instance = null;
-	
+
 	/**
 	 * Retrieve the singleton instance of the <code>Controller</code>.
 	 *
@@ -202,7 +203,7 @@ new function()
 	{
 		if( !Controller.instance )
 			Controller.instance = new Controller();
-	
+
 		return Controller.instance;
 	}
 }

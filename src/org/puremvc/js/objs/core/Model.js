@@ -36,10 +36,10 @@ new function()
 			 * @private
 			 */
 			proxyMap: null,
-			
+
 			/**
 			 * Initialize a <code>Model</code> instance.
-			 * 
+			 *
 			 * @throws {Error}
 			 * 		Throws an error if an instance for this singleton has already
 			 * 		been constructed.
@@ -48,12 +48,12 @@ new function()
 			{
 				if( Model.instance )
 					throw Error( Model.SINGLETON_MSG );
-					
+
 				Model.instance = this;
 				this.proxyMap = {};
 				this.initializeModel();
 			},
-			
+
 			/**
 			 * Initialize the singleton <code>Model</code> instance.
 			 *
@@ -62,7 +62,7 @@ new function()
 			 */
 			initializeModel: function()
 			{
-			
+
 			},
 
 			/**
@@ -76,9 +76,9 @@ new function()
 				this.proxyMap[proxy.getProxyName()] = proxy;
 				proxy.onRegister();
 			},
-			
+
 			/**
-			 * Retrieve an <code>IProxy</code> from the <code>Model</code>.
+			 * Retrieve an <code>Proxy</code> from the <code>Model</code>.
 			 *
 			 * @param {String} proxyName
 			 *		The name of the <code>Proxy</code> to retrieve.
@@ -90,9 +90,9 @@ new function()
 			retrieveProxy: function( proxyName )
 			{
 				//Return a strict null when the proxy doesn't exist
-				return this.proxyMap[proxyName] || null;
+				return this.proxyMap[ proxyName ] || null;
 			},
-			
+
 			/**
 			 * Check if a <code>Proxy</code> is registered.
 			 *
@@ -104,9 +104,9 @@ new function()
 			 */
 			hasProxy: function( proxyName )
 			{
-				return this.proxyMap[proxyName] ? true : false;
+				return this.proxyMap[proxyName] != null;
 			},
-			
+
 			/**
 			 * Remove a <code>Proxy</code> from the <code>Model</code>.
 			 *
@@ -130,20 +130,20 @@ new function()
 			}
 		}
 	);
-	
+
 	/**
 	 * @constant
 	 * @type {String}
 	 * @private
 	 */
 	Model.SINGLETON_MSG = "Model Singleton already constructed!";
-	
+
 	/**
 	 * @type {Model}
 	 * @private
 	 */
-	Model.instance = new Model();
-	
+	Model.instance = null;
+
 	/**
 	 * Retrieve the singleton instance of the <code>Model</code>.
 	 *
@@ -154,7 +154,7 @@ new function()
 	{
 		if( !Model.instance )
 			Model.instance = new Model();
-	
+
 		return Model.instance;
 	}
 }

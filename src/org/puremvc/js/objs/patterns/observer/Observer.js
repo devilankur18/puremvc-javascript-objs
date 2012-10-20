@@ -36,7 +36,7 @@ new function()
 			 * @private
 			 */
 			notify: null,
-			
+
 			/**
 			 * The notification context of the interested object.
 			 * 
@@ -44,7 +44,7 @@ new function()
 			 * @private
 			 */
 			context: null,
-			
+
 			/**
 			 * Initialize an <code>Observer</code> instance.
 			 *
@@ -59,7 +59,7 @@ new function()
 				this.setNotifyMethod( notifyMethod );
 				this.setNotifyContext( notifyContext );
 			},
-			
+
 			/**
 			 * Get the notification method.
 			 *
@@ -70,7 +70,7 @@ new function()
 			{
 				return this.notify;
 			},
-			
+
 			/**
 			 * Set the notification method.
 			 *
@@ -83,7 +83,7 @@ new function()
 			{
 				this.notify = notifyMethod;
 			},
-			
+
 			/**
 			 * Get the notification context.
 			 *
@@ -94,7 +94,7 @@ new function()
 			{
 				return this.context;
 			},
-			
+
 			/**
 			 * Set the notification context.
 			 *
@@ -105,7 +105,7 @@ new function()
 			{
 				this.context = notifyContext;
 			},
-			
+
 			/**
 			 * Notify the interested object.
 			 *
@@ -117,7 +117,7 @@ new function()
 			{
 				this.getNotifyMethod().call( this.getNotifyContext(), note );
 			},
-			
+
 			/**
 			 * Compare an object to the notification context.
 			 *

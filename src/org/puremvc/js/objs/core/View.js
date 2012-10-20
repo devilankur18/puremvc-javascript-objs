@@ -62,7 +62,8 @@ new function()
 			{
 				if( View.instance )
 					throw Error( View.SINGLETON_MSG );
-			
+
+				View.instance = this;
 				this.mediatorMap = {};
 				this.observerMap = {};
 				this.initializeView();
@@ -75,7 +76,7 @@ new function()
 			 * singleton instance in a subclass without overriding the constructor.
 			 */
 			initializeView: function() {},
-			
+
 			/**
 			 * Register an <code>Observer</code> to be notified of <code>Notifications</code> with a
 			 * given name.
@@ -94,7 +95,7 @@ new function()
 				else
 					this.observerMap[notificationName] = [observer];
 			},
-			
+
 			/**
 			 * Notify the <code>Observer</code>s for a particular <code>Notification</code>.
 			 *
@@ -122,7 +123,7 @@ new function()
 					}
 				}
 			},
-			
+
 			/**
 			 * Remove the <code>Observer</code> for a given <code>notifyContext</code> from an
 			 * <code>Observer</code> list for a given <code>Notification</code> name.
@@ -157,7 +158,7 @@ new function()
 				if( observers.length == 0 )
 					delete this.observerMap[notificationName];
 			},
-			
+
 			/**
 			 * Register an <code>Mediator</code> instance with the <code>View</code>.
 			 *
@@ -187,7 +188,7 @@ new function()
 				//Get Notification interests, if any.
 				var interests/*Array*/ = mediator.listNotificationInterests();
 				var len/*Number*/ = interests.length;
-				if( len )
+				if( len>0 )
 				{
 			    	//Create Observer referencing this mediator's handlNotification method.
 					var observer/*Observer*/ = new Observer( mediator.handleNotification, mediator );
@@ -200,7 +201,7 @@ new function()
 				//Alert the mediator that it has been registered.
 				mediator.onRegister();
 			},
-			
+
 			/**
 			 * Retrieve a <code>Mediator</code> from the <code>View</code>.
 			 *
@@ -216,7 +217,7 @@ new function()
 				//Return a strict null when the mediator doesn't exist
 				return this.mediatorMap[mediatorName] || null;
 			},
-			
+
 			/**
 			 * Remove a <code>Mediator</code> from the <code>View</code>.
 			 *
@@ -232,22 +233,22 @@ new function()
 				var mediator/*Mediator*/ = this.mediatorMap[mediatorName];
 				if( !mediator )
 					return null;
-			
+
 				//Get Notification interests, if any.
 				var interests/*Array*/ = mediator.listNotificationInterests();
-				
+
 				//For every notification this mediator is interested in...
 				var i/*Number*/ = interests.length;
 				while( i-- ) 
 					this.removeObserver( interests[i], mediator );
-				
+
 				// remove the mediator from the map		
 				delete this.mediatorMap[mediatorName];
 				//Alert the mediator that it has been removed
 				mediator.onRemove();
 				return mediator;	
 			},
-					
+
 			/**
 			 * Check if a <code>Mediator</code> is registered or not.
 			 *
@@ -263,20 +264,20 @@ new function()
 			}
 		}
 	);
-	
+
 	/**
 	 * @constant
 	 * @type {String}
 	 * @private
 	 */
 	View.SINGLETON_MSG = "View Singleton already constructed!";
-	
+
 	/**
 	 * @type {View}
 	 * @private
 	 */
 	View.instance = null;
-	
+
 	/**
 	 * Retrieve the singleton instance of the <code>View</code>.
 	 * 
@@ -287,7 +288,7 @@ new function()
 	{
 		if( !View.instance )
 			View.instance = new View();
-	
+
 		return View.instance;
 	}
 }

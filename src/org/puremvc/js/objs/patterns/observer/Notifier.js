@@ -34,12 +34,12 @@ new function()
 		{
 			/**
 			 * Local reference to the <code>Facade</code> of this core.
-			 * 
+			 *
 			 * @type {Facade}
 			 * @private
 			 */
 			facade: null,
-			
+
 			/**
 			 * Initialize a <code>Notifier</code> instance.
 			 */
@@ -47,7 +47,7 @@ new function()
 			{
 				this.facade = Facade.getInstance();
 			},
-			
+
 			/**
 			 * Create and send a <code>Notification</code>.
 			 *

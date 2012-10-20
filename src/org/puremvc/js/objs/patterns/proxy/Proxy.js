@@ -39,7 +39,7 @@ new function()
 			 * @private
 			 */
 			data: null,
-			
+
 			/**
 			 * The name of the <code>Proxy</code>.
 			 * 
@@ -47,7 +47,7 @@ new function()
 			 * @private
 			 */
 			proxyName: null,
-			
+
 			/**
 			 * @override
 			 *
@@ -62,12 +62,12 @@ new function()
 			initialize: function( proxyName, data )
 			{
 				Proxy.$super.initialize.call(this);
-			
+
 				this.proxyName = (proxyName != null) ? proxyName : Proxy.NAME;
 				if( data != null )
 					this.setData(data);
 			},
-			
+
 			/**
 			 * Gets the proxyName.
 			 *
@@ -78,7 +78,7 @@ new function()
 			{
 				return this.proxyName;
 			},
-			
+
 			/**
 			 * Sets the data object.
 			 *
@@ -89,9 +89,9 @@ new function()
 			{
 				this.data = data;
 			},
-			
+
 			/**
-			 * Get the data object
+			 * Get the data object.
 			 *
 			 * @return {Object}
 			 * 		The data held in the <code>Proxy</code>.
@@ -100,13 +100,13 @@ new function()
 			{
 				return this.data;
 			},
-			
+
 			/**
 			 * Called by the Model when the <code>Proxy</code> is registered. This method has to be
 			 * overridden by the subclass to know when the instance is registered.
 			 */
 			onRegister: function(){},
-			
+
 			/**
 			 * Called by the Model when the <code>Proxy</code> is removed. This method has to be
 			 * overridden by the subclass to know when the instance is removed.

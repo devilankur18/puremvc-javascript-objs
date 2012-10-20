@@ -29,7 +29,7 @@ new function()
 			 * @private
 			 */
 			mediatorName: null,
-			
+
 			/**
 			 * The <code>Mediator</code>'s view component.
 			 * 
@@ -37,7 +37,7 @@ new function()
 			 * @private
 			 */
 			viewComponent: null,
-			
+
 			/**
 			 * @override
 			 *
@@ -53,12 +53,10 @@ new function()
 			initialize: function( mediatorName, viewComponent )
 			{
 				Mediator.$super.initialize.call(this);
-			
+
 				this.mediatorName = (mediatorName != null) ? mediatorName : Mediator.NAME;
 				this.viewComponent = viewComponent;
 			},
-			
-
 			
 			/**
 			 * Get the name of the <code>Mediator</code>.
@@ -141,7 +139,7 @@ new function()
 			onRemove: function(){}
 		}
 	);
-	
+
 	/**
 	 * Default name of the <code>Mediator</code>.
 	 * 

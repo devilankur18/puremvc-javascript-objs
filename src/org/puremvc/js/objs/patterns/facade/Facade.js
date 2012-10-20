@@ -9,7 +9,7 @@ new function()
 	var View = Objs("puremvc.View");
 	var Controller = Objs("puremvc.Controller");
 	var Notification = Objs("puremvc.Notification");
-	
+
 	/**
 	 * @classDescription
 	 * A base singleton <code>Facade</code> implementation.
@@ -23,7 +23,7 @@ new function()
 	 * <code>Controller</code> singletons.
 	 * <LI>Providing a single point of contact to the application for registering
 	 * <code>Command</code>s and notifying <code>Observer</code>s.
-	 * 
+	 *
 	 * This <code>Facade</code> implementation is a singleton and cannot be instantiated directly,
 	 * but instead calls the static singleton factory method <code>Facade.getInstance()</code>.
 	 * 
@@ -49,7 +49,7 @@ new function()
 			 * @private
 			 */
 			view: null,
-			
+
 			/**
 			 * The <code>Model</code> singleton.
 			 *
@@ -57,7 +57,7 @@ new function()
 			 * @private
 			 */
 			model: null,
-			
+
 			/**
 			 * The <code>Controller</code> singleton.
 			 *
@@ -65,18 +65,21 @@ new function()
 			 * @private
 			 */
 			controller: null,
-			
+
 			/**
 			 * Initialize a <code>Facade</code> instance.
+			 * @throws {Error}
+			 *		Error if an instance of this singleton has already been constructed.
 			 */
 			initialize: function()
 			{
 				if( Facade.instance )
 					throw Error( Facade.SINGLETON_MSG );
-			
+
+				Facade.instance = this;
 				this.initializeFacade();
 			},
-			
+
 			/**
 			 * @private
 			 * Called automatically by the constructor.
@@ -92,7 +95,7 @@ new function()
 				this.initializeController();
 				this.initializeView();
 			},
-			
+
 			/**
 			 * @private
 			 * Initialize the <code>Model</code>.
@@ -119,7 +122,7 @@ new function()
 				if( !this.model )
 					this.model = Model.getInstance();
 			},
-			
+
 			/**
 			 * @private
 			 * Initialize the <code>Controller</code>.
@@ -141,7 +144,7 @@ new function()
 				if( !this.controller )
 					this.controller = Controller.getInstance();
 			},
-			
+
 			/**
 			 * @private
 			 *
@@ -151,9 +154,9 @@ new function()
 			 * subclass of <code>Facade</code> if one or both of the following are true:
 			 * 
 			 * <UL>
-			 *
-			 * <LI>You wish to initialize a different <code>IView</code>.
-			 *
+
+			 * <LI>You wish to initialize a different <code>View</code>.
+
 			 * <LI>You have <code>Observer</code>s to register with the <code>View</code>
 			 * 
 			 * Note: This method is <i>rarely</i> overridden; in practice you are more likely to use
@@ -167,7 +170,7 @@ new function()
 				if( !this.view )
 					this.view = View.getInstance();
 			},
-			
+
 			/**
 			 * Register a <code>Command</code> with the <code>IController</code> associating it to a
 			 * <code>Notification</code> name.
@@ -183,7 +186,7 @@ new function()
 			{
 				this.controller.registerCommand( name, commandClassRef );
 			},
-			
+
 			/**
 			 * Remove a previously registered <code>Command</code> to <code>Notification</code>
 			 * mapping from the <code>Controller</code>.
@@ -212,7 +215,7 @@ new function()
 			{
 				return this.controller.hasCommand( notificationName );
 			},
-			
+
 			/**
 			 * Register a <code>Proxy</code> with the <code>Model</code> by name.
 			 *
@@ -223,7 +226,7 @@ new function()
 			{
 				this.model.registerProxy(proxy);
 			},
-			
+
 			/**
 			 * Retrieve a <code>Proxy</code> from the <code>Model</code> by name.
 			 *
@@ -237,7 +240,7 @@ new function()
 			{
 				return this.model.retrieveProxy(proxyName);
 			},
-			
+
 			/**
 			 * Remove an <code>Proxy</code> from the <code>Model</code> by name.
 			 *
@@ -255,7 +258,7 @@ new function()
 
 				return proxy
 			},
-			
+
 			/**
 			 * Check if a <code>Proxy</code> is registered.
 			 *
@@ -271,7 +274,7 @@ new function()
 			{
 				return this.model.hasProxy(proxyName);
 			},
-			
+
 			/**
 			 * Register a <code>Mediator</code> with the <code>View</code>.
 			 *
@@ -283,7 +286,7 @@ new function()
 				if( this.view )
 					this.view.registerMediator(mediator);
 			},
-			
+
 			/**
 			 * Retrieve an <code>Mediator</code> from the <code>View</code>.
 			 *
@@ -298,7 +301,7 @@ new function()
 			{
 				return this.view.retrieveMediator(mediatorName);
 			},
-			
+
 			/**
 			 * Remove an <code>Mediator</code> from the <code>View</code>.
 			 *
@@ -316,7 +319,7 @@ new function()
 
 				return mediator;
 			},
-			
+
 			/**
 			 * Check if a <code>Mediator</code> is registered or not.
 			 *
@@ -331,7 +334,6 @@ new function()
 			{
 				return this.view.hasMediator(mediatorName);
 			},
-			
 			
 			/**
 			 * Notify <code>Observer</code>s.
@@ -374,7 +376,7 @@ new function()
 			}
 		}
 	);
-	
+
 	/**
 	 * @private
 	 * 
@@ -389,7 +391,7 @@ new function()
 	 * @type {Facade}
 	 */
 	Facade.instance = null;
-	
+
 	/**
 	 * Retrieve the singleton instance of the <code>Facade</code>.
 	 * 
@@ -400,7 +402,7 @@ new function()
 	{
 		if( !Facade.instance )
 			Facade.instance = new Facade();
-	
+
 		return Facade.instance;
 	}
 }

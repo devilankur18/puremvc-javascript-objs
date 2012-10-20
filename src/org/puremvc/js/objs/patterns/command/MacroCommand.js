@@ -45,7 +45,7 @@ new function()
 			 * @private
 			 */
 			subCommands: null,
-			
+
 			/**
 			 * @override
 			 *
@@ -54,11 +54,11 @@ new function()
 			initialize: function()
 			{
 				MacroCommand.$super.initialize.call(this);
-			
+
 				this.subCommands = [];
 				this.initializeMacroCommand();
 			},
-			
+
 			/**
 			 * Initialize the <code>MacroCommand</code>.
 			 *
@@ -83,7 +83,7 @@ new function()
 			initializeMacroCommand: function()
 			{
 			},
-			
+
 			/**
 			 * Add an entry to the <i>subCommands</i> list.
 			 *
@@ -96,7 +96,7 @@ new function()
 			{
 				this.subCommands.push( commandClassRef );
 			},
-			
+
 			/**
 			 * Execute this <code>MacroCommand</code>'s <i>SubCommands</i>.
 			 *
@@ -110,14 +110,14 @@ new function()
 			execute: function( notification )
 			{
 				var	subCommands/*Array*/ = this.subCommands.slice(0);
-				var	len/*Number*/ = this.subCommands.length;
+				var len/*Number*/ = this.subCommands.length;
 				for( var i/*Number*/=0; i<len; i++ )
 				{
 					var commandClassRef/*Function*/ = subCommands[i];
 					var commandInstance/*Command*/ = new commandClassRef();
 					commandInstance.execute( notification );
 				}
-			
+
 				this.subCommands.splice(0);
 			}
 		}
