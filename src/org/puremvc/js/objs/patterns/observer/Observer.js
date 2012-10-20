@@ -9,12 +9,10 @@ new function()
 	 * @classDescription
 	 * The base <code>Observer</code> class.
 	 *
-	 * <P>
-	 * An <code>Observer</code> is an object that encapsulates information
-	 * about an interested object with a method that should
-	 * be called when a particular <code>Notification</code> is broadcast.
+	 * An <code>Observer</code> is an object that encapsulates information about an interested
+	 * object with a method that should be called when a particular <code>Notification</code> is
+	 * broadcast.
 	 *
-	 * <P>
 	 * In PureMVC, the <code>Observer</code> class assumes these responsibilities:
 	 * <UL>
 	 * <LI>Encapsulate the notification (callback) method of the interested object.
@@ -76,8 +74,7 @@ new function()
 			/**
 			 * Set the notification method.
 			 *
-			 * <P>The notification method should take one parameter of type
-			 * <code>Notification</code>.
+			 * The notification method should take one parameter of type <code>Notification</code>.
 			 *
 			 * @param {Function} notifyMethod
 			 * 		The notification (callback) method of the interested object.
@@ -91,8 +88,7 @@ new function()
 			 * Get the notification context.
 			 *
 			 * @return {Object}
-			 * 		The notification context (<code>this</code>) of the interested
-			 * 		object.
+			 * 		The notification context (<code>this</code>) of the interested object.
 			 */
 			getNotifyContext: function()
 			{

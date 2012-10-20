@@ -24,8 +24,7 @@ var ControllerTestCommand2 = Objs
 		 * Fabricate a result by multiplying the input by 2 and adding to the
 		 * existing result.
 		 * 
-		 * <P>
-		 * This tests accumulation effect that would show if the command were
+			 * This tests accumulation effect that would show if the command were
 		 * executed more than once.
 		 * 
 		 * @param {Notification} note 

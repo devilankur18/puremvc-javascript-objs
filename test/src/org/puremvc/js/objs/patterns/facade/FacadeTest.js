@@ -65,13 +65,11 @@ var FacadeTest = new YUITest.TestCase
   		/**
   		 * Tests Command registration and execution via the Facade.
   		 * 
-  		 * <P>
-  		 * This test gets the Singleton Facade instance 
+  	  		 * This test gets the Singleton Facade instance
   		 * and registers the FacadeTestCommand class 
   		 * to handle 'FacadeTest' Notifications.
   		 * 
-  		 * <P>
-  		 * It then sends a notification using the Facade. 
+  	  		 * It then sends a notification using the Facade.
   		 * Success is determined by evaluating 
   		 * a property on an object placed in the body of
   		 * the Notification, which will be modified by the Command.
@@ -104,13 +102,11 @@ var FacadeTest = new YUITest.TestCase
   		/**
   		 * Tests Command removal via the Facade.
   		 * 
-  		 * <P>
-  		 * This test gets the Singleton Facade instance 
+  	  		 * This test gets the Singleton Facade instance
   		 * and registers the FacadeTestCommand class 
   		 * to handle 'FacadeTest' Notifcations. Then it removes the command.
   		 * 
-  		 * <P>
-  		 * It then sends a Notification using the Facade. 
+  	  		 * It then sends a Notification using the Facade.
   		 * Success is determined by evaluating a property on an object placed
   		 * in the body of the Notification, which will NOT be modified by the
   		 * Command.
@@ -144,8 +140,7 @@ var FacadeTest = new YUITest.TestCase
   		/**
   		 * Tests the registering and retrieving Model proxies via the Facade.
   		 * 
-  		 * <P>
-  		 * Tests <code>registerProxy</code> and <code>retrieveProxy</code> in the same test.
+  	  		 * Tests <code>registerProxy</code> and <code>retrieveProxy</code> in the same test.
   		 * These methods cannot currently be tested separately
   		 * in any meaningful way other than to show that the
   		 * methods do not throw exception when called.

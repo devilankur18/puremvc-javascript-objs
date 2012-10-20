@@ -43,7 +43,7 @@ ViewTestNote.NAME = "ViewTestNote";
 /**
  * Factory method.
  * 
- * <P> 
+ *
  * This method creates new instances of the ViewTestNote class,
  * automatically setting the note name so you don't have to. Use
  * this as an alternative to the constructor.

@@ -9,18 +9,15 @@ new function()
 	 * @classDescription
 	 * A base <code>Command</code> implementation.
 	 * 
-	 * <P>
-	 * Your subclass should override the <code>execute</code> method where
-	 * your business logic will handle the <code>Notification</code>.
+	 * Your subclass should override the <code>execute</code> method where your business logic will
+	 * handle the <code>Notification</code>.
 	 *
-	 * <P>
 	 * As in JavaScript there isn't interfaces, <code>SimpleCommand</code> and
-	 * <code>MacroCommand</code> cannot offer the guarantee to have the right
-	 * signature. We could have inherited from a common <code>Command</code> class,
-	 * but to avoid an unwanted complexity and to respect PureMVC implementation,
-	 * this is to the developer to take care to inherit from
-	 * <code>SimpleCommand</code> in its command and <code>MacroCommand</code>
-	 * depending on his need.
+	 * <code>MacroCommand</code> cannot offer the guarantee to have the right signature. We could
+	 * have inherited from a common <code>Command</code> class, but to avoid an unwanted complexity
+	 * and to respect PureMVC implementation, this is to the developer to take care to inherit from
+	 * <code>SimpleCommand</code> in its command and <code>MacroCommand</code> depending on his
+	 * need.
 	 * 
 	 * @extends puremvc.Notifier Notifier
 	 *
@@ -34,11 +31,10 @@ new function()
 			/**
 			 * Fulfill the use-case initiated by the given <code>Notification</code>.
 			 *
-			 * <P>
-			 * In the Command Pattern, an application use-case typically begins with
-			 * some user action, which results in a <code>Notification</code> being
-			 * broadcast, which is handled by business logic in the
-			 * <code>execute</code> method of an <code>Command</code>.
+			 * In the Command Pattern, an application use-case typically begins with some user
+			 * action, which results in a <code>Notification</code> being broadcast, which is
+			 * handled by business logic in the <code>execute</code> method of an
+			 * <code>Command</code>.
 			 *
 			 * @param {Notification} note 
 			 * 		The <code>Notification</code> to handle.

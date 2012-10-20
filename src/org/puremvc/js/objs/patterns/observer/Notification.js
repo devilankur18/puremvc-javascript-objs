@@ -9,35 +9,25 @@ new function()
 	 * @classDescription
 	 * The base <code>Notification</code> class.
 	 *
-	 * <P>
-	 * PureMVC does not rely upon underlying event models such
-	 * as the one provided with Flash, and ActionScript 3 does
+	 * PureMVC does not rely upon underlying event framework or language models and JavaScript does
 	 * not have an inherent event model.
 	 *
-	 * <P>
-	 * The Observer pattern as implemented within PureMVC exists
-	 * to support event-driven communication between the
-	 * application and the actors of the MVC triad (Model, View
-	 * and Controller.
+	 * The Observer pattern as implemented within PureMVC exists to support event-driven
+	 * communication between the application and the actors of the MVC triad (Model, View and
+	 * Controller).
 	 *
-	 * <P>
-	 * Notifications are not meant to be a replacement for Events
-	 * in Flex/Flash/Air/Javascript. Generally, <code>Mediator</code>
-	 * implementors place event listeners on their view components, which they
-	 * then handle in the usual way. This may lead to the broadcast of
-	 * <code>Notification</code>s to trigger <code>Command</code>s or to
-	 * communicate with other <code>Mediators</code>.
-	 * <code>Proxy</code> and <code>Command</code> instances communicate with each
-	 * other and <code>Mediator</code>s by broadcasting <code>Notification</code>s.
+	 * Notifications are not meant to be a replacement for Events in Flex/Flash/Air/Javascript.
+	 * Generally, <code>Mediator</code> implementors place event listeners on their view components,
+	 * which they then handle in the usual way. This may lead to the broadcast of
+	 * <code>Notification</code>s to trigger <code>Command</code>s or to communicate with other
+	 * <code>Mediators</code>. <code>Proxy</code> and <code>Command</code> instances communicate
+	 * with each other and <code>Mediator</code>s by broadcasting <code>Notification</code>s.
 	 *
-	 * <P>
-	 * A key difference between Flash <code>Event</code>s and PureMVC
-	 * <code>Notification</code>s is that <code>Event</code>s follow the
-	 * 'Chain of Responsibility' pattern, 'bubbling' up the display hierarchy
-	 * until some parent component handles the <code>Event</code>, while
-	 * PureMVC <code>Notification</code>s follow a 'Publish/Subscribe'
-	 * pattern. PureMVC classes need not be related to each other in a
-	 * parent/child relationship in order to communicate with one another
+	 * A key difference between Flash <code>Event</code>s and PureMVC <code>Notification</code>s is
+	 * that <code>Event</code>s follow the 'Chain of Responsibility' pattern, 'bubbling' up the
+	 * display hierarchy until some parent component handles the <code>Event</code>, while PureMVC
+	 * <code>Notification</code>s follow a 'Publish/Subscribe' pattern. PureMVC classes need not be
+	 * related to each other in a parent/child relationship in order to communicate with one another
 	 * using <code>Notification</code>s.
 	 *
 	 * @see puremvc.Observer Observer

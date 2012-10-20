@@ -9,21 +9,17 @@ new function()
 	 * @classDescription
 	 * The base <code>Proxy</code> class.
 	 * 
-	 * <P>
-	 * In PureMVC, <code>Proxy</code> classes are used to manage parts of the
-	 * application's data model.
+	 * In PureMVC, <code>Proxy</code> classes are used to manage parts of the application's data
+	 * model.
 	 *
-	 * <P>
-	 * A <code>Proxy</code> might simply manage a reference to a local data object,
-	 * in which case interacting with it might involve setting and
-	 * getting of its data in synchronous fashion.
+	 * A <code>Proxy</code> might simply manage a reference to a local data object, in which case
+	 * interacting with it might involve setting and getting of its data in synchronous fashion.
 	 *
-	 * <P>
-	 * <code>Proxy</code> classes are also used to encapsulate the application's
-	 * interaction with remote services to store or retrieve data, in which case,
-	 * we adopt an asynchronous idiom; setting data (or calling a method) on the
-	 * <code>Proxy</code> and listening for a <code>Notification</code> to be sent
-	 * when the <code>Proxy</code> has retrieved the data from the service.
+	 * <code>Proxy</code> classes are also used to encapsulate the application's interaction with
+	 * remote services to store or retrieve data, in which case, we adopt an asynchronous idiom
+	 * setting data (or calling a method) on the <code>Proxy</code> and listening for a
+	 * <code>Notification</code> to be sent when the <code>Proxy</code> has retrieved the data from
+	 * the service.
 	 *
 	 * @see puremvc.Model Model
 	 *
@@ -105,14 +101,14 @@ new function()
 			},
 			
 			/**
-			 * Called by the Model when the <code>Proxy</code> is registered.
-			 * This method is usually overridden as needed by the subclass.
+			 * Called by the Model when the <code>Proxy</code> is registered. This method is usually
+			 * overridden as needed by the subclass.
 			 */
 			onRegister: function(){},
 			
 			/**
-			 * Called by the Model when the <code>Proxy</code> is removed.
-			 * This method is usually overridden as needed by the subclass.
+			 * Called by the Model when the <code>Proxy</code> is removed. This method is usually
+			 * overridden as needed by the subclass.
 			 */
 			onRemove: function(){}
 		}

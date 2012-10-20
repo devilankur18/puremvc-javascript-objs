@@ -11,25 +11,18 @@ new function()
 	 * @classDescription
 	 * The Base <code>Notifier</code> class.
 	 *
-	 * <P>
-	 * <code>MacroCommand</code>, <code>Command</code>,
-	 * <code>Mediator</code> and <code>Proxy</code> all have a need to send
-	 * <code>Notifications</code>.
+	 * <code>MacroCommand</code>, <code>Command</code>, <code>Mediator</code> and <code>Proxy</code>
+	 * all have a need to send <code>Notifications</code>.
 	 * 
-	 * <P>
-	 * The <code>Notifier</code> base class provides a common method
-	 * called <code>sendNotification</code> that relieves implementation
-	 * code of the necessity to actually construct
-	 * <code>Notification</code>s.
+	 * The <code>Notifier</code> base class provides a common method called
+	 * <code>sendNotification</code> that relieves implementation code of the necessity to actually
+	 * construct <code>Notification</code>s.
 	 *
-	 * <P>
-	 * The <code>Notifier</code> class, which all of the above mentioned
-	 * classes extend, provides an initialized reference to the
-	 * <code>Facade</code> singleton, which is required by the convenience
-	 * method <code>sendNotification</code>	for sending
-	 * <code>Notifications</code>, but it also eases implementation as
-	 * these classes have frequent <code>Facade</code> interactions and
-	 * uusually require access to the facade anyway.
+	 * The <code>Notifier</code> class, which all of the above mentioned classes extend, provides an
+	 * initialized reference to the <code>Facade</code> singleton, which is required by the
+	 * convenience method <code>sendNotification</code>	for sending <code>Notifications</code>, but
+	 * it also eases implementation as these classes have frequent <code>Facade</code> interactions
+	 * and usually require access to the facade anyway.
 	 * 
 	 * @see puremvc.Facade Facade
 	 * 
@@ -58,9 +51,8 @@ new function()
 			/**
 			 * Create and send a <code>Notification</code>.
 			 *
-			 * <P>
-			 * Keeps us from having to construct new <code>Notification</code>
-			 * instances in our implementation code.
+			 * Keeps us from having to construct new <code>Notification</code> instances in our
+			 * implementation code.
 			 * 
 			 * @param {String} name
 			 * 		The name of the notification to send.

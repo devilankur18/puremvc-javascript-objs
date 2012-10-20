@@ -92,16 +92,14 @@ var ViewTest = new YUITest.TestCase
   		/**
   		 * Tests registration and notification of Observers.
   		 * 
-  		 * <P>
-  		 * An Observer is created to callback the viewTestMethod of
+  	  		 * An Observer is created to callback the viewTestMethod of
   		 * this ViewTest instance. This Observer is registered with
   		 * the View to be notified of 'ViewTestEvent' events. Such
   		 * an event is created, and a value set on its payload. Then
   		 * the View is told to notify interested observers of this
   		 * Event. 
   		 * 
-  		 * <P>
-  		 * The View calls the Observer's notifyObserver method
+  	  		 * The View calls the Observer's notifyObserver method
   		 * which calls the viewTestMethod on this instance
   		 * of the ViewTest class. The viewTestMethod method will set 
   		 * an instance variable to the value passed in on the Event

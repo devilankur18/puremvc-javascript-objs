@@ -9,25 +9,20 @@ new function()
 	 * @classDescription
 	 * The <code>Model</code> class for PureMVC.
 	 *
-	 * <P>
-	 * In PureMVC, the <code>Model</code> class provides
-	 * access to model objects (Proxies) by named lookup.
+	 * In PureMVC, the <code>Model</code> class provides access to model objects (Proxies) by named
+	 * lookup.
 	 *
-	 * <P>
 	 * A singleton <code>Model</code> implementation.
 	 *
-	 * <P>
 	 * The <code>Model</code> assumes these responsibilities:
 	 *
 	 * <UL>
 	 * <LI>Maintain a cache of <code>Proxy</code> instances.
-	 * <LI>Provide methods for registering, retrieving, and removing
-	 * <code>Proxy</code> instances.
-	 *
-	 * <P>Your application must register <code>Proxy</code> instances with the
-	 * <code>Model</code>. Typically, you use a <code>Command</code> to
-	 * create and register <code>Proxy</code> instances once the
-	 * <code>Facade</code> has initd the core actors.
+	 * <LI>Provide methods for registering, retrieving, and removing <code>Proxy</code> instances.
+
+	 * Your application must register <code>Proxy</code> instances with the <code>Model</code>.
+	 * Typically, you use a <code>Command</code> to create and register <code>Proxy</code> instances
+	 * once the <code>Facade</code> has initialized the core actors.
 	 * 
 	 * @see puremvc.Proxy Proxy
 	 * 
@@ -38,8 +33,7 @@ new function()
 		"puremvc.Model",
 		{
 			/**
-			 * HashTable of <code>Proxy</code> instances
-			 * registered with the <code>Model</code>
+			 * HashTable of <code>Proxy</code> instances registered with the <code>Model</code>.
 			 * 
 			 * @type {Object}
 			 * @private
@@ -65,16 +59,14 @@ new function()
 			/**
 			 * Initialize the singleton <code>Model</code> instance.
 			 *
-			 * <P>
-			 * Called automatically by the constructor. This
-			 * is the opportunity to initialize the singleton
-			 * instance in a subclass without overriding the
-			 * constructor.
+			 * Called automatically by the constructor. This is the opportunity to initialize the
+			 * singleton instance in a subclass without overriding the constructor.
 			 */
 			initializeModel: function()
 			{
 			
 			},
+
 			/**
 			 * Register a <code>Proxy</code> with the <code>Model</code>.
 			 *
@@ -94,9 +86,8 @@ new function()
 			 *		The name of the <code>Proxy</code> to retrieve.
 			 *
 			 * @return {Proxy}
-			 *		The <code>Proxy</code> instance previously registered with the
-			 *		given <code>proxyName</code> or an explicit <code>null</code>
-			 *		if it doesn't exists.
+			 *		The <code>Proxy</code> instance previously registered with the given
+			 *		<code>proxyName</code> or an explicit <code>null</code> if it doesn't exists.
 			 */
 			retrieveProxy: function( proxyName )
 			{
@@ -108,12 +99,10 @@ new function()
 			 * Check if a <code>Proxy</code> is registered.
 			 *
 			 * @param {String} proxyName
-			 *		The name of the <code>Proxy</code> to verify the existence of
-			 		its registration.
+			 *		The name of the <code>Proxy</code> to verify the existence of its registration.
 			 *
 			 * @return {Boolean}
-			 *		A Proxy is currently registered with the given
-			 		<code>proxyName</code>.
+			 *		A Proxy is currently registered with the given <code>proxyName</code>.
 			 */
 			hasProxy: function( proxyName )
 			{
@@ -127,9 +116,8 @@ new function()
 			 *		The name of the <code>Proxy</code> instance to be removed.
 			 *
 			 * @return {Proxy}
-			 *		The <code>Proxy</code> that was removed from the
-			 *		<code>Model</code> or an explicit <code>null</null> if the
-			 *		<code>Proxy</code> didn't exist.
+			 *		The <code>Proxy</code> that was removed from the <code>Model</code> or an
+			 *		explicit <code>null</null> if the <code>Proxy</code> didn't exist.
 			 */
 			removeProxy: function( proxyName )
 			{

@@ -14,23 +14,20 @@ new function()
 	 * @classDescription
 	 * A base singleton <code>Facade</code> implementation.
 	 * 
-	 * <P>
 	 * In PureMVC, the <code>Facade</code> class assumes these responsibilities:
 	 * 
 	 * <UL>
-	 * <LI>Initializing the <code>Model</code>, <code>View</code>
-	 * and <code>Controller</code> singletons.
+	 * <LI>Initializing the <code>Model</code>, <code>View</code> and <code>Controller</code>
+	 * singletons.
+	 *
+	 * <LI>Providing all the applicable methods of the <code>Model</code>, <code>View</code>, &
+	 * <code>Controller</code> singletons.
+	 *
+	 * <LI>Providing a single point of contact to the application for registering
+	 * <code>Command</code>s and notifying <code>Observer</code>s.
 	 * 
-	 * <LI>Providing all the applicable methods of the <code>Model</code>,
-	 * <code>View</code>, & <code>Controller</code> singletons.
-	 * 
-	 * <LI>Providing a single point of contact to the application for
-	 * registering <code>Command</code>s and notifying <code>Observer</code>s.
-	 * 
-	 * <P>
-	 * This <code>Facade</code> implementation is a singleton and cannot be
-	 * instantiated directly, but instead calls the static singleton factory
-	 * method <code>Facade.getInstance()</code>.
+	 * This <code>Facade</code> implementation is a singleton and cannot be instantiated directly,
+	 * but instead calls the static singleton factory method <code>Facade.getInstance()</code>.
 	 * 
 	 * @see puremvc.Controller Controller
 	 * @see puremvc.Model Model
@@ -87,11 +84,9 @@ new function()
 			 * Called automatically by the constructor.
 			 * Initialize the Singleton <code>Facade</code> instance.
 			 *
-			 * <P>
-			 * Override in your subclass to do any subclass specific
-			 * initializations. Be sure to extend the <code>Facade</code> with the
-			 * methods and properties on your implementation and call
-			 * <code>Facade.initializeFacade()</code>.
+			 * Override in your subclass to do any subclass specific initializations. Be sure to
+			 * extend the <code>Facade</code> with the methods and properties on your implementation
+			 * and call <code>Facade.initializeFacade()</code>.
 			 */
 			initializeFacade: function()
 			{
@@ -104,24 +99,20 @@ new function()
 			 * @private
 			 * Initialize the <code>Model</code>.
 			 *
-			 * <P>
-			 * Called by the <code>initializeFacade</code> method. Override this
-			 * method in your subclass of <code>Facade</code> if one or both of the
-			 * following are true:
-			 * 
+			 * Called by the <code>initializeFacade</code> method. Override this method in your
+			 * subclass of <code>Facade</code> if one or both of the following are true:
+			 *
 			 * <UL>
 			 * <LI>You wish to initialize a different <code>Model</code>.
-			 * <LI>You have <code>Proxy</code>s to register with the
-			 * <code>Model</code> that do not retrieve a reference to the
-			 * <code>Facade</code> at construction time.
 			 *
-			 * <P>
-			 * Note: This method is <i>rarely</i> overridden; in practice you are
-			 * more likely to use a <code>Command</code> to create and register
-			 * <code>Proxy</code>s with the <code>Model</code>, since
-			 * <code>Proxy</code>s with mutable data will likely need to send 
-			 * <code>Notification</code>s and thus will likely want to fetch a
-			 * reference to the <code>Facade</code> during their construction.
+			 * <LI>You have <code>Proxy</code>s to register with the <code>Model</code> that do not
+			 * retrieve a reference to the <code>Facade</code> at construction time.
+			 *
+			 * Note: This method is <i>rarely</i> overridden; in practice you are more likely to use
+			 * a <code>Command</code> to create and register <code>Proxy</code>s with the
+			 * <code>Model</code>, since <code>Proxy</code>s with mutable data will likely need to
+			 * send <code>Notification</code>s and thus will likely want to fetch a reference to the
+			 * <code>Facade</code> during their construction.
 			 */
 			initializeModel: function()
 			{
@@ -133,15 +124,14 @@ new function()
 			 * @private
 			 * Initialize the <code>Controller</code>.
 			 *
-			 * <P>
-			 * Called by the <code>initializeFacade</code> method.
-			 * Override this method in JSON Object <code>Facade</code>
-			 * definition if one or both of the following are true:
+			 * Called by the <code>initializeFacade</code> method. Override this method in JSON
+			 * Object <code>Facade</code> definition if one or both of the following are true:
 			 * 
 			 * <UL>
 			 * <LI>You wish to initialize a different <code>Controller</code>.
-			 * <LI>You have <code>Command</code>s to register with the
-			 * <code>Controller</code> at startup.</code>.
+
+			 * <LI>You have <code>Command</code>s to register with the <code>Controller</code> at
+			 * startup.
 			 */
 			initializeController: function()
 			{
@@ -154,24 +144,20 @@ new function()
 			 *
 			 * Initialize the <code>View</code>.
 			 *
-			 * <P>
-			 * Called by the <code>initializeFacade</code> method.
-			 * Override this method in your subclass of <code>Facade</code>
-			 * if one or both of the following are true:
+			 * Called by the <code>initializeFacade</code> method. Override this method in your
+			 * subclass of <code>Facade</code> if one or both of the following are true:
 			 * 
 			 * <UL>
-			 * <LI>You wish to initialize a different <code>IView</code>.</LI>
-			 * <LI>You have <code>Observer</code>s to register with the
-			 * <code>View</code></LI>
-			 * </UL>
+			 *
+			 * <LI>You wish to initialize a different <code>IView</code>.
+			 *
+			 * <LI>You have <code>Observer</code>s to register with the <code>View</code>
 			 * 
-			 * <P>
-			 * Note: This method is <i>rarely</i> overridden; in practice you are
-			 * more likely to use a <code>Command</code> to create and register
-			 * <code>Mediator</code>s with the <code>View</code>, since
-			 * <code>Mediator</code> instances will need to send
-			 * <code>Notification</code>s and thus will likely want to fetch a
-			 * reference to the <code>Facade</code> during their construction.
+			 * Note: This method is <i>rarely</i> overridden; in practice you are more likely to use
+			 * a <code>Command</code> to create and register <code>Mediator</code>s with the
+			 * <code>View</code>, since <code>Mediator</code> instances will need to send
+			 * <code>Notification</code>s and thus will likely want to fetch a reference to the
+			 * <code>Facade</code> during their construction.
 			 */
 			initializeView: function()
 			{
@@ -184,8 +170,8 @@ new function()
 			 * <code>Notification</code> name.
 			 *
 			 * @param {String} name
-			 * 		The name of the <code>Notification</code> to associate the
-			 * 		<code>Command</code> with.
+			 * 		The name of the <code>Notification</code> to associate the <code>Command</code>
+			 * 		with.
 			 *
 			 * @param {Function} commandClassRef
 			 * 		A reference to the Class of the <code>Command</code>.
@@ -200,8 +186,8 @@ new function()
 			 * <code>Notification</code> mapping from the <code>Controller</code>.
 			 *
 			 * @param {String} name
-			 * 		The name of the <code>Notification</code> to remove the
-			 * 		<code>Command</code> mapping for.
+			 * 		The name of the <code>Notification</code> to remove the <code>Command</code>
+			 * 		mapping for.
 			 */
 			removeCommand: function( name )
 			{
@@ -213,12 +199,12 @@ new function()
 			 * <code>Notification</code>.
 			 *
 			 * @param {String} name
-			 * 		The name of the <code>Notification</code> to verify for the
-			 * 		existence of a <code>Command</code> mapping for.
+			 * 		The name of the <code>Notification</code> to verify for the existence of a
+			 * 		<code>Command</code> mapping for.
 			 *
 			 * @return {Boolean}
 			 * 		A <code>Command</code> is currently registered for the given
-			 * 		<i>name</i>.
+			 * 		<code>name</code>.
 			 */
 			hasCommand: function( name )
 			{
@@ -229,8 +215,7 @@ new function()
 			 * Register a <code>Proxy</code> with the <code>Model</code> by name.
 			 *
 			 * @param proxy {Proxy}
-			 * 		The <code>Proxy</code> instance to be registered with the
-			 * 		<code>Model</code>.
+			 * 		The <code>Proxy</code> instance to be registered with the <code>Model</code>.
 			 */
 			registerProxy: function( proxy )
 			{
@@ -244,8 +229,8 @@ new function()
 			 * 		The name of the <code>Proxy</code> to be retrieved.
 			 *
 			 * @return {Proxy}
-			 * 		The <code>Proxy</code> instance previously registered with the
-			 * 		given <i>proxyName</i>.
+			 * 		The <code>Proxy</code> instance previously registered with the given
+			 * 		<code>proxyName</code>.
 			 */
 			retrieveProxy: function( proxyName )
 			{
@@ -259,8 +244,7 @@ new function()
 			 * 		The <code>Proxy</code> to remove from the <code>Model</code>.
 			 *
 			 * @return {Proxy}
-			 * 		The <code>Proxy</code> that was removed from the
-			 * 		<code>Model</code>.
+			 * 		The <code>Proxy</code> that was removed from the <code>Model</code>.
 			 */
 			removeProxy: function( proxyName )
 			{
@@ -271,12 +255,12 @@ new function()
 			 * Check if a <code>Proxy</code> is registered.
 			 *
 			 * @param {String} proxyName
-			 * 		The <code>Proxy</code> to verify the existence of a 
-			 * 		registration with the <code>Model</code>.
+			 * 		The <code>Proxy</code> to verify the existence of a registration with the
+			 * 		<code>Model</code>.
 			 *
 			 * @return {Boolean}
 			 * 		A <code>Proxy</code> is currently registered with the given
-			 * 		<i>proxyName</i>.
+			 * 		<code>proxyName</code>.
 			 */
 			hasProxy: function( proxyName )
 			{
@@ -302,7 +286,7 @@ new function()
 			 *
 			 * @return {Mediator}
 			 * 		The <code>Mediator</code> previously registered with the given
-			 * 		<i>mediatorName</i>.
+			 * 		<code>mediatorName</code>.
 			 */
 			retrieveMediator: function( mediatorName )
 			{
@@ -316,8 +300,7 @@ new function()
 			 * 		The name of the <code>Mediator</code> to be removed.
 			 *
 			 * @return {Mediator}
-			 * 		The <code>Mediator</code> that was removed from the 
-			 * 		<code>View</code>.
+			 * 		The <code>Mediator</code> that was removed from the <code>View</code>.
 			 */
 			removeMediator: function( mediatorName )
 			{
@@ -328,12 +311,11 @@ new function()
 			 * Check if a <code>Mediator</code> is registered or not.
 			 *
 			 * @param {String} mediatorName
-			 * 		The name of the <code>Mediator</code> to verify the existence
-			 * 		of a registration for.
+			 * 		The name of the <code>Mediator</code> to verify the existence of a registration
+			 * 		for.
 			 *
 			 * @return {Boolean}
-			 * 		A <code>Mediator</code> is registered with the given
-			 * 		<i>mediatorName</i>.
+			 * 		A <code>Mediator</code> is registered with the given <code>mediatorName</code>.
 			 */
 			hasMediator: function( mediatorName )
 			{
@@ -343,8 +325,8 @@ new function()
 			/**
 			 * Create and send a <code>Notification</code>.
 			 *
-			 * <P>Keeps us from having to construct new notification instances in
-			 * our implementation code.
+			 * Keeps us from having to construct new notification instances in our implementation
+			 * code.
 			 *
 			 * @param {String} name
 			 * 		The name of the notification to send.
@@ -363,19 +345,16 @@ new function()
 			/**
 			 * Notify <code>Observer</code>s.
 			 *
-			 * <P>
-			 * This method is left <strong>public</strong> mostly for backward
-			 * compatibility, and to allow you to send custom notification classes
-			 * using the <code>Facade</code>.
+			 * This method is left <strong>public</strong> mostly for backward compatibility, and to
+			 * allow you to send custom notification classes using the <code>Facade</code>.
 			 *
-			 *<P>
-			 * Usually you should just call <i>sendNotification</i> and pass the
-			 * parameters, never having to construct the <code>Notification</code>
-			 * yourself.
+			 *
+			 * Usually you should just call <code>sendNotification</code> and pass the parameters,
+			 * never having to construct the <code>Notification</code> yourself.
 			 *
 			 * @param {Notification} note
-			 * 		The <code>Notification</code> to have the <code>View</code>
-			 * 		notify <code>Observers</code> of.
+			 * 		The <code>Notification</code> to have the <code>View</code> notify
+			 * 		<code>Observers</code> of.
 			 */
 			notifyObservers: function( note )
 			{

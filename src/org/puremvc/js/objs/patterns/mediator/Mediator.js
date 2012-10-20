@@ -7,12 +7,10 @@ new function()
 {
 	/**
 	 * @classDescription
-	 * <P>A base <code>Mediator</code> implementation.
+	 * A base <code>Mediator</code> implementation.
 	 * 
-	 * <P>
-	 * Typically, a <code>Mediator</code> will be written to serve one specific
-	 * control or group controls and so, will not have a need to be dynamically
-	 * named.
+	 * Typically, a <code>Mediator</code> will be written to serve one specific control or group
+	 * controls and so, will not have a need to be dynamically named.
 	 * 
 	 * @see puremvc.Notification Notification
 	 * @extends puremvc.Notifier Notifier
@@ -61,8 +59,8 @@ new function()
 			},
 			
 			/**
-			 * List the <code>Notification</code> names this
-			 * <code>Mediator</code> is interested in being notified of.
+			 * List the <code>Notification</code> names this <code>Mediator</code> is interested in
+			 * being notified of.
 			 *
 			 * @return {Array}
 			 * 		The list of notifications names in which is interested the
@@ -109,10 +107,8 @@ new function()
 			/**
 			 * Handle <code>Notification</code>s.
 			 *
-			 * <P>
-			 * Typically this will be handled in a switch statement,
-			 * with one 'case' entry per <code>Notification</code>
-			 * the <code>Mediator</code> is interested in.
+			 * Typically this will be handled in a switch statement, with one 'case' entry per
+			 * <code>Notification</code> the <code>Mediator</code> is interested in.
 			 *
 			 * @param {Notification} note
 			 * 		The notification instance to be handled.
@@ -120,14 +116,14 @@ new function()
 			handleNotification: function( note ){},
 			
 			/**
-			 * Called by the View when the Mediator is registered.
-			 * This method is usually overridden as needed by the subclass.
+			 * Called by the View when the Mediator is registered. This method is usually overridden
+			 * as needed by the subclass.
 			 */
 			onRegister: function(){},
 			
 			/**
-			 * Called by the View when the Mediator is removed.
-			 * This method is usually overridden as needed by the subclass.
+			 * Called by the View when the Mediator is removed. This method is usually overridden as
+			 * needed by the subclass.
 			 */
 			onRemove: function(){}
 		}
