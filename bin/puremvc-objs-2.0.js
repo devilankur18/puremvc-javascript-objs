@@ -53,6 +53,8 @@ new function()
 			context: null,
 
 			/**
+			 * @constructs
+			 *
 			 * Constructs an <code>Observer</code> instance.
 			 *
 			 * @param {Function} notifyMethod
@@ -241,7 +243,7 @@ new function()
 			 * Set the body of the <code>Notification</code> instance.
 			 *
 			 * @param {Object} body
-			 * 		The body of the notification instance.
+			 * 		The body of the <code>Notification</code> instance.
 			 */
 			setBody: function( body )
 			{
@@ -344,7 +346,7 @@ new function()
 			 * @protected
 			 */
 			mediatorMap: null,
-			
+
 			/**
 			 * Mapping of <code>Notification</code> names to <code>Observers</code> lists.
 			 *
@@ -355,7 +357,11 @@ new function()
 
 			/**
 			 * Constructs a <code>View</code> instance.
-			 * 
+			 *
+			 * This <code>View</code> implementation is a singleton, so you should not call the
+			 * constructor directly, but instead call the static singleton factory method
+			 * <code>View.getInstance()</code>.
+			 *
 			 * @throws {Error}
 			 * 		Throws an error if an instance for this singleton has already been constructed.
 			 */
@@ -647,6 +653,10 @@ new function()
 			/**
 			 * Constructs a <code>Model</code> instance.
 			 *
+			 * This <code>View</code> implementation is a singleton, so you should not call the
+			 * constructor directly, but instead call the static singleton factory method
+			 * <code>View.getInstance()</code>.
+			 *
 			 * @throws {Error}
 			 * 		Throws an error if an instance for this singleton has already
 			 * 		been constructed.
@@ -741,9 +751,6 @@ new function()
 	);
 
 	/**
-	 * Error message used to indicate that a controller singleton is already constructed when
-	 * trying to constructs the class twice.
-	 *
 	 * @constant
 	 * @type {String}
 	 * @protected
@@ -835,8 +842,10 @@ new function()
 			commandMap: null,
 
 			/**
-			 * This <code>IController</code> implementation is a Singleton, so you should not call the
-			 * constructor directly, but instead call the static Singleton Factory method
+			 * Constructs a <code>Controller</code> instance.
+			 *
+			 * This <code>IController</code> implementation is a singleton, so you should not call the
+			 * constructor directly, but instead call the static singleton factory method
 			 * <code>Controller.getInstance()</code>.
 			 *
 			 * @throws {Error}
@@ -881,7 +890,7 @@ new function()
 			 * <code>Notification</code>, then it is executed.
 			 *
 			 * @param {Notification} notification
-		 	 *		The <code>INotification</code> the command will receive as parameter.
+		 	 *		The <code>Notification</code> the command will receive as parameter.
 			 */
 			executeCommand: function( notification )
 			{
@@ -945,7 +954,7 @@ new function()
 			 */
 			removeCommand: function( notificationName )
 			{
-				// if the Command is registered...
+				//If the Command is registered...
 				if( this.hasCommand(notificationName) )
 				{
 					this.view.removeObserver( notificationName, this );
@@ -956,6 +965,13 @@ new function()
 	);
 
 	/**
+	 * @constant
+	 * @type {String}
+	 * @protected
+	 */
+	Controller.SINGLETON_MSG = "Controller Singleton already constructed!";
+
+	/**
 	 * Singleton instance local reference.
 	 *
 	 * @type {Controller}
@@ -964,16 +980,7 @@ new function()
 	Controller.instance = null;
 
 	/**
-	 * Error message used to indicate that a controller singleton is already constructed when
-	 * trying to constructs the class twice.
-	 * @constant
-	 * @type {String}
-	 * @protected
-	 */
-	Controller.SINGLETON_MSG = "Controller Singleton already constructed!";
-
-	/**
-	 * <code>Controller</code> Singleton Factory method.
+	 * <code>Controller</code> singleton factory method.
 	 *
 	 * @return {Controller}
 	 * 		The singleton instance of the <code>Controller</code>
@@ -1050,12 +1057,16 @@ new function()
 			controller: null,
 
 			/**
-			 * This <code>IFacade</code> implementation is a Singleton, so you should not call the
-			 * constructor directly, but instead call the static Singleton Factory method
+			 * @constructs
+			 *
+			 * Constructs a <code>Controller</code> instance.
+			 *
+			 * This <code>IFacade</code> implementation is a singleton, so you should not call the
+			 * constructor directly, but instead call the static singleton factory method
 			 * <code>Facade.getInstance()</code>.
 			 *
 			 * @throws {Error}
-			 *		Error if an instance of this singleton has already been constructed.
+			 *		Throws an error if an instance of this singleton has already been constructed.
 			 */
 			initialize: function()
 			{
@@ -1141,13 +1152,13 @@ new function()
 			 * Called by the <code>initializeFacade</code> method. Override this method in your
 			 * subclass of <code>Facade</code> if one or both of the following are true:
 			 * <UL>
-
 			 * <LI>You wish to initialize a different <code>View</code>.
 			 * <LI>You have <code>Observer</code>s to register with the <code>View</code>
 			 * 
 			 * If you don't want to initialize a different <code>View</code>, call
 			 * <code>$super.initializeView()</code> at the beginning of your method, then register
 			 * <code>Mediator</code> instances.
+			 *
 			 * Note: This method is <i>rarely</i> overridden; in practice you are more likely to use
 			 * a <code>Command</code> to create and register <code>Mediator</code>s with the
 			 * <code>View</code>, since <code>Mediator</code> instances will need to send
@@ -1385,10 +1396,10 @@ new function()
 	Facade.instance = null;
 
 	/**
-	 * Facade Singleton factory method.
+	 * <code>Facade</code> singleton factory method.
 	 * 
 	 * @return {Facade}
-	 * 		The singleton instance of the <code>Facade</code>.
+	 * 		The singleton instance of <code>Facade</code>.
 	 */
 	Facade.getInstance = function()
 	{

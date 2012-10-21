@@ -58,12 +58,16 @@ new function()
 			controller: null,
 
 			/**
-			 * This <code>IFacade</code> implementation is a Singleton, so you should not call the
-			 * constructor directly, but instead call the static Singleton Factory method
+			 * @constructs
+			 *
+			 * Constructs a <code>Controller</code> instance.
+			 *
+			 * This <code>IFacade</code> implementation is a singleton, so you should not call the
+			 * constructor directly, but instead call the static singleton factory method
 			 * <code>Facade.getInstance()</code>.
 			 *
 			 * @throws {Error}
-			 *		Error if an instance of this singleton has already been constructed.
+			 *		Throws an error if an instance of this singleton has already been constructed.
 			 */
 			initialize: function()
 			{
@@ -149,13 +153,13 @@ new function()
 			 * Called by the <code>initializeFacade</code> method. Override this method in your
 			 * subclass of <code>Facade</code> if one or both of the following are true:
 			 * <UL>
-
 			 * <LI>You wish to initialize a different <code>View</code>.
 			 * <LI>You have <code>Observer</code>s to register with the <code>View</code>
 			 * 
 			 * If you don't want to initialize a different <code>View</code>, call
 			 * <code>$super.initializeView()</code> at the beginning of your method, then register
 			 * <code>Mediator</code> instances.
+			 *
 			 * Note: This method is <i>rarely</i> overridden; in practice you are more likely to use
 			 * a <code>Command</code> to create and register <code>Mediator</code>s with the
 			 * <code>View</code>, since <code>Mediator</code> instances will need to send
@@ -393,10 +397,10 @@ new function()
 	Facade.instance = null;
 
 	/**
-	 * Facade Singleton factory method.
+	 * <code>Facade</code> singleton factory method.
 	 * 
 	 * @return {Facade}
-	 * 		The singleton instance of the <code>Facade</code>.
+	 * 		The singleton instance of <code>Facade</code>.
 	 */
 	Facade.getInstance = function()
 	{

@@ -40,6 +40,10 @@ new function()
 			/**
 			 * Constructs a <code>Model</code> instance.
 			 *
+			 * This <code>View</code> implementation is a singleton, so you should not call the
+			 * constructor directly, but instead call the static singleton factory method
+			 * <code>View.getInstance()</code>.
+			 *
 			 * @throws {Error}
 			 * 		Throws an error if an instance for this singleton has already
 			 * 		been constructed.
@@ -134,9 +138,6 @@ new function()
 	);
 
 	/**
-	 * Error message used to indicate that a controller singleton is already constructed when
-	 * trying to constructs the class twice.
-	 *
 	 * @constant
 	 * @type {String}
 	 * @protected

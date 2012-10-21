@@ -94,7 +94,7 @@ new function()
 			 * Set the body of the <code>Notification</code> instance.
 			 *
 			 * @param {Object} body
-			 * 		The body of the notification instance.
+			 * 		The body of the <code>Notification</code> instance.
 			 */
 			setBody: function( body )
 			{

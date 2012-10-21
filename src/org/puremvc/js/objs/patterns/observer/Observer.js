@@ -53,6 +53,8 @@ new function()
 			context: null,
 
 			/**
+			 * @constructs
+			 *
 			 * Constructs an <code>Observer</code> instance.
 			 *
 			 * @param {Function} notifyMethod

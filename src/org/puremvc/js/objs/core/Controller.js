@@ -57,8 +57,10 @@ new function()
 			commandMap: null,
 
 			/**
-			 * This <code>IController</code> implementation is a Singleton, so you should not call the
-			 * constructor directly, but instead call the static Singleton Factory method
+			 * Constructs a <code>Controller</code> instance.
+			 *
+			 * This <code>IController</code> implementation is a singleton, so you should not call the
+			 * constructor directly, but instead call the static singleton factory method
 			 * <code>Controller.getInstance()</code>.
 			 *
 			 * @throws {Error}
@@ -103,7 +105,7 @@ new function()
 			 * <code>Notification</code>, then it is executed.
 			 *
 			 * @param {Notification} notification
-		 	 *		The <code>INotification</code> the command will receive as parameter.
+		 	 *		The <code>Notification</code> the command will receive as parameter.
 			 */
 			executeCommand: function( notification )
 			{
@@ -167,7 +169,7 @@ new function()
 			 */
 			removeCommand: function( notificationName )
 			{
-				// if the Command is registered...
+				//If the Command is registered...
 				if( this.hasCommand(notificationName) )
 				{
 					this.view.removeObserver( notificationName, this );
@@ -178,6 +180,13 @@ new function()
 	);
 
 	/**
+	 * @constant
+	 * @type {String}
+	 * @protected
+	 */
+	Controller.SINGLETON_MSG = "Controller Singleton already constructed!";
+
+	/**
 	 * Singleton instance local reference.
 	 *
 	 * @type {Controller}
@@ -186,16 +195,7 @@ new function()
 	Controller.instance = null;
 
 	/**
-	 * Error message used to indicate that a controller singleton is already constructed when
-	 * trying to constructs the class twice.
-	 * @constant
-	 * @type {String}
-	 * @protected
-	 */
-	Controller.SINGLETON_MSG = "Controller Singleton already constructed!";
-
-	/**
-	 * <code>Controller</code> Singleton Factory method.
+	 * <code>Controller</code> singleton factory method.
 	 *
 	 * @return {Controller}
 	 * 		The singleton instance of the <code>Controller</code>

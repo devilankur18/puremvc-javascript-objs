@@ -40,7 +40,7 @@ new function()
 			 * @protected
 			 */
 			mediatorMap: null,
-			
+
 			/**
 			 * Mapping of <code>Notification</code> names to <code>Observers</code> lists.
 			 *
@@ -51,7 +51,11 @@ new function()
 
 			/**
 			 * Constructs a <code>View</code> instance.
-			 * 
+			 *
+			 * This <code>View</code> implementation is a singleton, so you should not call the
+			 * constructor directly, but instead call the static singleton factory method
+			 * <code>View.getInstance()</code>.
+			 *
 			 * @throws {Error}
 			 * 		Throws an error if an instance for this singleton has already been constructed.
 			 */
