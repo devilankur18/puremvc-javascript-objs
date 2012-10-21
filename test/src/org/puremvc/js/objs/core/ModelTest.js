@@ -1,6 +1,6 @@
 /*
  PureMVC Javascript Objs by Frederic Saunier Saunier <frederic.saunier@puremvc.org>
- PureMVC - Copyright(c) 2006-2011 Futurescale, Inc., Some rights reserved.
+ PureMVC - Copyright(c) 2006-2012 Futurescale, Inc., Some rights reserved.
  Your reuse is governed by the Creative Commons Attribution 3.0 License
 */
 
