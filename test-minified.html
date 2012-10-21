@@ -3,28 +3,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>PureMVC Javascript for Objs port Unit Tests - minified</title> 
-		
+        <title>PureMVC Javascript Objs unit tests - minified</title> 
+
 	 	<!-- Needed by YUITest Unit Test Framework Library -->
 		<link type="text/css" rel="stylesheet" href="test/lib/fonts-min.css" />
 		<script type="text/javascript" src="test/lib/yui-min.js"></script>
 		<script type="text/javascript" src="test/lib/yuitest_1.0.0b1.js"></script>
-		
+
 		<!-- Home Made Test Runner -->
 		<link type="text/css" rel="stylesheet" href="test/lib/testrunner.css" />
 		<script type="text/javascript" src="test/lib/testrunner.js"></script>
-		
+
 	 	<!-- Objs Library -->
 		<script type="text/javascript" src="lib/objs-2.1.2.js"></script>
-		
-		<script type="text/javascript">var HidePureMVC = false;</script>
-		
+
 		<!-- 
 			For a production use we preferer to test the minified version of
 			the framework to verify that the minification didn't broke anything
 		-->
+		<script type="text/javascript">var HidePureMVC = true;</script>
 		<script type="text/javascript" src="bin/puremvc-objs-2.0-min.js"></script>
-		
+
 	 	<!-- PureMVC Framework Unit Test Cases -->
 		<script type="text/javascript" src="test/src/org/puremvc/js/objs/core/ControllerTestCommand.js"></script>
 		<script type="text/javascript" src="test/src/org/puremvc/js/objs/core/ControllerTestCommand2.js"></script>
