@@ -1,6 +1,6 @@
 /*
- PureMVC Javascript for Objs port by Frederic Saunier <frederic.saunier@puremvc.org>
- PureMVC - Copyright(c) 2006-2011 Futurescale, Inc., Some rights reserved.
+ PureMVC Javascript Objs by Frederic Saunier <frederic.saunier@puremvc.org>
+ PureMVC - Copyright(c) 2006-2012 Futurescale, Inc., Some rights reserved.
  Your reuse is governed by the Creative Commons Attribution 3.0 License
 */
 new function()
@@ -148,8 +148,8 @@ new function()
 if( typeof HidePureMVC == "undefined" )
 	Observer = Objs("puremvc.Observer");
 /*
- PureMVC Javascript for Objs port by Frederic Saunier <frederic.saunier@puremvc.org>
- PureMVC - Copyright(c) 2006-2011 Futurescale, Inc., Some rights reserved.
+ PureMVC Javascript Objs by Frederic Saunier <frederic.saunier@puremvc.org>
+ PureMVC - Copyright(c) 2006-2012 Futurescale, Inc., Some rights reserved.
  Your reuse is governed by the Creative Commons Attribution 3.0 License
 */
 new function()
@@ -305,8 +305,8 @@ new function()
 if( typeof HidePureMVC == "undefined" )
 	Notification = Objs("puremvc.Notification");
 /*
- PureMVC Javascript for Objs port by Frederic Saunier <frederic.saunier@puremvc.org>
- PureMVC - Copyright(c) 2006-2011 Futurescale, Inc., Some rights reserved.
+ PureMVC Javascript Objs by Frederic Saunier <frederic.saunier@puremvc.org>
+ PureMVC - Copyright(c) 2006-2012 Futurescale, Inc., Some rights reserved.
  Your reuse is governed by the Creative Commons Attribution 3.0 License
 */
 new function()
@@ -612,8 +612,8 @@ new function()
 if( typeof HidePureMVC == "undefined" )
 	View = Objs("puremvc.View");
 /*
- PureMVC Javascript for Objs port by Frederic Saunier <frederic.saunier@puremvc.org>
- PureMVC - Copyright(c) 2006-2011 Futurescale, Inc., Some rights reserved.
+ PureMVC Javascript Objs by Frederic Saunier <frederic.saunier@puremvc.org>
+ PureMVC - Copyright(c) 2006-2012 Futurescale, Inc., Some rights reserved.
  Your reuse is governed by the Creative Commons Attribution 3.0 License
 */
 new function()
@@ -784,8 +784,8 @@ new function()
 if( typeof HidePureMVC == "undefined" )
 	Model = Objs("puremvc.Model");
 /*
- PureMVC Javascript for Objs port by Frederic Saunier <frederic.saunier@puremvc.org>
- PureMVC - Copyright(c) 2006-2011 Futurescale, Inc., Some rights reserved.
+ PureMVC Javascript Objs by Frederic Saunier <frederic.saunier@puremvc.org>
+ PureMVC - Copyright(c) 2006-2012 Futurescale, Inc., Some rights reserved.
  Your reuse is governed by the Creative Commons Attribution 3.0 License
 */
 new function()
@@ -998,8 +998,8 @@ new function()
 if( typeof HidePureMVC == "undefined" )
 	Controller = Objs("puremvc.Controller");
 /*
- PureMVC Javascript for Objs port by Frederic Saunier <frederic.saunier@puremvc.org>
- PureMVC - Copyright(c) 2006-2011 Futurescale, Inc., Some rights reserved.
+ PureMVC Javascript Objs by Frederic Saunier <frederic.saunier@puremvc.org>
+ PureMVC - Copyright(c) 2006-2012 Futurescale, Inc., Some rights reserved.
  Your reuse is governed by the Creative Commons Attribution 3.0 License
 */
 new function()
@@ -1414,8 +1414,8 @@ new function()
 if( typeof HidePureMVC == "undefined" )
 	Facade = Objs("puremvc.Facade");
 /*
- PureMVC Javascript for Objs port by Frederic Saunier <frederic.saunier@puremvc.org>
- PureMVC - Copyright(c) 2006-2011 Futurescale, Inc., Some rights reserved.
+ PureMVC Javascript Objs by Frederic Saunier <frederic.saunier@puremvc.org>
+ PureMVC - Copyright(c) 2006-2012 Futurescale, Inc., Some rights reserved.
  Your reuse is governed by the Creative Commons Attribution 3.0 License
 */
 new function()
@@ -1490,8 +1490,8 @@ new function()
 if( typeof HidePureMVC == "undefined" )
 	Notifier = Objs("puremvc.Notifier");
 /*
- PureMVC Javascript for Objs port by Frederic Saunier <frederic.saunier@puremvc.org>
- PureMVC - Copyright(c) 2006-2011 Futurescale, Inc., Some rights reserved.
+ PureMVC Javascript Objs by Frederic Saunier <frederic.saunier@puremvc.org>
+ PureMVC - Copyright(c) 2006-2012 Futurescale, Inc., Some rights reserved.
  Your reuse is governed by the Creative Commons Attribution 3.0 License
 */
 new function()
@@ -1542,8 +1542,8 @@ new function()
 if( typeof HidePureMVC == "undefined" )
 	SimpleCommand = Objs("puremvc.SimpleCommand");
 /*
- PureMVC Javascript for Objs port by Frederic Saunier <frederic.saunier@puremvc.org>
- PureMVC - Copyright(c) 2006-2011 Futurescale, Inc., Some rights reserved.
+ PureMVC Javascript Objs by Frederic Saunier <frederic.saunier@puremvc.org>
+ PureMVC - Copyright(c) 2006-2012 Futurescale, Inc., Some rights reserved.
  Your reuse is governed by the Creative Commons Attribution 3.0 License
 */
 new function()
@@ -1677,8 +1677,8 @@ new function()
 if( typeof HidePureMVC == "undefined" )
 	MacroCommand = Objs("puremvc.MacroCommand");
 /*
- PureMVC Javascript for Objs port by Frederic Saunier <frederic.saunier@puremvc.org>
- PureMVC - Copyright(c) 2006-2011 Futurescale, Inc., Some rights reserved.
+ PureMVC Javascript Objs by Frederic Saunier <frederic.saunier@puremvc.org>
+ PureMVC - Copyright(c) 2006-2012 Futurescale, Inc., Some rights reserved.
  Your reuse is governed by the Creative Commons Attribution 3.0 License
 */
 new function()
@@ -1838,8 +1838,8 @@ new function()
 if( typeof HidePureMVC == "undefined" )
 	Mediator = Objs("puremvc.Mediator");
 /*
- PureMVC Javascript for Objs port by Frederic Saunier <frederic.saunier@puremvc.org>
- PureMVC - Copyright(c) 2006-2011 Futurescale, Inc., Some rights reserved.
+ PureMVC Javascript Objs by Frederic Saunier <frederic.saunier@puremvc.org>
+ PureMVC - Copyright(c) 2006-2012 Futurescale, Inc., Some rights reserved.
  Your reuse is governed by the Creative Commons Attribution 3.0 License
 */
 new function()
