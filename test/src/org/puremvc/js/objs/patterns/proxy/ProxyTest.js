@@ -19,7 +19,7 @@ var ProxyTest = new YUITest.TestCase
          * @type {String}
          * @private
          */
-        name: "PureMVC Proxy class tests",  
+       name: "PureMVC Proxy class tests",
 
         /**
          * Sets up data that is needed by each test.
@@ -40,7 +40,7 @@ var ProxyTest = new YUITest.TestCase
   		 * for the existence of its <code>Notifier</code> superclass facade
   		 * instance.
   		 */
-  		testConstructor: function()
+  		testConstructorInitialization: function()
 		{
 			// Create a new subclass of Notifier and verify that its facade
 			// has well been created
@@ -53,10 +53,31 @@ var ProxyTest = new YUITest.TestCase
 				"Expecting proxyTestSub.hasFacade() === true"
 			);
    		},
-	
+
+ 		/**
+  		 * Tests create a new Proxy using the constructor to set the name and data.
+  		 */
+  		testConstructor: function()
+		{
+    		var Proxy = Objs("puremvc.Proxy");
+
+			// Create a new Proxy using the Constructor to set the name and data
+   			var proxy/*Proxy*/ = new Proxy('colors',['red', 'green', 'blue']);
+   			var data/*Array*/ = proxy.getData();
+
+   			// test assertions
+   			YUITest.Assert.isNotNull( proxy, "Expecting proxy !== null"	);
+
+   			YUITest.Assert.areEqual( 'colors', proxy.getProxyName(), "Expecting proxy.getProxyName() == 'colors'" );
+   			YUITest.Assert.areEqual	( 3, data.length, "Expecting data.length == 3" );
+   			YUITest.Assert.areEqual( 'red', data[0], "Expecting data[0] == 'red'" );
+   			YUITest.Assert.areEqual( 'green', data[1], "Expecting data[1] == 'green'" );
+   			YUITest.Assert.areEqual( 'blue', data[2], "Expecting data[2] == 'blue'"	);
+   		},
+
 		/**
-  		 * Tests getting the name using Proxy class accessor method. Setting
-  		 * can only be done in constructor.
+  		 * Tests getting the name using Proxy class accessor method. Setting can only be done in
+		 * constructor.
   		 */
   		testNameAccessor: function()
 		{
@@ -88,61 +109,6 @@ var ProxyTest = new YUITest.TestCase
    			var data/*Array*/ = proxy.getData();
    			
    			// test assertions
-   			YUITest.Assert.areEqual
-			(
-				3,
-				data.length,
-				"Expecting data.length == 3"
-			);
-			
-   			YUITest.Assert.areEqual
-			(
-				'red',
-				data[0],
-				"Expecting data[0] == 'red'"
-			);
-			
-   			YUITest.Assert.areEqual
-			(
-				'green',
-				data[1],
-				"Expecting data[1] == 'green'"
-			);
-			
-   			YUITest.Assert.areEqual
-			(
-				'blue',
-				data[2],
-				"Expecting data[2] == 'blue'"
-			);
-   		},
-
-  		/**
-  		 * Tests setting the name and body using the Notification class
-  		 * Constructor.
-  		 */
-  		testConstructor: function()
-		{
-    		var Proxy = Objs("puremvc.Proxy");
-
-			// Create a new Proxy using the Constructor to set the name and data
-   			var proxy/*Proxy*/ = new Proxy('colors',['red', 'green', 'blue']);
-   			var data/*Array*/ = proxy.getData();
-   			
-   			// test assertions
-   			YUITest.Assert.isNotNull
-			(
-				proxy,
-				"Expecting proxy !== null"
-			);
-			
-   			YUITest.Assert.areEqual
-			(
-				'colors',
-				proxy.getProxyName(),
-				"Expecting proxy.getProxyName() == 'colors'"
-			);
-			
    			YUITest.Assert.areEqual
 			(
 				3,
