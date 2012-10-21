@@ -7,7 +7,7 @@ new function()
 {
 	/**
 	 * @classDescription
-	 * A base <code>Command</code> implementation.
+	 * The base <code>SimpleCommand</code> class.
 	 * 
 	 * Your subclass should override the <code>execute</code> method where your business logic will
 	 * handle the <code>Notification</code>.
@@ -39,10 +39,13 @@ new function()
 			 * @param {Notification} notification 
 			 * 		The <code>Notification</code> to handle.
 			 */
-			execute: function( notification ){}
+			execute: function( notification )
+			{
+
+			}
 		}
 	);
-}
+};
 
 //Offer a way to hide PureMVC from the global context.
 if( typeof HidePureMVC == "undefined" )

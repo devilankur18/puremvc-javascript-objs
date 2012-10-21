@@ -20,7 +20,7 @@ var ViewTestMediator6 = Objs
 	"puremvc.Mediator", 
 	{
 		/**
-		 * Initialize a <code>Mediator</code> subclass instance.
+		 * Constructs a <code>Mediator</code> subclass instance.
 		 * 
 		 * @param {String} mediatorName
 		 * 		The name of the <code>Mediator</code>.

@@ -20,7 +20,7 @@ new function()
 	 * Unlike <code>SimpleCommand</code>, your subclass should not override <code>execute</code>,
 	 * but instead, should override the <code>initializeMacroCommand</code> method, calling
 	 * <code>addSubCommand</code> once for each <i>SubCommand</i> to be executed.
-	 * 
+	 *
 	 * As in JavaScript there isn't interfaces, <code>SimpleCommand</code> and
 	 * <code>MacroCommand</code> cannot offer the guarantee to have the right signature. We could
 	 * have inherited from a common <code>Command</code> class, but to avoid an unwanted complexity
@@ -38,18 +38,20 @@ new function()
 		"puremvc.Notifier",
 		{
 			/**
-			 * An array of <code>SimpleCommands</code>
-			 * or subclasses of.
+			 * An array of <code>SimpleCommands</code> or subclasses of.
 			 * 
 			 * @type {Array}
-			 * @private
+			 * @protected
 			 */
 			subCommands: null,
 
 			/**
-			 * @override
+			 * @constructs
 			 *
-			 * Initialize a <code>MacroCommand</code> instance.
+			 * Constructs a <code>MacroCommand</code> instance.
+			 *
+			 * You should not need to override this method in your subclasses, instead, override
+			 * the <code>initializeMacroCommand</code> method.
 			 */
 			initialize: function()
 			{
@@ -75,13 +77,15 @@ new function()
 			 *    }
 			 * </pre>
 			 *
-			 * Note that <i>subCommands</i> may be any <code>Command</code> implementor.
+			 * Note that <i>subCommand</i>s may be any of <code>MacroCommand</code>s or 
+			 * <code>SimpleCommands</code> class or subclasses.
 			 *
 			 * In the JavaScript version it means that it only needs to implement an execute method
 			 * and inherits from <code>Notifier</code>.
 			 */
 			initializeMacroCommand: function()
 			{
+		
 			},
 
 			/**
@@ -106,6 +110,8 @@ new function()
 			 * @param {Notification} notification
 			 *		The <code>Notification</code> object to be passed to each <i>SubCommand</i> of
 			 *		the list.
+			 *
+			 * @final
 			 */
 			execute: function( notification )
 			{
@@ -122,7 +128,7 @@ new function()
 			}
 		}
 	);
-}
+};
 
 //Offer a way to hide PureMVC from the global context.
 if( typeof HidePureMVC == "undefined" )

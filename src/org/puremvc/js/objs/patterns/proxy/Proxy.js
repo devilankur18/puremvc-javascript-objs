@@ -21,8 +21,6 @@ new function()
 	 * <code>Notification</code> to be sent when the <code>Proxy</code> has retrieved the data from
 	 * the service.
 	 *
-	 * @see puremvc.Model Model
-	 *
 	 * @extends puremvc.Notifier Notifier
 	 * 
 	 * @constructor
@@ -36,7 +34,7 @@ new function()
 			 * The data object controlled by the <code>Proxy</code>.
 			 *
 			 * @type {Object}
-			 * @private
+			 * @protected
 			 */
 			data: null,
 
@@ -44,17 +42,17 @@ new function()
 			 * The name of the <code>Proxy</code>.
 			 * 
 			 * @type {String}
-			 * @private
+			 * @protected
 			 */
 			proxyName: null,
 
 			/**
-			 * @override
+			 * @constructs
 			 *
-			 * Initialize a <code>Proxy</code> instance.
+			 * Constructs a <code>Proxy</code> instance.
 			 *
 			 * @param {String} proxyName
-			 * 		The name of the <code>Proxy</code>.
+			 * 		The name of the <code>Proxy</code> instance.
 			 *
 			 * @param {Object} data
 			 * 		An initial data object to be held by the <code>Proxy</code>.
@@ -69,10 +67,10 @@ new function()
 			},
 
 			/**
-			 * Gets the proxyName.
+			 * Get the name of the <code>Proxy></code> instance.
 			 *
 			 * @return {String}
-			 * 		The name of the proxy.
+			 * 		The name of the <code>Proxy></code> instance.
 			 */
 			getProxyName: function()
 			{
@@ -80,10 +78,10 @@ new function()
 			},
 
 			/**
-			 * Sets the data object.
+			 * Set the data of the <code>Proxy></code> instance.
 			 *
 			 * @param {Object} data
-			 * 		The data to set.
+			 * 		The data to set for the <code>Proxy></code> instance.
 			 */
 			setData: function( data )
 			{
@@ -91,10 +89,10 @@ new function()
 			},
 
 			/**
-			 * Get the data object.
+			 * Get the data of the <code>Proxy></code> instance.
 			 *
 			 * @return {Object}
-			 * 		The data held in the <code>Proxy</code>.
+			 * 		The data held in the <code>Proxy</code> instance.
 			 */
 			getData: function()
 			{
@@ -105,13 +103,19 @@ new function()
 			 * Called by the Model when the <code>Proxy</code> is registered. This method has to be
 			 * overridden by the subclass to know when the instance is registered.
 			 */
-			onRegister: function(){},
+			onRegister: function()
+			{
+			
+			},
 
 			/**
 			 * Called by the Model when the <code>Proxy</code> is removed. This method has to be
 			 * overridden by the subclass to know when the instance is removed.
 			 */
-			onRemove: function(){}
+			onRemove: function()
+			{
+			
+			}
 		}
 	);
 
@@ -122,7 +126,7 @@ new function()
 	 * @constant
 	 */
 	Proxy.NAME = "Proxy";
-}
+};
 
 //Offer a way to hide PureMVC from the global context.
 if( typeof HidePureMVC == "undefined" )

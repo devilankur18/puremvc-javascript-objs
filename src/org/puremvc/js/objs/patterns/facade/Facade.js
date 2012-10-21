@@ -12,29 +12,20 @@ new function()
 
 	/**
 	 * @classDescription
-	 * A base singleton <code>Facade</code> implementation.
+	 * A singleton implementation.
 	 * 
 	 * In PureMVC, the <code>Facade</code> class assumes these responsibilities:
-	 * 
+	 *
 	 * <UL>
 	 * <LI>Initializing the <code>Model</code>, <code>View</code> and <code>Controller</code>
 	 * singletons.
-	 * <LI>Providing all the applicable methods of the <code>Model</code>, <code>View</code>, &
-	 * <code>Controller</code> singletons.
+	 * <LI>Providing the ability to override the specific <code>Model</code>, <code>View</code> and
+	 * <code>Controller</code> singletons created.
 	 * <LI>Providing a single point of contact to the application for registering
 	 * <code>Command</code>s and notifying <code>Observer</code>s.
 	 *
 	 * This <code>Facade</code> implementation is a singleton and cannot be instantiated directly,
 	 * but instead calls the static singleton factory method <code>Facade.getInstance()</code>.
-	 * 
-	 * @see puremvc.Controller Controller
-	 * @see puremvc.Model Model
-	 * @see puremvc.View View
-	 * @see puremvc.Notification Notification
-	 * @see puremvc.Mediator Mediator
-	 * @see puremvc.Proxy Proxy
-	 * @see puremvc.SimpleCommand SimpleCommand
-	 * @see puremvc.MacroCommand MacroCommand
 	 *
 	 * @constructor
 	 */
@@ -43,31 +34,34 @@ new function()
 		"puremvc.Facade",
 		{
 			/**
-			 * The <code>View</code> singleton.
-			 *
-			 * @type {View}
-			 * @private
-			 */
-			view: null,
-
-			/**
-			 * The <code>Model</code> singleton.
+			 * Local reference to the <code>Model</code> singleton.
 			 *
 			 * @type {Model}
-			 * @private
+			 * @protected
 			 */
 			model: null,
-
+			
 			/**
-			 * The <code>Controller</code> singleton.
+			 * Local reference to the <code>View</code> singleton.
+			 *
+			 * @type {View}
+			 * @protected
+			 */
+			view: null,
+			
+			/**
+			 * Local reference to the <code>Controller</code> singleton.
 			 *
 			 * @type {Controller}
-			 * @private
+			 * @protected
 			 */
 			controller: null,
 
 			/**
-			 * Initialize a <code>Facade</code> instance.
+			 * This <code>IFacade</code> implementation is a Singleton, so you should not call the
+			 * constructor directly, but instead call the static Singleton Factory method
+			 * <code>Facade.getInstance()</code>.
+			 *
 			 * @throws {Error}
 			 *		Error if an instance of this singleton has already been constructed.
 			 */
@@ -81,13 +75,14 @@ new function()
 			},
 
 			/**
-			 * @private
 			 * Called automatically by the constructor.
 			 * Initialize the Singleton <code>Facade</code> instance.
 			 *
 			 * Override in your subclass to do any subclass specific initializations. Be sure to
 			 * extend the <code>Facade</code> with the methods and properties on your implementation
 			 * and call <code>Facade.initializeFacade()</code>.
+			 *
+			 * @protected
 			 */
 			initializeFacade: function()
 			{
@@ -97,7 +92,6 @@ new function()
 			},
 
 			/**
-			 * @private
 			 * Initialize the <code>Model</code>.
 			 *
 			 * Called by the <code>initializeFacade</code> method. Override this method in your
@@ -111,11 +105,14 @@ new function()
 			 * If you don't want to initialize a different <code>IModel</code>, call
 			 * <code>Facade.initializeModel.call()</code> at the beginning of your method, then register
 			 * <code>Proxy</code>s.
+			 *
 			 * Note: This method is <i>rarely</i> overridden; in practice you are more likely to use
 			 * a <code>Command</code> to create and register <code>Proxy</code>s with the
 			 * <code>Model</code>, since <code>Proxy</code>s with mutable data will likely need to
 			 * send <code>Notification</code>s and thus will likely want to fetch a reference to the
 			 * <code>Facade</code> during their construction.
+			 *
+			 * @protected
 			 */
 			initializeModel: function()
 			{
@@ -124,7 +121,6 @@ new function()
 			},
 
 			/**
-			 * @private
 			 * Initialize the <code>Controller</code>.
 			 *
 			 * Called by the <code>initializeFacade</code> method. Override this method in your
@@ -138,6 +134,8 @@ new function()
 			 * If you don't want to initialize a different <code>IController</code>, call
 			 * <code>super.initializeController()</code> at the beginning of your method, then register
 			 * <code>Command</code>s.
+			 *
+			 * @protected
 			 */
 			initializeController: function()
 			{
@@ -146,24 +144,25 @@ new function()
 			},
 
 			/**
-			 * @private
-			 *
 			 * Initialize the <code>View</code>.
 			 *
 			 * Called by the <code>initializeFacade</code> method. Override this method in your
 			 * subclass of <code>Facade</code> if one or both of the following are true:
-			 * 
 			 * <UL>
 
 			 * <LI>You wish to initialize a different <code>View</code>.
-
 			 * <LI>You have <code>Observer</code>s to register with the <code>View</code>
 			 * 
+			 * If you don't want to initialize a different <code>View</code>, call
+			 * <code>$super.initializeView()</code> at the beginning of your method, then register
+			 * <code>Mediator</code> instances.
 			 * Note: This method is <i>rarely</i> overridden; in practice you are more likely to use
 			 * a <code>Command</code> to create and register <code>Mediator</code>s with the
 			 * <code>View</code>, since <code>Mediator</code> instances will need to send
 			 * <code>Notification</code>s and thus will likely want to fetch a reference to the
 			 * <code>Facade</code> during their construction.
+			 *
+			 * @protected
 			 */
 			initializeView: function()
 			{
@@ -175,16 +174,16 @@ new function()
 			 * Register a <code>Command</code> with the <code>IController</code> associating it to a
 			 * <code>Notification</code> name.
 			 *
-			 * @param {String} name
+			 * @param {String} notificationName
 			 * 		The name of the <code>Notification</code> to associate the <code>Command</code>
 			 * 		with.
 			 *
 			 * @param {Function} commandClassRef
 			 * 		A reference to the constructor of the <code>Command</code>.
 			 */
-			registerCommand: function( name, commandClassRef )
+			registerCommand: function( notificationName, commandClassRef )
 			{
-				this.controller.registerCommand( name, commandClassRef );
+				this.controller.registerCommand( notificationName, commandClassRef );
 			},
 
 			/**
@@ -201,10 +200,10 @@ new function()
 			},
 			
 			/**
-			 * Check if a <code>Command</code> is registered for a given
-			 * <code>Notification</code>.
+			 * Check if a <code>SimpleCommand</code> or a <code>MacroCommand</code> is registered
+			 * for a given <code>Notification</code>.
 			 *
-			 * @param {String} name
+			 * @param {String} notificationName
 			 * 		The name of the <code>Notification</code> to verify for the existence of a
 			 * 		<code>Command</code> mapping for.
 			 *
@@ -234,7 +233,8 @@ new function()
 			 * 		The name of the <code>Proxy</code> to be retrieved.
 			 *
 			 * @return {Proxy}
-			 * 		The <code>Proxy</code> previously registered with the given	<code>proxyName</code>.
+			 * 		The <code>Proxy</code> previously registered with the given
+			 *		<code>proxyName</code>.
 			 */
 			retrieveProxy: function( proxyName )
 			{
@@ -253,7 +253,7 @@ new function()
 			removeProxy: function( proxyName )
 			{
 				var proxy/*Proxy*/;
-				if( this.model != null )
+				if( this.model )
 					proxy = this.model.removeProxy( proxyName );
 
 				return proxy
@@ -299,14 +299,14 @@ new function()
 			 */
 			retrieveMediator: function( mediatorName )
 			{
-				return this.view.retrieveMediator(mediatorName);
+				return this.view.retrieveMediator( mediatorName );
 			},
 
 			/**
 			 * Remove an <code>Mediator</code> from the <code>View</code>.
 			 *
 			 * @param {String} mediatorName
-			 * 		The name of the <code>Mediator</code> to be removed.
+			 * 		Name of the <code>Mediator</code> to be removed.
 			 *
 			 * @return {Mediator}
 			 * 		The <code>Mediator</code> that was removed from the <code>View</code>.
@@ -314,7 +314,7 @@ new function()
 			removeMediator: function( mediatorName )
 			{
 				var mediator/*IMediator*/;
-				if( this.view != null )
+				if( this.view )
 					mediator = this.view.removeMediator( mediatorName );
 
 				return mediator;
@@ -338,8 +338,8 @@ new function()
 			/**
 			 * Notify <code>Observer</code>s.
 			 *
-			 * This method is left <strong>public</strong> mostly for backward compatibility, and to
-			 * allow you to send custom notification classes using the <code>Facade</code>.
+			 * This method is left public mostly for backward compatibility, and to allow you to
+			 * send custom notification classes using the <code>Facade</code>.
 			 *
 			 *
 			 * Usually you should just call <code>sendNotification</code> and pass the parameters,
@@ -351,7 +351,7 @@ new function()
 			 */
 			notifyObservers: function( notification )
 			{
-				if( this.view != null )
+				if( this.view )
 					this.view.notifyObservers( notification );
 			},
 			
@@ -378,22 +378,22 @@ new function()
 	);
 
 	/**
-	 * @private
-	 * 
-	 * @constant
 	 * @type {String}
+	 * @constant
+	 * @protected
 	 */
 	Facade.SINGLETON_MSG = "Facade Singleton already constructed!";
 	
 	/**
-	 * @private
-	 * 
+	 * The Singleton Facade instance.
+	 *
 	 * @type {Facade}
+	 * @protected
 	 */
 	Facade.instance = null;
 
 	/**
-	 * Retrieve the singleton instance of the <code>Facade</code>.
+	 * Facade Singleton factory method.
 	 * 
 	 * @return {Facade}
 	 * 		The singleton instance of the <code>Facade</code>.
@@ -405,7 +405,7 @@ new function()
 
 		return Facade.instance;
 	}
-}
+};
 
 //Offer a way to hide PureMVC from the global context.
 if( typeof HidePureMVC == "undefined" )

@@ -89,6 +89,8 @@ var FacadeTest = new YUITest.TestCase
 			// the vo.input value by 2 and set the result on vo.result
    			var vo/*FacadeTestVO*/ = new FacadeTestVO( 32 );
    			facade.sendNotification( 'FacadeTestNote', vo );
+
+			//TODO test for null body and type parameter to see if they're nullified by default.
    			
    			// test assertions 
    			YUITest.Assert.areEqual

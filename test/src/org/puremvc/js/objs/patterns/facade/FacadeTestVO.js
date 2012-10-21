@@ -18,7 +18,7 @@ var FacadeTestVO = Objs
 	"puremvc.FacadeTestVO",
 	{
 		/**
-		 * Initialize a <code>FacadeTestVo</code> instance.
+		 * Constructs a <code>FacadeTestVo</code> instance.
 		 * 
 		 * @param {Number} input
 		 * 		The number to be fed to the FacadeTestCommand

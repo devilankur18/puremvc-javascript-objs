@@ -19,9 +19,9 @@ var MacroCommandTestSub = Objs
 	"puremvc.MacroCommand",
 	{
 		/**
-		 * @override
+		 * @constructs
 		 * 
-		 * Initialize a <code>MacroCommandTestSub</code> instance.
+		 * Constructs a <code>MacroCommandTestSub</code> instance.
 		 * 
 		 * @return {MacroCommandTestSub}
 		 * 		This <code>MacroCommandTestSub</code> instance.

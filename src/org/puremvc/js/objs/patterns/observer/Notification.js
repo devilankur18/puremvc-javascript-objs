@@ -9,8 +9,8 @@ new function()
 	 * @classDescription
 	 * The base <code>Notification</code> class.
 	 *
-	 * PureMVC does not rely upon underlying event framework or language models and JavaScript does
-	 * not have an inherent event model.
+	 * PureMVC does not rely upon underlying event models such as the one provided in JavaScript DOM API,
+	 * and JavaScript does not have an inherent event model.
 	 *
 	 * The Observer pattern as implemented within PureMVC exists to support event-driven
 	 * communication between the application and the actors of the MVC triad (Model, View and
@@ -29,8 +29,6 @@ new function()
 	 * <code>Event</code>, while PureMVC <code>Notification</code>s follow a 'Publish/Subscribe'
 	 * pattern. PureMVC classes need not be related to each other in a parent/child relationship in
 	 * order to communicate with one another using <code>Notification</code>s.
-	 *
-	 * @see puremvc.Observer Observer
 	 * 
 	 * @constructor
 	 */
@@ -42,7 +40,7 @@ new function()
 			 * The name of the notification.
 			 * 
 			 * @type {String}
-			 * @private 
+			 * @protected
 			 */
 			name: null,
 
@@ -50,7 +48,7 @@ new function()
 			 * The body data to send with the notification.
 			 * 
 			 * @type {Object}
-			 * @private
+			 * @protected
 			 */
 			body: null,
 
@@ -58,12 +56,12 @@ new function()
 			 * The type identifier of the notification.
 			 * 
 			 * @type {String}
-			 * @private
+			 * @protected
 			 */
 			type: null,
 
 			/**
-			 * Initialize a <code>Notification</code> instance.
+			 * Constructs a <code>Notification</code> instance.
 			 *
 			 * @param {String} name
 			 * 		The name of the notification.
@@ -96,7 +94,7 @@ new function()
 			 * Set the body of the <code>Notification</code> instance.
 			 *
 			 * @param {Object} body
-			 * 		The body of the notification.
+			 * 		The body of the notification instance.
 			 */
 			setBody: function( body )
 			{
@@ -107,7 +105,7 @@ new function()
 			 * Get the body of the <code>Notification</code> instance.
 			 *
 			 * @return {Object}
-			 * 		The body for the notification.
+			 *		The body object of the <code>Notification</code> instance.
 			 */
 			getBody: function()
 			{
@@ -118,7 +116,7 @@ new function()
 			 * Set the type of the <code>Notification</code> instance.
 			 *
 			 * @param {String} type
-			 * 		The type identifier for the notification.
+			 * 		The type of the <code>Notification</code> instance.
 			 */
 			setType: function( type )
 			{
@@ -129,7 +127,7 @@ new function()
 			 * Get the type of the <code>Notification</code> instance.
 			 *
 			 * @return {String}
-			 * 		The type identifier for the notification.
+			 *		The type of the <code>Notification</code> instance.
 			 */
 			getType: function()
 			{
@@ -137,12 +135,10 @@ new function()
 			},
 
 			/**
-			 * Get a textual representation of the <code>Notification</code>
-			 * instance.
+			 * Get a textual representation of the <code>Notification</code> instance.
 			 *
 			 * @return {String}
-			 * 		The textual representation of the <code>Notification</code>
-			 * 		instance.
+			 * 		The textual representation of the <code>Notification</code>	instance.
 			 */
 			toString: function()
 			{
@@ -154,7 +150,7 @@ new function()
 			}
 		}
 	);
-}
+};
 
 //Offer a way to hide PureMVC from the global context.
 if( typeof HidePureMVC == "undefined" )

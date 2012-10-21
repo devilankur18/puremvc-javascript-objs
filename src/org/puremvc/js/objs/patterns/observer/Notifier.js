@@ -6,10 +6,10 @@
 new function()
 {
 	var Facade = Objs("puremvc.Facade");
-	
+
 	/**
 	 * @classDescription
-	 * The Base <code>Notifier</code> class.
+	 * The base <code>Notifier</code> class.
 	 *
 	 * <code>MacroCommand</code>, <code>Command</code>, <code>Mediator</code> and <code>Proxy</code>
 	 * all have a need to send <code>Notifications</code>.
@@ -23,9 +23,7 @@ new function()
 	 * convenience method <code>sendNotification</code>	for sending <code>Notifications</code>, but
 	 * it also eases implementation as these classes have frequent <code>Facade</code> interactions
 	 * and usually require access to the facade anyway.
-	 * 
-	 * @see puremvc.Facade Facade
-	 * 
+	 *
 	 * @constructor
 	 */
 	Objs
@@ -33,15 +31,17 @@ new function()
 		"puremvc.Notifier",
 		{
 			/**
-			 * Local reference to the <code>Facade</code> of this core.
+			 * Local reference to the singleton <code>Facade</code>.
 			 *
 			 * @type {Facade}
-			 * @private
+			 * @protected
 			 */
 			facade: null,
 
 			/**
-			 * Initialize a <code>Notifier</code> instance.
+			 * @constructs
+			 *
+			 * Constructs a <code>Notifier</code> instance.
 			 */
 			initialize: function()
 			{
@@ -69,7 +69,7 @@ new function()
 			}
 		}
 	);
-}
+};
 
 //Offer a way to hide PureMVC from the global context.
 if( typeof HidePureMVC == "undefined" )

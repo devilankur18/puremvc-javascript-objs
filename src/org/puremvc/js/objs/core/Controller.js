@@ -16,7 +16,7 @@ new function()
 	 *
 	 * In PureMVC, the <code>Controller</code> class follows the 'Command and Controller' strategy,
 	 * and assumes these responsibilities:
-	 * 
+	 *
 	 * <UL>
 	 * <LI>Remembering which <code>SimpleCommand</code>s or <code>MacroCommand</code>s are intended
 	 * to handle which <code>Notification</code>s.
@@ -31,15 +31,9 @@ new function()
 	 *
 	 * Your application must register <code>ICommand</code>s with the <code>Controller</code>.
 	 *
-	 * The simplest way is to subclass </code>Facade</code>, and use its
+ 	 * The simplest way is to subclass </code>Facade</code>, and use its
 	 * <code>initializeController</code> method to add your registrations.
-	 * 
-	 * @see puremvc.View View
-	 * @see puremvc.Observer Observer
-	 * @see puremvc.Notification Notification
-	 * @see puremvc.SimpleCommand SimpleCommand
-	 * @see puremvc.MacroCommand MacroCommand
-	 * 
+	 *
 	 * @constructor
 	 */
 	var Controller = Objs
@@ -47,23 +41,25 @@ new function()
 		"puremvc.Controller",
 		{
 			/**
-			 * The <code>View</code> singleton.
+			 * Local reference to the <code>View</code> singleton.
 			 *
 			 * @type {View}
-			 * @private
+			 * @protected
 			 */
 			view: null,
 
 			/**
-			 * Mapping of <code>Notification<code> names to <code>Command</code> class references.
+			 * Mapping of <code>Notification<code> names to <code>Command</code> constructors references.
 			 *
 			 * @type {Object}
-			 * @private
+			 * @protected
 			 */
 			commandMap: null,
 
 			/**
-			 * Initialize a <code>Controller</code> instance.
+			 * This <code>IController</code> implementation is a Singleton, so you should not call the
+			 * constructor directly, but instead call the static Singleton Factory method
+			 * <code>Controller.getInstance()</code>.
 			 *
 			 * @throws {Error}
 			 * 		Throws an error if an instance for this singleton has already been constructed.
@@ -79,7 +75,7 @@ new function()
 			},
 
 			/**
-			 * Retains a reference to the <code>View</code> singleton.
+			 * Initialize the Singleton <code>Controller</code> instance.
 		 	 *
 			 * Called automatically by the constructor.
 			 *
@@ -95,7 +91,7 @@ new function()
 			 *	}
 			 * </pre>
 			 *
-			 * @private
+			 * @protected
 			 */
 			initializeController: function()
 			{
@@ -106,16 +102,16 @@ new function()
 			 * If a <code>Command</code> has previously been registered to handle the given
 			 * <code>Notification</code>, then it is executed.
 			 *
-			 * @param {Notification} note
-			 * 		A <code>Notification</code>.
+			 * @param {Notification} notification
+		 	 *		The <code>INotification</code> the command will receive as parameter.
 			 */
-			executeCommand: function( note )
+			executeCommand: function( notification )
 			{
-				var commandClassRef/*Function*/ = this.commandMap[ note.getName() ];
+				var commandClassRef/*Function*/ = this.commandMap[ notification.getName() ];
 				if( commandClassRef )
 				{
 					var command/*Command*/ = new commandClassRef();
-					command.execute(note);
+					command.execute(notification);
 				}
 			},
 
@@ -171,6 +167,7 @@ new function()
 			 */
 			removeCommand: function( notificationName )
 			{
+				// if the Command is registered...
 				if( this.hasCommand(notificationName) )
 				{
 					this.view.removeObserver( notificationName, this );
@@ -181,20 +178,24 @@ new function()
 	);
 
 	/**
-	 * @constant
-	 * @type {String}
-	 * @private
-	 */
-	Controller.SINGLETON_MSG = "Controller Singleton already constructed!";
-
-	/**
+	 * Singleton instance local reference.
+	 *
 	 * @type {Controller}
-	 * @private
+	 * @protected
 	 */
 	Controller.instance = null;
 
 	/**
-	 * Retrieve the singleton instance of the <code>Controller</code>.
+	 * Error message used to indicate that a controller singleton is already constructed when
+	 * trying to constructs the class twice.
+	 * @constant
+	 * @type {String}
+	 * @protected
+	 */
+	Controller.SINGLETON_MSG = "Controller Singleton already constructed!";
+
+	/**
+	 * <code>Controller</code> Singleton Factory method.
 	 *
 	 * @return {Controller}
 	 * 		The singleton instance of the <code>Controller</code>
@@ -206,7 +207,7 @@ new function()
 
 		return Controller.instance;
 	}
-}
+};
 
 //Offer a way to hide PureMVC from the global context.
 if( typeof HidePureMVC == "undefined" )

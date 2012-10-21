@@ -9,6 +9,8 @@ new function()
 	 * @classDescription
 	 * The <code>Model</code> class for PureMVC.
 	 *
+	 * A singleton implementation.
+	 *
 	 * In PureMVC, the <code>Model</code> class provides access to model objects (Proxies) by named
 	 * lookup.
 	 *
@@ -20,9 +22,7 @@ new function()
 	 * Your application must register <code>Proxy</code> instances with the <code>Model</code>.
 	 * Typically, you use a <code>Command</code> to create and register <code>Proxy</code> instances
 	 * once the <code>Facade</code> has initialized the core actors.
-	 * 
-	 * @see puremvc.Proxy Proxy
-	 * 
+	 *
 	 * @constructor
 	 */
 	var Model = Objs
@@ -30,15 +30,15 @@ new function()
 		"puremvc.Model",
 		{
 			/**
-			 * HashTable of <code>Proxy</code> instances registered with the <code>Model</code>.
+			 * HashTable of <code>Proxy</code> registered with the <code>Model</code>.
 			 * 
 			 * @type {Object}
-			 * @private
+			 * @protected
 			 */
 			proxyMap: null,
 
 			/**
-			 * Initialize a <code>Model</code> instance.
+			 * Constructs a <code>Model</code> instance.
 			 *
 			 * @throws {Error}
 			 * 		Throws an error if an instance for this singleton has already
@@ -59,6 +59,8 @@ new function()
 			 *
 			 * Called automatically by the constructor. This is the opportunity to initialize the
 			 * singleton instance in a subclass without overriding the constructor.
+			 *
+			 * @protected
 			 */
 			initializeModel: function()
 			{
@@ -132,20 +134,25 @@ new function()
 	);
 
 	/**
+	 * Error message used to indicate that a controller singleton is already constructed when
+	 * trying to constructs the class twice.
+	 *
 	 * @constant
 	 * @type {String}
-	 * @private
+	 * @protected
 	 */
 	Model.SINGLETON_MSG = "Model Singleton already constructed!";
 
 	/**
+	 * Singleton instance local reference.
+	 *
 	 * @type {Model}
-	 * @private
+	 * @protected
 	 */
 	Model.instance = null;
-
+	
 	/**
-	 * Retrieve the singleton instance of the <code>Model</code>.
+	 * <code>Model</code> singleton factory method.
 	 *
 	 * @return {Model}
 	 * 		The singleton instance of the <code>Model</code>.
@@ -157,7 +164,7 @@ new function()
 
 		return Model.instance;
 	}
-}
+};
 
 //Offer a way to hide PureMVC from the global context.
 if( typeof HidePureMVC == "undefined" )

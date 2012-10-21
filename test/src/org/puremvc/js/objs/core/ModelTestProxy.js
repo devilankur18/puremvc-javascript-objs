@@ -25,7 +25,7 @@ var ModelTestProxy = Objs
 		},
 	
 		/**
-		 * @override.
+		 * @override
 		 */
 		onRegister: function()
 		{
@@ -33,7 +33,7 @@ var ModelTestProxy = Objs
 		},		
 	
 		/**
-		 * @override.
+		 * @override
 		 */
 		onRemove: function()
 		{

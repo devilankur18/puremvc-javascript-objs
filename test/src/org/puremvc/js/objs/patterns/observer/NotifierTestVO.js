@@ -18,7 +18,7 @@ var NotifierTestVO = Objs
 	"puremvc.NotifierTestVO",
 	{
 		/**
-		 * Initialize a <code>NotifierTestVO</code> instance.
+		 * Constructs a <code>NotifierTestVO</code> instance.
 		 *
 		 * @param {Number} input
 		 * 		The number to be fed to the FacadeTestCommand

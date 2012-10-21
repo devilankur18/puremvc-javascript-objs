@@ -9,6 +9,10 @@ new function()
 
 	/**
 	 * @classDescription
+	 *
+	 * The <code>View</code> class for PureMVC.
+	 *
+	 * A singleton implementation.
 	 * 
 	 * In PureMVC, the <code>View</code> class assumes these responsibilities:
 	 * <UL>
@@ -23,10 +27,6 @@ new function()
 	 * <LI>Notifying the <code>Observer</code>s of a given <code>Notification</code> when it
 	 * broadcasts.
 	 *
-	 * @see puremvc.Mediator Mediator
-	 * @see puremvc.Observer Observer
-	 * @see puremvc.Notification Notification
-	 * 
 	 * @constructor
 	 */
 	var View = Objs
@@ -34,26 +34,23 @@ new function()
 		"puremvc.View",
 		{
 			/**
-			 * @private
-			 *
 			 * Mapping of <code>Mediator</code> names to <code>Mediator</code> instances.
 			 *
 			 * @type {Object}
+			 * @protected
 			 */
 			mediatorMap: null,
 			
 			/**
-			 * @private
-			 * 
-			 * Mapping of <code>Notification</code> names to
-			 * <code>Observers</code> lists.
+			 * Mapping of <code>Notification</code> names to <code>Observers</code> lists.
 			 *
 			 * @type {Object}
+			 * @protected
 			 */
 			observerMap: null,
-			
+
 			/**
-			 * Initialize a <code>View</code> instance.
+			 * Constructs a <code>View</code> instance.
 			 * 
 			 * @throws {Error}
 			 * 		Throws an error if an instance for this singleton has already been constructed.
@@ -75,14 +72,18 @@ new function()
 			 * Called automatically by the constructor. This is the opportunity to initialize the
 			 * singleton instance in a subclass without overriding the constructor.
 			 */
-			initializeView: function() {},
+			initializeView: function()
+			{
+			
+			},
 
 			/**
 			 * Register an <code>Observer</code> to be notified of <code>Notifications</code> with a
 			 * given name.
 			 *
 			 * @param {String} notificationName
-			 * The name of the <code>Notification</code>s to notify this <code>Observer</code> of.
+			 * 		The name of the <code>INotifications</code> to notify this
+			 *		<code>IObserver</code> of.
 			 * 
 			 * @param {Observer} observer
 			 * 		The <code>Observer</code> to register.
@@ -103,12 +104,12 @@ new function()
 			 * list are notified and are passed a reference to the <code>Notification</code> in the
 			 * order in which they were registered.
 			 *
-			 * @param {Notification} note
+			 * @param {Notification} notification
 			 * 		The <code>Notification</code> to notify <code>Observer</code>s of.
 			 */
-			notifyObservers: function( note )
+			notifyObservers: function( notification )
 			{
-				var notificationName/*String*/ = note.getName();
+				var notificationName/*String*/ = notification.getName();
 			
 				var observersRef/*Array*/ = this.observerMap[notificationName];
 				if( observersRef )
@@ -119,7 +120,7 @@ new function()
 					for( var i/*Number*/=0; i<len; i++ )
 					{
 						var observer/*Observer*/ = observers[i];
-						observer.notifyObserver(note);
+						observer.notifyObserver(notification);
 					}
 				}
 			},
@@ -137,6 +138,7 @@ new function()
 			 */
 			removeObserver: function( notificationName, notifyContext )
 			{
+				//The observer list for the notification under inspection
 				var observers/*Array*/ = this.observerMap[notificationName];
 
 				//Find the observer for the notifyContext.
@@ -150,7 +152,7 @@ new function()
 						break;
 					}
 				}
-			
+
 				/*
 				 * Also, when a Notification's Observer list length falls to zero, delete the
 				 * notification key from the observer map.
@@ -172,7 +174,7 @@ new function()
 			 * <code>Mediator</code> is interested in.
 			 *
 			 * @param {Mediator} mediator
-			 * 		A reference to the <code>Mediator</code> instance.
+			 * 		A reference to a <code>Mediator</code> instance.
 			 */
 			registerMediator: function( mediator )
 			{
@@ -230,6 +232,7 @@ new function()
 			 */
 			removeMediator: function( mediatorName )
 			{
+				// Retrieve the named mediator
 				var mediator/*Mediator*/ = this.mediatorMap[mediatorName];
 				if( !mediator )
 					return null;
@@ -268,18 +271,20 @@ new function()
 	/**
 	 * @constant
 	 * @type {String}
-	 * @private
+	 * @protected
 	 */
 	View.SINGLETON_MSG = "View Singleton already constructed!";
 
 	/**
+	 * Singleton instance local reference.
+	 *
 	 * @type {View}
-	 * @private
+	 * @protected
 	 */
 	View.instance = null;
 
 	/**
-	 * Retrieve the singleton instance of the <code>View</code>.
+	 * <code>View</code> Singleton Factory method.
 	 * 
 	 * @return {View}
 	 * 		The singleton instance of the <code>View</code>.
@@ -291,7 +296,7 @@ new function()
 
 		return View.instance;
 	}
-}
+};
 
 //Offer a way to hide PureMVC from the global context.
 if( typeof HidePureMVC == "undefined" )

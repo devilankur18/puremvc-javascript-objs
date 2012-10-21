@@ -7,12 +7,11 @@ new function()
 {
 	/**
 	 * @classDescription
-	 * A base <code>Mediator</code> implementation.
+	 * The base <code>Mediator</code> class.
 	 * 
 	 * Typically, a <code>Mediator</code> will be written to serve one specific control or group
 	 * controls and so, will not have a need to be dynamically named.
-	 * 
-	 * @see puremvc.Notification Notification
+	 *
 	 * @extends puremvc.Notifier Notifier
 	 * 
 	 * @constructor
@@ -26,7 +25,7 @@ new function()
 			 * The name of the <code>Mediator</code>.
 			 * 
 			 * @type {String}
-			 * @private
+			 * @protected
 			 */
 			mediatorName: null,
 
@@ -34,14 +33,14 @@ new function()
 			 * The <code>Mediator</code>'s view component.
 			 * 
 			 * @type {Object}
-			 * @private
+			 * @protected
 			 */
 			viewComponent: null,
 
 			/**
-			 * @override
+			 * @constructs
 			 *
-			 * Initialize a <code>Mediator</code> instance.
+			 * Constructs a <code>Mediator</code> instance.
 			 *
 			 * @param {String} mediatorName
 			 * 		The name of the <code>Mediator</code>.
@@ -72,9 +71,8 @@ new function()
 			/**
 			 * Get the <code>Mediator</code>'s view component.
 			 *
-			 * Additionally, an implicit getter will usually
-			 * be defined in the subclass that casts the view 
-			 * object to a type, like this:
+			 * Additionally, an implicit getter will usually be defined in the subclass that casts the
+			 * view object to a type, like this:
 			 * 
 			 * <code>
 			 *		getMenu: function
@@ -121,22 +119,31 @@ new function()
 			 * Typically this will be handled in a switch statement, with one 'case' entry per
 			 * <code>Notification</code> the <code>Mediator</code> is interested in.
 			 *
-			 * @param {Notification} note
+			 * @param {Notification} notification
 			 * 		The notification instance to be handled.
 			 */
-			handleNotification: function( note ){},
+			handleNotification: function( notification )
+			{
 			
+			},
+
 			/**
 			 * Called by the View when the Mediator is registered. This method has to be overridden
 			 * by the subclass to know when the instance is registered.
 			 */
-			onRegister: function(){},
+			onRegister: function()
+			{
+
+			},
 			
 			/**
 			 * Called by the View when the Mediator is removed. This method has to be overridden
 			 * by the subclass to know when the instance is removed.
 			 */
-			onRemove: function(){}
+			onRemove: function()
+			{
+
+			}
 		}
 	);
 
@@ -147,7 +154,7 @@ new function()
 	 * @constant
 	 */
 	Mediator.NAME = "Mediator";
-}
+};
 
 //Offer a way to hide PureMVC from the global context.
 if( typeof HidePureMVC == "undefined" )

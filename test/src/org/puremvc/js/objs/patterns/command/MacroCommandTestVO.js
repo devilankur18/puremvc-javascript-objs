@@ -20,7 +20,7 @@ var MacroCommandTestVO = Objs
 	"puremvc.MacroCommandTestVO",
 	{
 		/**
-		 * Initialize a <code>MacroCommandTestVO</code> instance.
+		 * Constructs a <code>MacroCommandTestVO</code> instance.
 		 * 
 	  	 * @param {Number} input
 	  	 * 		A random number to pass to the command.

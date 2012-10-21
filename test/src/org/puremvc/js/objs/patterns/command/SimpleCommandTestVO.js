@@ -18,7 +18,7 @@ var SimpleCommandTestVO = Objs
 	"puremvc.SimpleCommandTestVO",
 	{
 		/**
-		 * Initialize a <code>SimpleCommandTestVO</code> instance.
+		 * Constructs a <code>SimpleCommandTestVO</code> instance.
 		 * 
 		 * @param {Number} input
 		 * 		The number to be fed to the	<code>SimpleCommandTestCommand</code>.
