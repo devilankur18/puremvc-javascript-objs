@@ -70,6 +70,8 @@ new function()
 			},
 
 			/**
+			 * @private
+			 *
 			 * Get the notification method.
 			 *
 			 * @return {Function}
@@ -94,6 +96,8 @@ new function()
 			},
 
 			/**
+			 * @private
+			 *
 			 * Get the notification context.
 			 *
 			 * @return {Object}
@@ -138,7 +142,7 @@ new function()
 			 */
 			compareNotifyContext: function( object )
 			{
-				return object === this.getNotifyContext();
+		 		return object === this.context;
 			}
 		}
 	);
@@ -318,7 +322,7 @@ new function()
 	 *
 	 * The <code>View</code> class for PureMVC.
 	 *
-	 * A singleton implementation.
+	 * A singleton <code>View</code> implementation.
 	 * 
 	 * In PureMVC, the <code>View</code> class assumes these responsibilities:
 	 * <UL>
@@ -375,7 +379,7 @@ new function()
 				this.observerMap = {};
 				this.initializeView();
 			},
-			
+
 			/**
 			 * Initialize the singleton <code>View</code> instance.
 			 *
@@ -392,8 +396,8 @@ new function()
 			 * given name.
 			 *
 			 * @param {String} notificationName
-			 * 		The name of the <code>INotifications</code> to notify this
-			 *		<code>IObserver</code> of.
+			 * 		The name of the <code>Notification</code>s to notify this <code>Observer</code>
+			 *		of.
 			 * 
 			 * @param {Observer} observer
 			 * 		The <code>Observer</code> to register.
@@ -405,34 +409,6 @@ new function()
 					observers.push(observer);
 				else
 					this.observerMap[notificationName] = [observer];
-			},
-
-			/**
-			 * Notify the <code>Observer</code>s for a particular <code>Notification</code>.
-			 *
-			 * All previously attached <code>Observer</code>s for this <code>Notification</code>'s
-			 * list are notified and are passed a reference to the <code>Notification</code> in the
-			 * order in which they were registered.
-			 *
-			 * @param {Notification} notification
-			 * 		The <code>Notification</code> to notify <code>Observer</code>s of.
-			 */
-			notifyObservers: function( notification )
-			{
-				var notificationName/*String*/ = notification.getName();
-			
-				var observersRef/*Array*/ = this.observerMap[notificationName];
-				if( observersRef )
-				{
-					// Copy the array.
-					var observers/*Array*/ = observersRef.slice(0);
-					var len/*Number*/ = observers.length;
-					for( var i/*Number*/=0; i<len; i++ )
-					{
-						var observer/*Observer*/ = observers[i];
-						observer.notifyObserver(notification);
-					}
-				}
 			},
 
 			/**
@@ -472,6 +448,34 @@ new function()
 			},
 
 			/**
+			 * Notify the <code>Observer</code>s for a particular <code>Notification</code>.
+			 *
+			 * All previously attached <code>Observer</code>s for this <code>Notification</code>'s
+			 * list are notified and are passed a reference to the <code>Notification</code> in the
+			 * order in which they were registered.
+			 *
+			 * @param {Notification} notification
+			 * 		The <code>Notification</code> to notify <code>Observer</code>s of.
+			 */
+			notifyObservers: function( notification )
+			{
+				var notificationName/*String*/ = notification.getName();
+			
+				var observersRef/*Array*/ = this.observerMap[notificationName];
+				if( observersRef )
+				{
+					// Copy the array.
+					var observers/*Array*/ = observersRef.slice(0);
+					var len/*Number*/ = observers.length;
+					for( var i/*Number*/=0; i<len; i++ )
+					{
+						var observer/*Observer*/ = observers[i];
+						observer.notifyObserver( notification );
+					}
+				}
+			},
+
+			/**
 			 * Register an <code>Mediator</code> instance with the <code>View</code>.
 			 *
 			 * Registers the <code>Mediator</code> so that it can be retrieved by name, and further
@@ -493,10 +497,10 @@ new function()
 				//Do not allow re-registration (you must removeMediator first).
 				if( this.mediatorMap[name] )
 					return;
-			
+
 				//Register the Mediator for retrieval by name.
 				this.mediatorMap[name] = mediator;
-				
+
 				//Get Notification interests, if any.
 				var interests/*Array*/ = mediator.listNotificationInterests();
 				var len/*Number*/ = interests.length;
@@ -509,7 +513,7 @@ new function()
 					for( var i/*Number*/=0; i<len; i++ )
 						this.registerObserver( interests[i], observer );
 				}
-			
+
 				//Alert the mediator that it has been registered.
 				mediator.onRegister();
 			},
@@ -534,7 +538,7 @@ new function()
 			 * Remove a <code>Mediator</code> from the <code>View</code>.
 			 *
 			 * @param {String} mediatorName
-			 *		Name of the <code>IMediator</code> instance to be removed.
+			 *		Name of the <code>Mediator</code> instance to be removed.
 			 *
 			 * @return {Mediator}
 			 *		The <code>Mediator</code> that was removed from the <code>View</code> or a
@@ -557,6 +561,7 @@ new function()
 
 				// remove the mediator from the map		
 				delete this.mediatorMap[mediatorName];
+
 				//Alert the mediator that it has been removed
 				mediator.onRemove();
 				return mediator;	
@@ -579,6 +584,9 @@ new function()
 	);
 
 	/**
+	 * Error message used to indicate that a <code>View</code> singleton is already
+	 * constructed when trying to constructs the class twice.
+	 *
 	 * @constant
 	 * @type {String}
 	 * @protected
@@ -597,7 +605,7 @@ new function()
 	 * <code>View</code> Singleton Factory method.
 	 * 
 	 * @return {View}
-	 * 		The singleton instance of the <code>View</code>.
+	 * 		The singleton instance of <code>View</code>.
 	 */
 	View.getInstance = function()
 	{
@@ -605,7 +613,7 @@ new function()
 			View.instance = new View();
 
 		return View.instance;
-	}
+	};
 };
 
 //Offer a way to hide PureMVC from the global context.
@@ -653,13 +661,13 @@ new function()
 			/**
 			 * Constructs a <code>Model</code> instance.
 			 *
-			 * This <code>View</code> implementation is a singleton, so you should not call the
+			 * This <code>Model</code> implementation is a singleton, so you should not call the
 			 * constructor directly, but instead call the static singleton factory method
 			 * <code>View.getInstance()</code>.
 			 *
 			 * @throws {Error}
-			 * 		Throws an error if an instance for this singleton has already
-			 * 		been constructed.
+			 * 		Throws an error if an instance for this singleton has already been constructed.
+			 *
 			 */
 			initialize: function()
 			{
@@ -697,10 +705,32 @@ new function()
 			},
 
 			/**
+			 * Remove a <code>Proxy</code> from the <code>Model</code>.
+			 *
+			 * @param {String} proxyName
+			 *		The name of the <code>Proxy</code> instance to be removed.
+			 *
+			 * @return {Proxy}
+			 *		The <code>Proxy</code> that was removed from the <code>Model</code> or an
+			 *		explicit <code>null</null> if the <code>Proxy</code> didn't exist.
+			 */
+			removeProxy: function( proxyName )
+			{
+				var proxy/*Proxy*/ = this.proxyMap[ proxyName ];
+				if( proxy )
+				{
+					delete this.proxyMap[ proxyName ];
+					proxy.onRemove();
+				}
+			
+				return proxy;
+			},
+
+			/**
 			 * Retrieve an <code>Proxy</code> from the <code>Model</code>.
 			 *
 			 * @param {String} proxyName
-			 *		The name of the <code>Proxy</code> to retrieve.
+			 *		 The <code>Proxy</code> name to retrieve from the <code>Model</code>.
 			 *
 			 * @return {Proxy}
 			 *		The <code>Proxy</code> instance previously registered with the given
@@ -724,33 +754,14 @@ new function()
 			hasProxy: function( proxyName )
 			{
 				return this.proxyMap[proxyName] != null;
-			},
-
-			/**
-			 * Remove a <code>Proxy</code> from the <code>Model</code>.
-			 *
-			 * @param {String} proxyName
-			 *		The name of the <code>Proxy</code> instance to be removed.
-			 *
-			 * @return {Proxy}
-			 *		The <code>Proxy</code> that was removed from the <code>Model</code> or an
-			 *		explicit <code>null</null> if the <code>Proxy</code> didn't exist.
-			 */
-			removeProxy: function( proxyName )
-			{
-				var proxy/*Proxy*/ = this.proxyMap[ proxyName ];
-				if( proxy )
-				{
-					delete this.proxyMap[ proxyName ];
-					proxy.onRemove();
-				}
-			
-				return proxy;
 			}
 		}
 	);
 
 	/**
+	 * Error message used to indicate that a <code>Model</code> singleton is already
+	 * constructed when trying to constructs the class twice.
+	 *
 	 * @constant
 	 * @type {String}
 	 * @protected
@@ -758,7 +769,7 @@ new function()
 	Model.SINGLETON_MSG = "Model Singleton already constructed!";
 
 	/**
-	 * Singleton instance local reference.
+	 * <code>Model</code> singleton instance local reference.
 	 *
 	 * @type {Model}
 	 * @protected
@@ -769,7 +780,7 @@ new function()
 	 * <code>Model</code> singleton factory method.
 	 *
 	 * @return {Model}
-	 * 		The singleton instance of the <code>Model</code>.
+	 * 		The singleton instance of <code>Model</code>.
 	 */
 	Model.getInstance = function()
 	{
@@ -862,7 +873,7 @@ new function()
 			},
 
 			/**
-			 * Initialize the Singleton <code>Controller</code> instance.
+			 * Initialize the singleton <code>Controller</code> instance.
 		 	 *
 			 * Called automatically by the constructor.
 			 *
@@ -965,7 +976,9 @@ new function()
 	);
 
 	/**
-	 * @constant
+	 * Error message used to indicate that a <code>Controller</code> singleton is already
+	 * constructed when trying to constructs the class twice.
+	 *
 	 * @type {String}
 	 * @protected
 	 */
@@ -983,7 +996,7 @@ new function()
 	 * <code>Controller</code> singleton factory method.
 	 *
 	 * @return {Controller}
-	 * 		The singleton instance of the <code>Controller</code>
+	 * 		The singleton instance of <code>Controller</code>
 	 */
 	Controller.getInstance = function()
 	{
@@ -991,7 +1004,7 @@ new function()
 			Controller.instance = new Controller();
 
 		return Controller.instance;
-	}
+	};
 };
 
 //Offer a way to hide PureMVC from the global context.
@@ -1011,7 +1024,7 @@ new function()
 
 	/**
 	 * @classDescription
-	 * A singleton implementation.
+	 * A base singleton <code>Facade</code> implementation.
 	 * 
 	 * In PureMVC, the <code>Facade</code> class assumes these responsibilities:
 	 *
@@ -1061,7 +1074,7 @@ new function()
 			 *
 			 * Constructs a <code>Controller</code> instance.
 			 *
-			 * This <code>IFacade</code> implementation is a singleton, so you should not call the
+			 * This <code>Facade</code> implementation is a singleton, so you should not call the
 			 * constructor directly, but instead call the static singleton factory method
 			 * <code>Facade.getInstance()</code>.
 			 *
@@ -1386,9 +1399,9 @@ new function()
 	 * @protected
 	 */
 	Facade.SINGLETON_MSG = "Facade Singleton already constructed!";
-	
+
 	/**
-	 * The Singleton Facade instance.
+	 * Singleton Facade instance.
 	 *
 	 * @type {Facade}
 	 * @protected
@@ -1407,7 +1420,7 @@ new function()
 			Facade.instance = new Facade();
 
 		return Facade.instance;
-	}
+	};
 };
 
 //Offer a way to hide PureMVC from the global context.
@@ -1522,10 +1535,10 @@ new function()
 			/**
 			 * Fulfill the use-case initiated by the given <code>Notification</code>.
 			 *
-			 * In the Command Pattern, an application use-case typically begins with some user
-			 * action,which results in a <code>Notification</code> being broadcast, which is
-			 * handled by business logic in the <code>execute</code> method of an
-			 * <code>Command</code>.
+			 * In the Command Pattern, an application use-case typically begins with some user action,
+			 * which results in a <code>Notification</code> being broadcast, which is handled by
+			 * business logic in the <code>execute</code> method of an <code>SimpleCommand</code> or
+			 * <code>MacroCommand</code>.
 			 *
 			 * @param {Notification} notification 
 			 * 		The <code>Notification</code> to handle.
