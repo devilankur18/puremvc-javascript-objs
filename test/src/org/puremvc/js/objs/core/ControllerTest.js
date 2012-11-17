@@ -22,20 +22,6 @@ var ControllerTest = new YUITest.TestCase
 	     */
 	    name: "PureMVC Controller class tests",  
 
-	    /**
-	     * Sets up data that is needed by each test.
-	     */
-	    setUp: function()
-		{
-	    },
-
-	    /**
-	     * Cleans up everything that was created by setUp().
-	     */
-	    tearDown: function()
-		{
-	    },
-
 		/**
 		 * Tests the Controller Singleton Factory Method
 		 */
@@ -63,16 +49,13 @@ var ControllerTest = new YUITest.TestCase
 
 		/**
 		 * Tests Command registration and execution.
-		 * 
-			 * This test gets the Singleton Controller instance
-		 * and registers the ControllerTestCommand class 
-		 * to handle 'ControllerTest' Notifications.
-		 * 
-			 * It then constructs such a Notification and tells the
-		 * Controller to execute the associated Command.
-		 * Success is determined by evaluating a property
-		 * on an object passed to the Command, which will
-		 * be modified when the Command executes.
+		 *
+		 * This test gets the singleton Controller instance and registers the ControllerTestCommand
+		 * class to handle 'ControllerTest' Notifications.
+		 *
+		 * It then constructs such a Notification and tells the Controller to execute the associated
+		 * Command. Success is determined by evaluating a property on an object passed to the
+		 * Command, which will be modified when the Command executes.
 		 */
 		testRegisterAndExecuteCommand: function()
 		{

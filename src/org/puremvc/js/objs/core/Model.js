@@ -40,13 +40,13 @@ new function()
 			/**
 			 * Constructs a <code>Model</code> instance.
 			 *
-			 * This <code>View</code> implementation is a singleton, so you should not call the
+			 * This <code>Model</code> implementation is a singleton, so you should not call the
 			 * constructor directly, but instead call the static singleton factory method
 			 * <code>View.getInstance()</code>.
 			 *
 			 * @throws {Error}
-			 * 		Throws an error if an instance for this singleton has already
-			 * 		been constructed.
+			 * 		Throws an error if an instance for this singleton has already been constructed.
+			 *
 			 */
 			initialize: function()
 			{
@@ -84,10 +84,32 @@ new function()
 			},
 
 			/**
+			 * Remove a <code>Proxy</code> from the <code>Model</code>.
+			 *
+			 * @param {String} proxyName
+			 *		The name of the <code>Proxy</code> instance to be removed.
+			 *
+			 * @return {Proxy}
+			 *		The <code>Proxy</code> that was removed from the <code>Model</code> or an
+			 *		explicit <code>null</null> if the <code>Proxy</code> didn't exist.
+			 */
+			removeProxy: function( proxyName )
+			{
+				var proxy/*Proxy*/ = this.proxyMap[ proxyName ];
+				if( proxy )
+				{
+					delete this.proxyMap[ proxyName ];
+					proxy.onRemove();
+				}
+			
+				return proxy;
+			},
+
+			/**
 			 * Retrieve an <code>Proxy</code> from the <code>Model</code>.
 			 *
 			 * @param {String} proxyName
-			 *		The name of the <code>Proxy</code> to retrieve.
+			 *		 The <code>Proxy</code> name to retrieve from the <code>Model</code>.
 			 *
 			 * @return {Proxy}
 			 *		The <code>Proxy</code> instance previously registered with the given
@@ -111,33 +133,14 @@ new function()
 			hasProxy: function( proxyName )
 			{
 				return this.proxyMap[proxyName] != null;
-			},
-
-			/**
-			 * Remove a <code>Proxy</code> from the <code>Model</code>.
-			 *
-			 * @param {String} proxyName
-			 *		The name of the <code>Proxy</code> instance to be removed.
-			 *
-			 * @return {Proxy}
-			 *		The <code>Proxy</code> that was removed from the <code>Model</code> or an
-			 *		explicit <code>null</null> if the <code>Proxy</code> didn't exist.
-			 */
-			removeProxy: function( proxyName )
-			{
-				var proxy/*Proxy*/ = this.proxyMap[ proxyName ];
-				if( proxy )
-				{
-					delete this.proxyMap[ proxyName ];
-					proxy.onRemove();
-				}
-			
-				return proxy;
 			}
 		}
 	);
 
 	/**
+	 * Error message used to indicate that a <code>Model</code> singleton is already
+	 * constructed when trying to constructs the class twice.
+	 *
 	 * @constant
 	 * @type {String}
 	 * @protected
@@ -145,7 +148,7 @@ new function()
 	Model.SINGLETON_MSG = "Model Singleton already constructed!";
 
 	/**
-	 * Singleton instance local reference.
+	 * <code>Model</code> singleton instance local reference.
 	 *
 	 * @type {Model}
 	 * @protected
@@ -156,7 +159,7 @@ new function()
 	 * <code>Model</code> singleton factory method.
 	 *
 	 * @return {Model}
-	 * 		The singleton instance of the <code>Model</code>.
+	 * 		The singleton instance of <code>Model</code>.
 	 */
 	Model.getInstance = function()
 	{

@@ -12,7 +12,7 @@ new function()
 
 	/**
 	 * @classDescription
-	 * A singleton implementation.
+	 * A base singleton <code>Facade</code> implementation.
 	 * 
 	 * In PureMVC, the <code>Facade</code> class assumes these responsibilities:
 	 *
@@ -62,7 +62,7 @@ new function()
 			 *
 			 * Constructs a <code>Controller</code> instance.
 			 *
-			 * This <code>IFacade</code> implementation is a singleton, so you should not call the
+			 * This <code>Facade</code> implementation is a singleton, so you should not call the
 			 * constructor directly, but instead call the static singleton factory method
 			 * <code>Facade.getInstance()</code>.
 			 *
@@ -387,9 +387,9 @@ new function()
 	 * @protected
 	 */
 	Facade.SINGLETON_MSG = "Facade Singleton already constructed!";
-	
+
 	/**
-	 * The Singleton Facade instance.
+	 * Singleton Facade instance.
 	 *
 	 * @type {Facade}
 	 * @protected
@@ -408,7 +408,7 @@ new function()
 			Facade.instance = new Facade();
 
 		return Facade.instance;
-	}
+	};
 };
 
 //Offer a way to hide PureMVC from the global context.

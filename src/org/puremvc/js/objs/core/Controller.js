@@ -77,7 +77,7 @@ new function()
 			},
 
 			/**
-			 * Initialize the Singleton <code>Controller</code> instance.
+			 * Initialize the singleton <code>Controller</code> instance.
 		 	 *
 			 * Called automatically by the constructor.
 			 *
@@ -180,7 +180,9 @@ new function()
 	);
 
 	/**
-	 * @constant
+	 * Error message used to indicate that a <code>Controller</code> singleton is already
+	 * constructed when trying to constructs the class twice.
+	 *
 	 * @type {String}
 	 * @protected
 	 */
@@ -198,7 +200,7 @@ new function()
 	 * <code>Controller</code> singleton factory method.
 	 *
 	 * @return {Controller}
-	 * 		The singleton instance of the <code>Controller</code>
+	 * 		The singleton instance of <code>Controller</code>
 	 */
 	Controller.getInstance = function()
 	{
@@ -206,7 +208,7 @@ new function()
 			Controller.instance = new Controller();
 
 		return Controller.instance;
-	}
+	};
 };
 
 //Offer a way to hide PureMVC from the global context.

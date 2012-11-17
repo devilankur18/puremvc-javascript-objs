@@ -70,6 +70,8 @@ new function()
 			},
 
 			/**
+			 * @private
+			 *
 			 * Get the notification method.
 			 *
 			 * @return {Function}
@@ -94,6 +96,8 @@ new function()
 			},
 
 			/**
+			 * @private
+			 *
 			 * Get the notification context.
 			 *
 			 * @return {Object}
@@ -138,7 +142,7 @@ new function()
 			 */
 			compareNotifyContext: function( object )
 			{
-				return object === this.getNotifyContext();
+		 		return object === this.context;
 			}
 		}
 	);

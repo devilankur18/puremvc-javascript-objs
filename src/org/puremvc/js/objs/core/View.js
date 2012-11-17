@@ -12,7 +12,7 @@ new function()
 	 *
 	 * The <code>View</code> class for PureMVC.
 	 *
-	 * A singleton implementation.
+	 * A singleton <code>View</code> implementation.
 	 * 
 	 * In PureMVC, the <code>View</code> class assumes these responsibilities:
 	 * <UL>
@@ -69,7 +69,7 @@ new function()
 				this.observerMap = {};
 				this.initializeView();
 			},
-			
+
 			/**
 			 * Initialize the singleton <code>View</code> instance.
 			 *
@@ -86,8 +86,8 @@ new function()
 			 * given name.
 			 *
 			 * @param {String} notificationName
-			 * 		The name of the <code>INotifications</code> to notify this
-			 *		<code>IObserver</code> of.
+			 * 		The name of the <code>Notification</code>s to notify this <code>Observer</code>
+			 *		of.
 			 * 
 			 * @param {Observer} observer
 			 * 		The <code>Observer</code> to register.
@@ -99,34 +99,6 @@ new function()
 					observers.push(observer);
 				else
 					this.observerMap[notificationName] = [observer];
-			},
-
-			/**
-			 * Notify the <code>Observer</code>s for a particular <code>Notification</code>.
-			 *
-			 * All previously attached <code>Observer</code>s for this <code>Notification</code>'s
-			 * list are notified and are passed a reference to the <code>Notification</code> in the
-			 * order in which they were registered.
-			 *
-			 * @param {Notification} notification
-			 * 		The <code>Notification</code> to notify <code>Observer</code>s of.
-			 */
-			notifyObservers: function( notification )
-			{
-				var notificationName/*String*/ = notification.getName();
-			
-				var observersRef/*Array*/ = this.observerMap[notificationName];
-				if( observersRef )
-				{
-					// Copy the array.
-					var observers/*Array*/ = observersRef.slice(0);
-					var len/*Number*/ = observers.length;
-					for( var i/*Number*/=0; i<len; i++ )
-					{
-						var observer/*Observer*/ = observers[i];
-						observer.notifyObserver(notification);
-					}
-				}
 			},
 
 			/**
@@ -166,6 +138,34 @@ new function()
 			},
 
 			/**
+			 * Notify the <code>Observer</code>s for a particular <code>Notification</code>.
+			 *
+			 * All previously attached <code>Observer</code>s for this <code>Notification</code>'s
+			 * list are notified and are passed a reference to the <code>Notification</code> in the
+			 * order in which they were registered.
+			 *
+			 * @param {Notification} notification
+			 * 		The <code>Notification</code> to notify <code>Observer</code>s of.
+			 */
+			notifyObservers: function( notification )
+			{
+				var notificationName/*String*/ = notification.getName();
+			
+				var observersRef/*Array*/ = this.observerMap[notificationName];
+				if( observersRef )
+				{
+					// Copy the array.
+					var observers/*Array*/ = observersRef.slice(0);
+					var len/*Number*/ = observers.length;
+					for( var i/*Number*/=0; i<len; i++ )
+					{
+						var observer/*Observer*/ = observers[i];
+						observer.notifyObserver( notification );
+					}
+				}
+			},
+
+			/**
 			 * Register an <code>Mediator</code> instance with the <code>View</code>.
 			 *
 			 * Registers the <code>Mediator</code> so that it can be retrieved by name, and further
@@ -187,10 +187,10 @@ new function()
 				//Do not allow re-registration (you must removeMediator first).
 				if( this.mediatorMap[name] )
 					return;
-			
+
 				//Register the Mediator for retrieval by name.
 				this.mediatorMap[name] = mediator;
-				
+
 				//Get Notification interests, if any.
 				var interests/*Array*/ = mediator.listNotificationInterests();
 				var len/*Number*/ = interests.length;
@@ -203,7 +203,7 @@ new function()
 					for( var i/*Number*/=0; i<len; i++ )
 						this.registerObserver( interests[i], observer );
 				}
-			
+
 				//Alert the mediator that it has been registered.
 				mediator.onRegister();
 			},
@@ -228,7 +228,7 @@ new function()
 			 * Remove a <code>Mediator</code> from the <code>View</code>.
 			 *
 			 * @param {String} mediatorName
-			 *		Name of the <code>IMediator</code> instance to be removed.
+			 *		Name of the <code>Mediator</code> instance to be removed.
 			 *
 			 * @return {Mediator}
 			 *		The <code>Mediator</code> that was removed from the <code>View</code> or a
@@ -251,6 +251,7 @@ new function()
 
 				// remove the mediator from the map		
 				delete this.mediatorMap[mediatorName];
+
 				//Alert the mediator that it has been removed
 				mediator.onRemove();
 				return mediator;	
@@ -273,6 +274,9 @@ new function()
 	);
 
 	/**
+	 * Error message used to indicate that a <code>View</code> singleton is already
+	 * constructed when trying to constructs the class twice.
+	 *
 	 * @constant
 	 * @type {String}
 	 * @protected
@@ -291,7 +295,7 @@ new function()
 	 * <code>View</code> Singleton Factory method.
 	 * 
 	 * @return {View}
-	 * 		The singleton instance of the <code>View</code>.
+	 * 		The singleton instance of <code>View</code>.
 	 */
 	View.getInstance = function()
 	{
@@ -299,7 +303,7 @@ new function()
 			View.instance = new View();
 
 		return View.instance;
-	}
+	};
 };
 
 //Offer a way to hide PureMVC from the global context.
