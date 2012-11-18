@@ -40,7 +40,7 @@ new function()
 			 * The notification method of the interested object.
 			 * 
 			 * @type {Function}
-			 * @protected
+			 * @private
 			 */
 			notify: null,
 
@@ -48,7 +48,7 @@ new function()
 			 * The notification context of the interested object.
 			 * 
 			 * @type {Object}
-			 * @protected
+			 * @private
 			 */
 			context: null,
 
@@ -70,12 +70,12 @@ new function()
 			},
 
 			/**
-			 * @private
-			 *
 			 * Get the notification method.
 			 *
 			 * @return {Function}
 			 * 		The notification (callback) method of the interested object.
+			 *
+			 * @private
 			 */
 			getNotifyMethod: function()
 			{
@@ -96,12 +96,12 @@ new function()
 			},
 
 			/**
-			 * @private
-			 *
 			 * Get the notification context.
 			 *
 			 * @return {Object}
 			 * 		The notification context (<code>this</code>) of the interested object.
+			 *
+			 * @private
 			 */
 			getNotifyContext: function()
 			{
@@ -122,13 +122,13 @@ new function()
 			/**
 			 * Notify the interested object.
 			 *
-			 * @param {Notification} note
+			 * @param {Notification} notification
 			 * 		The <code>Notification</code> to pass to the interested object's notification
 			 *		method.
 			 */
-			notifyObserver: function( note )
+			notifyObserver: function( notification )
 			{
-				this.getNotifyMethod().call( this.getNotifyContext(), note );
+				this.getNotifyMethod().call( this.getNotifyContext(), notification );
 			},
 
 			/**
@@ -193,7 +193,7 @@ new function()
 			 * The name of the notification.
 			 * 
 			 * @type {String}
-			 * @protected
+			 * @private
 			 */
 			name: null,
 
@@ -201,7 +201,7 @@ new function()
 			 * The body data to send with the notification.
 			 * 
 			 * @type {Object}
-			 * @protected
+			 * @private
 			 */
 			body: null,
 
@@ -209,7 +209,7 @@ new function()
 			 * The type identifier of the notification.
 			 * 
 			 * @type {String}
-			 * @protected
+			 * @private
 			 */
 			type: null,
 
@@ -292,6 +292,8 @@ new function()
 			 *
 			 * @return {String}
 			 * 		The textual representation of the <code>Notification</code>	instance.
+			 *
+			 * @override
 			 */
 			toString: function()
 			{
@@ -587,17 +589,19 @@ new function()
 	 * Error message used to indicate that a <code>View</code> singleton is already
 	 * constructed when trying to constructs the class twice.
 	 *
+	 * @static
 	 * @constant
-	 * @type {String}
 	 * @protected
+	 * @type {String}
 	 */
 	View.SINGLETON_MSG = "View Singleton already constructed!";
 
 	/**
 	 * Singleton instance local reference.
 	 *
-	 * @type {View}
+	 * @static
 	 * @protected
+	 * @type {View}
 	 */
 	View.instance = null;
 
@@ -762,6 +766,7 @@ new function()
 	 * Error message used to indicate that a <code>Model</code> singleton is already
 	 * constructed when trying to constructs the class twice.
 	 *
+	 * @static
 	 * @constant
 	 * @type {String}
 	 * @protected
@@ -855,7 +860,7 @@ new function()
 			/**
 			 * Constructs a <code>Controller</code> instance.
 			 *
-			 * This <code>IController</code> implementation is a singleton, so you should not call the
+			 * This <code>Controller</code> implementation is a singleton, so you should not call the
 			 * constructor directly, but instead call the static singleton factory method
 			 * <code>Controller.getInstance()</code>.
 			 *
@@ -914,22 +919,24 @@ new function()
 			},
 
 			/**
-			 * Register a particular <code>Command</code> class as the handler for a particular
-			 * <code>Notification</code>.
+			 * Register a particular <code>SimpleCommand</code> or <code>MacroCommand</code> class
+			 * as the handler for a particular <code>Notification</code>.
 			 *
-			 * If a <code>Command</code> has already been registered to handle
-			 * <code>Notification</code>s with this name, it is no longer used, the new
-			 * <code>Command</code> is used instead.
+			 * If a <code>SimpleCommand</code> or <code>MacroCommand</code> has already been
+			 * registered to handle <code>Notification</code>s with this name, it is no longer
+			 * used, the new <code>SimpleCommand</code> or <code>MacroCommand</code> is used
+			 * instead.
 			 *
-			 * The <code>Observer</code> for the new <code>Command</code> is only created if this is
-			 * the first time a <code>Command</code> has been registered for this
+			 * The <code>Observer</code> for the new <code>SimpleCommand</code> or
+			 * <code>MacroCommand</code> is only created if this is the first time a
+			 * <code>SimpleCommand</code> or <code>MacroCommand</code> has been registered for this
 			 * <code>Notification</code> name.
 			 *
 			 * @param {String} notificationName
 			 * 		The name of the <code>Notification</code>.
 			 *
 			 * @param {Function} commandClassRef
-			 * 		The constructor of the <code>Command</code>.
+			 * 		The constructor of the <code>SimpleCommand</code> or <code>MacroCommand</code>.
 			 */
 			registerCommand: function( notificationName, commandClassRef )
 			{
@@ -940,11 +947,12 @@ new function()
 			},
 
 			/**
-			 * Check if a <code>Command</code> is registered for a given <code>Notification</code>.
+			 * Check if a <code>SimpleCommand</code> or <code>MacroCommand</code> is registered for
+			 * a given <code>Notification</code>.
 			 *
 			 * @param {String} notificationName
-			 * 		Name of the <code>Notification</code> to check wheter an <code>ICommand</code> is
-			 * 		registered for.
+			 * 		Name of the <code>Notification</code> to check wheter a
+			 *		<code>SimpleCommand</code> or <code>MacroCommand</code> is registered for.
 			 * 
 			 * @return {Boolean}
 			 * 		A <code>Command</code> is currently registered for the given
@@ -979,15 +987,18 @@ new function()
 	 * Error message used to indicate that a <code>Controller</code> singleton is already
 	 * constructed when trying to constructs the class twice.
 	 *
-	 * @type {String}
+	 * @static
+	 * @constant
 	 * @protected
+	 * @type {String}
 	 */
-	Controller.SINGLETON_MSG = "Controller Singleton already constructed!";
+	Controller.SINGLETON_MSG = "Controller singleton already constructed!";
 
 	/**
 	 * Singleton instance local reference.
 	 *
-	 * @type {Controller}
+	 * @static
+	 * @type {puremvc.Controller}
 	 * @protected
 	 */
 	Controller.instance = null;
@@ -995,8 +1006,10 @@ new function()
 	/**
 	 * <code>Controller</code> singleton factory method.
 	 *
-	 * @return {Controller}
+	 * @return {puremvc.Controller}
 	 * 		The singleton instance of <code>Controller</code>
+	 *
+	 * @static
 	 */
 	Controller.getInstance = function()
 	{
@@ -1137,29 +1150,6 @@ new function()
 			},
 
 			/**
-			 * Initialize the <code>Controller</code>.
-			 *
-			 * Called by the <code>initializeFacade</code> method. Override this method in your
-			 * subclass of <code>Facade</code> if one or both of the following are true:
-			 * 
-			 * <UL>
-			 * <LI>You wish to initialize a different <code>Controller</code>.
-			 * <LI>You have <code>Command</code>s to register with the <code>Controller</code> at
-			 * startup.
-			 *
-			 * If you don't want to initialize a different <code>IController</code>, call
-			 * <code>super.initializeController()</code> at the beginning of your method, then register
-			 * <code>Command</code>s.
-			 *
-			 * @protected
-			 */
-			initializeController: function()
-			{
-				if( !this.controller )
-					this.controller = Controller.getInstance();
-			},
-
-			/**
 			 * Initialize the <code>View</code>.
 			 *
 			 * Called by the <code>initializeFacade</code> method. Override this method in your
@@ -1187,15 +1177,39 @@ new function()
 			},
 
 			/**
-			 * Register a <code>Command</code> with the <code>IController</code> associating it to a
-			 * <code>Notification</code> name.
+			 * Initialize the <code>Controller</code>.
+			 *
+			 * Called by the <code>initializeFacade</code> method. Override this method in your
+			 * subclass of <code>Facade</code> if one or both of the following are true:
+			 * 
+			 * <UL>
+			 * <LI>You wish to initialize a different <code>Controller</code>.
+			 * <LI>You have <code>SimpleCommand</code>s or a <code>MacroCommand</code>s to register
+			 * with the <code>Controller</code> at startup.
+			 *
+			 * If you don't want to initialize a different <code>Controller</code>, call
+			 * <code>Facade.initializeController.call(this)</code> at the beginning of your method,
+			 * then register <code>SimpleCommand</code>s or <code>MacroCommand</code>s.
+			 *
+			 * @protected
+			 */
+			initializeController: function()
+			{
+				if( !this.controller )
+					this.controller = Controller.getInstance();
+			},
+
+			/**
+			 * Register a <code>SimpleCommand</code> or a <code>MacroCommand</code> with the
+			 * <code>Controller</code> associating it to a <code>Notification</code> name.
 			 *
 			 * @param {String} notificationName
 			 * 		The name of the <code>Notification</code> to associate the <code>Command</code>
 			 * 		with.
 			 *
 			 * @param {Function} commandClassRef
-			 * 		A reference to the constructor of the <code>Command</code>.
+			 * 		A reference to the constructor of the <code>SimpleCommand</code> or a
+			 *		<code>MacroCommand</code>.
 			 */
 			registerCommand: function( notificationName, commandClassRef )
 			{
@@ -1203,8 +1217,9 @@ new function()
 			},
 
 			/**
-			 * Remove a previously registered <code>Command</code> to <code>Notification</code>
-			 * mapping from the <code>Controller</code>.
+			 * Remove a previously registered <code>SimpleCommand</code> or a
+			 * <code>MacroCommand</code> to <code>Notification</code> mapping from the
+			 * <code>Controller</code>.
 			 *
 			 * @param {String} notificationName
 			 * 		The name of the <code>Notification</code> to remove the <code>Command</code>
@@ -1329,7 +1344,7 @@ new function()
 			 */
 			removeMediator: function( mediatorName )
 			{
-				var mediator/*IMediator*/;
+				var mediator/*Mediator*/;
 				if( this.view )
 					mediator = this.view.removeMediator( mediatorName );
 
@@ -1394,9 +1409,13 @@ new function()
 	);
 
 	/**
-	 * @type {String}
+	 * Error message used to indicate that a <code>Facade</code> singleton is already
+	 * constructed when trying to constructs the class twice.
+	 *
+	 * @static
 	 * @constant
 	 * @protected
+	 * @type {String}
 	 */
 	Facade.SINGLETON_MSG = "Facade Singleton already constructed!";
 
@@ -1594,7 +1613,7 @@ new function()
 		"puremvc.Notifier",
 		{
 			/**
-			 * An array of <code>SimpleCommands</code> or subclasses of.
+			 * An array of <code>SimpleCommand</code>s, subclasses of or <code>MacroCommand</code>s.
 			 * 
 			 * @type {Array}
 			 * @protected
@@ -1638,6 +1657,8 @@ new function()
 			 *
 			 * In the JavaScript version it means that it only needs to implement an execute method
 			 * and inherits from <code>Notifier</code>.
+			 *
+			 * @protected
 			 */
 			initializeMacroCommand: function()
 			{
@@ -1651,6 +1672,8 @@ new function()
 			 *
 			 * @param {Function} commandClassRef
 			 * 		A reference to the constructor of the <code>Command</code>.
+			 *
+			 * @protected
 			 */
 			addSubCommand: function( commandClassRef )
 			{
@@ -1713,7 +1736,8 @@ new function()
 		"puremvc.Notifier",
 		{
 			/**
-			 * The name of the <code>Mediator</code>.
+			 * The name of the <code>Mediator</code>. Should only be accessed by
+			 * <code>Mediator</code> subclasses.
 			 * 
 			 * @type {String}
 			 * @protected
@@ -1721,7 +1745,8 @@ new function()
 			mediatorName: null,
 
 			/**
-			 * The <code>Mediator</code>'s view component.
+			 * The <code>Mediator</code>'s view component. Should only be accessed by
+			 * <code>Mediator</code> subclasses.
 			 * 
 			 * @type {Object}
 			 * @protected
@@ -1760,20 +1785,24 @@ new function()
 			},
 			
 			/**
-			 * Get the <code>Mediator</code>'s view component.
-			 *
-			 * Additionally, an implicit getter will usually be defined in the subclass that casts the
-			 * view object to a type, like this:
+			 * Get the Mediators view component.
 			 * 
-			 * <code>
-			 *		getMenu: function
-			 *		{
-			 *			return this.viewComponent;
-			 *		}
-			 * </code>
+			 * Additionally, an optional explicit getter can be
+			 * be defined in the subclass that defines the 
+			 * view components, providing a more semantic interface
+			 * to the Mediator.
+			 * 
+			 * This is different from the AS3 implementation in
+			 * the sense that no casting is required from the
+			 * object supplied as the view component.
+			 * 
+			 *     getComboBox: function ()
+			 *     {
+			 *         return this.viewComponent;  
+			 *     }
 			 * 
 			 * @return {Object}
-			 * 		The view component.
+			 * 		The view component
 			 */
 			getViewComponent: function()
 			{
@@ -1882,13 +1911,6 @@ new function()
 		"puremvc.Proxy",
 		"puremvc.Notifier",
 		{
-			/**
-			 * The data object controlled by the <code>Proxy</code>.
-			 *
-			 * @type {Object}
-			 * @protected
-			 */
-			data: null,
 
 			/**
 			 * The name of the <code>Proxy</code>.
@@ -1897,6 +1919,14 @@ new function()
 			 * @protected
 			 */
 			proxyName: null,
+			
+			/**
+			 * The data object controlled by the <code>Proxy</code>.
+			 *
+			 * @type {Object}
+			 * @protected
+			 */
+			data: null,
 
 			/**
 			 * @constructs
@@ -1974,8 +2004,9 @@ new function()
 	/**
 	 * The default name of the <code>Proxy</code>
 	 * 
-	 * @type {String}
+	 * @static
 	 * @constant
+	 * @type {String}
 	 */
 	Proxy.NAME = "Proxy";
 };

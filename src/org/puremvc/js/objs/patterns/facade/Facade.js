@@ -125,29 +125,6 @@ new function()
 			},
 
 			/**
-			 * Initialize the <code>Controller</code>.
-			 *
-			 * Called by the <code>initializeFacade</code> method. Override this method in your
-			 * subclass of <code>Facade</code> if one or both of the following are true:
-			 * 
-			 * <UL>
-			 * <LI>You wish to initialize a different <code>Controller</code>.
-			 * <LI>You have <code>Command</code>s to register with the <code>Controller</code> at
-			 * startup.
-			 *
-			 * If you don't want to initialize a different <code>IController</code>, call
-			 * <code>super.initializeController()</code> at the beginning of your method, then register
-			 * <code>Command</code>s.
-			 *
-			 * @protected
-			 */
-			initializeController: function()
-			{
-				if( !this.controller )
-					this.controller = Controller.getInstance();
-			},
-
-			/**
 			 * Initialize the <code>View</code>.
 			 *
 			 * Called by the <code>initializeFacade</code> method. Override this method in your
@@ -175,15 +152,39 @@ new function()
 			},
 
 			/**
-			 * Register a <code>Command</code> with the <code>IController</code> associating it to a
-			 * <code>Notification</code> name.
+			 * Initialize the <code>Controller</code>.
+			 *
+			 * Called by the <code>initializeFacade</code> method. Override this method in your
+			 * subclass of <code>Facade</code> if one or both of the following are true:
+			 * 
+			 * <UL>
+			 * <LI>You wish to initialize a different <code>Controller</code>.
+			 * <LI>You have <code>SimpleCommand</code>s or a <code>MacroCommand</code>s to register
+			 * with the <code>Controller</code> at startup.
+			 *
+			 * If you don't want to initialize a different <code>Controller</code>, call
+			 * <code>Facade.initializeController.call(this)</code> at the beginning of your method,
+			 * then register <code>SimpleCommand</code>s or <code>MacroCommand</code>s.
+			 *
+			 * @protected
+			 */
+			initializeController: function()
+			{
+				if( !this.controller )
+					this.controller = Controller.getInstance();
+			},
+
+			/**
+			 * Register a <code>SimpleCommand</code> or a <code>MacroCommand</code> with the
+			 * <code>Controller</code> associating it to a <code>Notification</code> name.
 			 *
 			 * @param {String} notificationName
 			 * 		The name of the <code>Notification</code> to associate the <code>Command</code>
 			 * 		with.
 			 *
 			 * @param {Function} commandClassRef
-			 * 		A reference to the constructor of the <code>Command</code>.
+			 * 		A reference to the constructor of the <code>SimpleCommand</code> or a
+			 *		<code>MacroCommand</code>.
 			 */
 			registerCommand: function( notificationName, commandClassRef )
 			{
@@ -191,8 +192,9 @@ new function()
 			},
 
 			/**
-			 * Remove a previously registered <code>Command</code> to <code>Notification</code>
-			 * mapping from the <code>Controller</code>.
+			 * Remove a previously registered <code>SimpleCommand</code> or a
+			 * <code>MacroCommand</code> to <code>Notification</code> mapping from the
+			 * <code>Controller</code>.
 			 *
 			 * @param {String} notificationName
 			 * 		The name of the <code>Notification</code> to remove the <code>Command</code>
@@ -317,7 +319,7 @@ new function()
 			 */
 			removeMediator: function( mediatorName )
 			{
-				var mediator/*IMediator*/;
+				var mediator/*Mediator*/;
 				if( this.view )
 					mediator = this.view.removeMediator( mediatorName );
 
@@ -382,9 +384,13 @@ new function()
 	);
 
 	/**
-	 * @type {String}
+	 * Error message used to indicate that a <code>Facade</code> singleton is already
+	 * constructed when trying to constructs the class twice.
+	 *
+	 * @static
 	 * @constant
 	 * @protected
+	 * @type {String}
 	 */
 	Facade.SINGLETON_MSG = "Facade Singleton already constructed!";
 

@@ -40,7 +40,7 @@ new function()
 			 * The name of the notification.
 			 * 
 			 * @type {String}
-			 * @protected
+			 * @private
 			 */
 			name: null,
 
@@ -48,7 +48,7 @@ new function()
 			 * The body data to send with the notification.
 			 * 
 			 * @type {Object}
-			 * @protected
+			 * @private
 			 */
 			body: null,
 
@@ -56,7 +56,7 @@ new function()
 			 * The type identifier of the notification.
 			 * 
 			 * @type {String}
-			 * @protected
+			 * @private
 			 */
 			type: null,
 
@@ -139,6 +139,8 @@ new function()
 			 *
 			 * @return {String}
 			 * 		The textual representation of the <code>Notification</code>	instance.
+			 *
+			 * @override
 			 */
 			toString: function()
 			{

@@ -22,7 +22,8 @@ new function()
 		"puremvc.Notifier",
 		{
 			/**
-			 * The name of the <code>Mediator</code>.
+			 * The name of the <code>Mediator</code>. Should only be accessed by
+			 * <code>Mediator</code> subclasses.
 			 * 
 			 * @type {String}
 			 * @protected
@@ -30,7 +31,8 @@ new function()
 			mediatorName: null,
 
 			/**
-			 * The <code>Mediator</code>'s view component.
+			 * The <code>Mediator</code>'s view component. Should only be accessed by
+			 * <code>Mediator</code> subclasses.
 			 * 
 			 * @type {Object}
 			 * @protected
@@ -69,20 +71,24 @@ new function()
 			},
 			
 			/**
-			 * Get the <code>Mediator</code>'s view component.
-			 *
-			 * Additionally, an implicit getter will usually be defined in the subclass that casts the
-			 * view object to a type, like this:
+			 * Get the Mediators view component.
 			 * 
-			 * <code>
-			 *		getMenu: function
-			 *		{
-			 *			return this.viewComponent;
-			 *		}
-			 * </code>
+			 * Additionally, an optional explicit getter can be
+			 * be defined in the subclass that defines the 
+			 * view components, providing a more semantic interface
+			 * to the Mediator.
+			 * 
+			 * This is different from the AS3 implementation in
+			 * the sense that no casting is required from the
+			 * object supplied as the view component.
+			 * 
+			 *     getComboBox: function ()
+			 *     {
+			 *         return this.viewComponent;  
+			 *     }
 			 * 
 			 * @return {Object}
-			 * 		The view component.
+			 * 		The view component
 			 */
 			getViewComponent: function()
 			{

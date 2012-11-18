@@ -59,7 +59,7 @@ new function()
 			/**
 			 * Constructs a <code>Controller</code> instance.
 			 *
-			 * This <code>IController</code> implementation is a singleton, so you should not call the
+			 * This <code>Controller</code> implementation is a singleton, so you should not call the
 			 * constructor directly, but instead call the static singleton factory method
 			 * <code>Controller.getInstance()</code>.
 			 *
@@ -118,22 +118,24 @@ new function()
 			},
 
 			/**
-			 * Register a particular <code>Command</code> class as the handler for a particular
-			 * <code>Notification</code>.
+			 * Register a particular <code>SimpleCommand</code> or <code>MacroCommand</code> class
+			 * as the handler for a particular <code>Notification</code>.
 			 *
-			 * If a <code>Command</code> has already been registered to handle
-			 * <code>Notification</code>s with this name, it is no longer used, the new
-			 * <code>Command</code> is used instead.
+			 * If a <code>SimpleCommand</code> or <code>MacroCommand</code> has already been
+			 * registered to handle <code>Notification</code>s with this name, it is no longer
+			 * used, the new <code>SimpleCommand</code> or <code>MacroCommand</code> is used
+			 * instead.
 			 *
-			 * The <code>Observer</code> for the new <code>Command</code> is only created if this is
-			 * the first time a <code>Command</code> has been registered for this
+			 * The <code>Observer</code> for the new <code>SimpleCommand</code> or
+			 * <code>MacroCommand</code> is only created if this is the first time a
+			 * <code>SimpleCommand</code> or <code>MacroCommand</code> has been registered for this
 			 * <code>Notification</code> name.
 			 *
 			 * @param {String} notificationName
 			 * 		The name of the <code>Notification</code>.
 			 *
 			 * @param {Function} commandClassRef
-			 * 		The constructor of the <code>Command</code>.
+			 * 		The constructor of the <code>SimpleCommand</code> or <code>MacroCommand</code>.
 			 */
 			registerCommand: function( notificationName, commandClassRef )
 			{
@@ -144,11 +146,12 @@ new function()
 			},
 
 			/**
-			 * Check if a <code>Command</code> is registered for a given <code>Notification</code>.
+			 * Check if a <code>SimpleCommand</code> or <code>MacroCommand</code> is registered for
+			 * a given <code>Notification</code>.
 			 *
 			 * @param {String} notificationName
-			 * 		Name of the <code>Notification</code> to check wheter an <code>ICommand</code> is
-			 * 		registered for.
+			 * 		Name of the <code>Notification</code> to check wheter a
+			 *		<code>SimpleCommand</code> or <code>MacroCommand</code> is registered for.
 			 * 
 			 * @return {Boolean}
 			 * 		A <code>Command</code> is currently registered for the given
@@ -183,15 +186,18 @@ new function()
 	 * Error message used to indicate that a <code>Controller</code> singleton is already
 	 * constructed when trying to constructs the class twice.
 	 *
-	 * @type {String}
+	 * @static
+	 * @constant
 	 * @protected
+	 * @type {String}
 	 */
-	Controller.SINGLETON_MSG = "Controller Singleton already constructed!";
+	Controller.SINGLETON_MSG = "Controller singleton already constructed!";
 
 	/**
 	 * Singleton instance local reference.
 	 *
-	 * @type {Controller}
+	 * @static
+	 * @type {puremvc.Controller}
 	 * @protected
 	 */
 	Controller.instance = null;
@@ -199,8 +205,10 @@ new function()
 	/**
 	 * <code>Controller</code> singleton factory method.
 	 *
-	 * @return {Controller}
+	 * @return {puremvc.Controller}
 	 * 		The singleton instance of <code>Controller</code>
+	 *
+	 * @static
 	 */
 	Controller.getInstance = function()
 	{

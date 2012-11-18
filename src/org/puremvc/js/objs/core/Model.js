@@ -141,6 +141,7 @@ new function()
 	 * Error message used to indicate that a <code>Model</code> singleton is already
 	 * constructed when trying to constructs the class twice.
 	 *
+	 * @static
 	 * @constant
 	 * @type {String}
 	 * @protected

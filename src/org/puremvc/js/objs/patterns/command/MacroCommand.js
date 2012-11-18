@@ -38,7 +38,7 @@ new function()
 		"puremvc.Notifier",
 		{
 			/**
-			 * An array of <code>SimpleCommands</code> or subclasses of.
+			 * An array of <code>SimpleCommand</code>s, subclasses of or <code>MacroCommand</code>s.
 			 * 
 			 * @type {Array}
 			 * @protected
@@ -82,6 +82,8 @@ new function()
 			 *
 			 * In the JavaScript version it means that it only needs to implement an execute method
 			 * and inherits from <code>Notifier</code>.
+			 *
+			 * @protected
 			 */
 			initializeMacroCommand: function()
 			{
@@ -95,6 +97,8 @@ new function()
 			 *
 			 * @param {Function} commandClassRef
 			 * 		A reference to the constructor of the <code>Command</code>.
+			 *
+			 * @protected
 			 */
 			addSubCommand: function( commandClassRef )
 			{

@@ -40,7 +40,7 @@ new function()
 			 * The notification method of the interested object.
 			 * 
 			 * @type {Function}
-			 * @protected
+			 * @private
 			 */
 			notify: null,
 
@@ -48,7 +48,7 @@ new function()
 			 * The notification context of the interested object.
 			 * 
 			 * @type {Object}
-			 * @protected
+			 * @private
 			 */
 			context: null,
 
@@ -70,12 +70,12 @@ new function()
 			},
 
 			/**
-			 * @private
-			 *
 			 * Get the notification method.
 			 *
 			 * @return {Function}
 			 * 		The notification (callback) method of the interested object.
+			 *
+			 * @private
 			 */
 			getNotifyMethod: function()
 			{
@@ -96,12 +96,12 @@ new function()
 			},
 
 			/**
-			 * @private
-			 *
 			 * Get the notification context.
 			 *
 			 * @return {Object}
 			 * 		The notification context (<code>this</code>) of the interested object.
+			 *
+			 * @private
 			 */
 			getNotifyContext: function()
 			{
@@ -122,13 +122,13 @@ new function()
 			/**
 			 * Notify the interested object.
 			 *
-			 * @param {Notification} note
+			 * @param {Notification} notification
 			 * 		The <code>Notification</code> to pass to the interested object's notification
 			 *		method.
 			 */
-			notifyObserver: function( note )
+			notifyObserver: function( notification )
 			{
-				this.getNotifyMethod().call( this.getNotifyContext(), note );
+				this.getNotifyMethod().call( this.getNotifyContext(), notification );
 			},
 
 			/**

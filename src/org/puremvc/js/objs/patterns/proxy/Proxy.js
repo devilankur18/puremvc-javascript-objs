@@ -30,13 +30,6 @@ new function()
 		"puremvc.Proxy",
 		"puremvc.Notifier",
 		{
-			/**
-			 * The data object controlled by the <code>Proxy</code>.
-			 *
-			 * @type {Object}
-			 * @protected
-			 */
-			data: null,
 
 			/**
 			 * The name of the <code>Proxy</code>.
@@ -45,6 +38,14 @@ new function()
 			 * @protected
 			 */
 			proxyName: null,
+			
+			/**
+			 * The data object controlled by the <code>Proxy</code>.
+			 *
+			 * @type {Object}
+			 * @protected
+			 */
+			data: null,
 
 			/**
 			 * @constructs
@@ -122,8 +123,9 @@ new function()
 	/**
 	 * The default name of the <code>Proxy</code>
 	 * 
-	 * @type {String}
+	 * @static
 	 * @constant
+	 * @type {String}
 	 */
 	Proxy.NAME = "Proxy";
 };

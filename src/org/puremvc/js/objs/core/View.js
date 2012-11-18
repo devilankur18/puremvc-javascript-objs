@@ -277,17 +277,19 @@ new function()
 	 * Error message used to indicate that a <code>View</code> singleton is already
 	 * constructed when trying to constructs the class twice.
 	 *
+	 * @static
 	 * @constant
-	 * @type {String}
 	 * @protected
+	 * @type {String}
 	 */
 	View.SINGLETON_MSG = "View Singleton already constructed!";
 
 	/**
 	 * Singleton instance local reference.
 	 *
-	 * @type {View}
+	 * @static
 	 * @protected
+	 * @type {View}
 	 */
 	View.instance = null;
 
